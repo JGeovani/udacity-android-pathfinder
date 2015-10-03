@@ -1,9 +1,9 @@
 # Android Pathfinder - Nanodegree Recommender App
 
-Organizer/Sponsor: Kathleen Mullaney (kathleen@udacity.com)
-Developer (Android): Brandy Camacho (brandycamacho@gmail.com)
-Developer (Android): Miraj Hassanpur (mjhassanpur@gmail.com)
-Project Manager: Dustan Curtis (dustan.curtis@gmail.com)
+- Organizer/Sponsor: Kathleen Mullaney (kathleen@udacity.com)
+- Developer (Android): Brandy Camacho (brandycamacho@gmail.com)
+- Developer (Android): Miraj Hassanpur (mjhassanpur@gmail.com)
+- Project Manager: Dustan Curtis (dustan.curtis@gmail.com)
 
 ## Project Links
 - [Github Repo](https://github.com/udacity/udacity-android-pathfinder)
