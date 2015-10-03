@@ -16,6 +16,9 @@
 ### App Pathway
 ![Transactions App Screenshot](assets/app-pathway.png)
 
+### Draft Architecture (To Expand)
+![Draft App Architecture](assets/app-architecture-flow.jpg)
+
 ## Major Milestones
 1. October 1 - Project Start
 2. November 6 - Project Due
