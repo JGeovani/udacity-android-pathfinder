@@ -2,4 +2,11 @@
 <resources>
     <color name="primary">#F64016</color>
     <color name="primary_dark">#CB3412</color>
+    <color name="theme_primary_light">#FFF</color>
+    <color name="theme_accent">#00A4B9</color>
+    <color name="black">#000</color>
+    <color name="white">#FFF</color>
+    <color name="orange">#F6A508</color>
+    <color name="lime_green">#85CA2E</color>
+    <color name="light_blue">#00AEEF</color>
 </resources>

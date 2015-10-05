@@ -4,4 +4,41 @@
     <string name="title_activity_feed">Feed</string>
     <string name="title_tab_grid">Grid</string>
     <string name="title_tab_list">List</string>
+
+    <string name="app_title">Pathfinder</string>
+    <string name="walkthrough_text_1" translatable="true">Pathfinder suggests tech-related articles and stories from around the internet.</string>
+    <string name="walkthrough_text_2" translatable="true">Read an article &amp; rate it by clicking a smiley. While you’re reading, we’ll be doing some thinking in the background.</string>
+    <string name="walkthrough_text_3" translatable="true">Over time, we’ll begin recommending top courses &amp; educational tools for you based on your reading habits. So let’s dig in!</string>
+
+    <string name="button_learn_more" translatable="true">Learn More</string>
+    <string name="button_view_story" translatable="true">View Story</string>
+    <string name="interests_graph_header" translatable="true">Your Interests</string>
+    <string name="liking_prompt" translatable="true">Enjoying this article?</string>
+
+    <string name="nano_title_front_end" translatable="true">Front-end Developer Nanodegree</string>
+    <string name="nano_title_android" translatable="true">Android Developer Nanodegree</string>
+    <string name="nano_title_data_analyst" translatable="true">Data Analyst Nanodegree</string>
+    <string name="nano_title_ios" translatable="true">iOS Developer Nanodegree</string>
+    <string name="nano_title_tech_entrepreneur" translatable="true">Tech Entrepreneur Nanodegree</string>
+    <string name="nano_title_beginning_ios" translatable="true">Beginning iOS App Development Nanodgree</string>
+    <string name="nano_title_full_stack" translatable="true">Full Stack Web Developer Nanodegree</string>
+    <string name="nano_title_programming_fundamentals" translatable="true">Programming Fundamentals Nanodegree</string>
+
+    <string name="nano_descrption_front_end" translatable="true"></string>
+    <string name="nano_descrption_android" translatable="true"></string>
+    <string name="nano_descrption_data_analyst" translatable="true"></string>
+    <string name="nano_descrption_ios" translatable="true"></string>
+    <string name="nano_descrption_tech_entrepreneur" translatable="true"></string>
+    <string name="nano_descrption_beginning_ios" translatable="true"></string>
+    <string name="nano_descrption_full_stack" translatable="true"></string>
+    <string name="nano_descrption_programming_fundamentals" translatable="true"></string>
+
+    <string name="nano_url_front_end" translatable="true">https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001</string>
+    <string name="nano_url_android" translatable="true">https://www.udacity.com/course/android-developer-nanodegree--nd801</string>
+    <string name="nano_url_data_analyst" translatable="true">https://www.udacity.com/course/data-analyst-nanodegree--nd002</string>
+    <string name="nano_url_ios" translatable="true">https://www.udacity.com/course/ios-developer-nanodegree--nd003</string>
+    <string name="nano_url_tech_entrepreneur" translatable="true">https://www.udacity.com/course/tech-entrepreneur-nanodegree--nd007</string>
+    <string name="nano_url_beginning_ios" translatable="true">https://www.udacity.com/course/beginning-ios-app-development--nd006</string>
+    <string name="nano_url_full_stack" translatable="true">https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004</string>
+    <string name="nano_url_programming_fundamentals" translatable="true">https://www.udacity.com/course/intro-to-programming-nanodegree--nd000</string>
 </resources>
