@@ -22,28 +22,24 @@
 ## Major Milestones
 October 1 - Project Start
 
-### Sprint 1
-Ends: October 15
+### Sprint 1 (Ends: October 15)
 1. Complete AppIntro Activity (October 15 - BM)
 2. Complete Login Activity (October 15 - BM)
 3. Complete Article Activity (October 15 - Feed - MH)
 4. Complete Article Datastore (October 15 - BM/MH)
 
-### Sprint 2
-Ends: October 22
+### Sprint 2 (Ends: October 22)
 1. Complete Article Detail (Webview/Like Functionality)
 2. Complete Recommendation Activity (MVP - To Discuss)
 3. Complete Recommendation Datastore
 4. Complete Recommendation Algorithm (Threshold, # of Notifications, Categories)
 
-### Sprint 3
-Ends: October 29
+### Sprint 3 (Ends: October 29)
 1. Design Dynamic Articles Service; or
 2. Populate Article Store with Static Content
 3. Enhance MVP - Glassdoor API, Udacity Stories, Article Detail Branding/UI Customizations
 
-### Finishing Up:
-November 6 - Project Due
+### Finishing Up (November 6 - Project Due)
 1. Prepare for Play Store
 2. Update with Release Assets/Build Config/Signing
 3. Thoroughly Test All Functionality
