@@ -19,6 +19,9 @@
 ### Draft Architecture (To Expand)
 ![Draft App Architecture](assets/app-detailed-architecture.png)
 
+### Likes Relation
+![Likes Relation](assets/likes-relation.png)
+
 ## Major Milestones
 October 1 - Project Start
 
@@ -29,10 +32,13 @@ October 1 - Project Start
 4. Complete Article Datastore (October 15 - BM/MH)
 
 ### Sprint 2 (Ends: October 22)
-1. Complete Article Detail (Webview/Like Functionality)
-2. Complete Recommendation Activity (MVP - To Discuss)
-3. Complete Recommendation Datastore
-4. Complete Recommendation Algorithm (Threshold, # of Notifications, Categories)
+1. Complete Article Detail (Webview/Like Functionality) (October 22 - MH)
+2. Add Pagination/Syncing for Article Feeds (October 22 - MH)
+3. Complete Recommendation Activity UI (October 22 - MH)
+4. Complete Recommendation Datastore (October 22 - BM)
+5. Complete Nanodegree Datastore (October 22 - BM)
+6. Complete Parse Job to Refresh Nanodegree Datastore (October 22 - BM)
+7. Complete Like Datastore (October 22 - BM)
 
 ### Sprint 3 (Ends: October 29)
 1. Design Dynamic Articles Service; or
