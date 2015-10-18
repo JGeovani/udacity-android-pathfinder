@@ -14,6 +14,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.misc.DividerItemDecoration;
 
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class FeedActivity extends AppCompatActivity {
     feedAdapter = new FeedAdapter();
     recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.addItemDecoration(
+        new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
     recyclerView.setAdapter(feedAdapter);
 
     requestArticles();
