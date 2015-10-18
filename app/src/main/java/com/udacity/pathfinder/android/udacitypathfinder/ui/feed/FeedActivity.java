@@ -76,8 +76,8 @@ public class FeedActivity extends AppCompatActivity {
   private void requestArticles() {
     ParseClient.request(ParseConstants.ARTICLE_CLASS_NAME, true, new RequestCallback<Article>() {
       @Override public void onResponse(List<Article> articles, ParseException e) {
-        if (e == null && articles != null && !articles.isEmpty()) {
-          feedAdapter.updateArticles(articles);
+        if (e == null && articles != null) {
+          if (!articles.isEmpty()) feedAdapter.updateArticles(articles);
         } else {
           Timber.e(e, "Error occurred while retrieving articles");
         }
