@@ -8,10 +8,18 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.udacity.pathfinder.android.udacitypathfinder.parse.Article;
 
+import timber.log.Timber;
+
+import static timber.log.Timber.DebugTree;
+
 public class PathfinderApp extends Application {
+
   @Override
   public void onCreate() {
     super.onCreate();
+    if (BuildConfig.DEBUG) {
+      Timber.plant(new DebugTree());
+    }
     // Register sub Classes
     ParseObject.registerSubclass(Article.class);
     // Enable Local Datastore.
