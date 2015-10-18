@@ -55,7 +55,13 @@ public class FeedActivity extends AppCompatActivity {
 
   private void setupGridLayout() {
     feedAdapter = new FeedAdapter(this, FeedAdapter.VIEW_TYPE_GRID);
-    recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+    gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+      @Override public int getSpanSize(int position) {
+        return (position % 3) > 0 ? 1 : 2;
+      }
+    });
+    recyclerView.setLayoutManager(gridLayoutManager);
     recyclerView.removeItemDecoration(dividerItemDecoration);
     recyclerView.setAdapter(feedAdapter);
   }
