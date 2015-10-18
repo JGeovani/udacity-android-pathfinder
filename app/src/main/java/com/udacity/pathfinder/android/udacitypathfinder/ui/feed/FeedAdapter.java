@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.udacity.pathfinder.android.udacitypathfinder.R;
-import com.udacity.pathfinder.android.udacitypathfinder.parse.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 
 import java.util.Collections;
 import java.util.List;

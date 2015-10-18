@@ -13,7 +13,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback;
-import com.udacity.pathfinder.android.udacitypathfinder.parse.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 
 import java.util.List;
 

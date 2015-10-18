@@ -6,7 +6,7 @@ import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.udacity.pathfinder.android.udacitypathfinder.parse.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 
 import timber.log.Timber;
 

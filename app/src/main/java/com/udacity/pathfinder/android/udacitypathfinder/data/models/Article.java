@@ -1,4 +1,4 @@
-package com.udacity.pathfinder.android.udacitypathfinder.parse;
+package com.udacity.pathfinder.android.udacitypathfinder.data.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
