@@ -1,5 +1,6 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.feed;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 
@@ -16,6 +18,11 @@ import java.util.List;
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder> {
 
   private List<Article> articles = Collections.emptyList();
+  private Context context;
+
+  public FeedAdapter(Context context) {
+    this.context = context;
+  }
 
   @Override public FeedViewHolder onCreateViewHolder(ViewGroup parent, int i) {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -25,7 +32,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
   @Override public void onBindViewHolder(FeedViewHolder holder, int pos) {
     if (articles != null && !articles.isEmpty()) {
       Article article = articles.get(pos);
-      holder.image.setImageResource(R.mipmap.ic_launcher);
+      Glide.with(context).load(article.getImageUrl()).into(holder.image);
       holder.title.setText(article.getTitle());
       holder.description.setText(article.getDescription());
     }

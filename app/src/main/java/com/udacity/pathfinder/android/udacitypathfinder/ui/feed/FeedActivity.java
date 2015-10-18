@@ -38,7 +38,7 @@ public class FeedActivity extends AppCompatActivity {
     tabLayout.addTab(tabLayout.newTab().setText(res.getString(R.string.title_tab_grid)));
     tabLayout.addTab(tabLayout.newTab().setText(res.getString(R.string.title_tab_list)));
 
-    feedAdapter = new FeedAdapter();
+    feedAdapter = new FeedAdapter(this);
     recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.addItemDecoration(
