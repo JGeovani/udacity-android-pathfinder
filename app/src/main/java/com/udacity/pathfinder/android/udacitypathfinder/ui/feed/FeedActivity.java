@@ -1,9 +1,9 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.feed;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,34 +18,53 @@ import com.udacity.pathfinder.android.udacitypathfinder.ui.misc.DividerItemDecor
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.BindString;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class FeedActivity extends AppCompatActivity {
 
-  private RecyclerView recyclerView;
+  @BindString(R.string.title_activity_feed) String FEED_ACTIVITY_TITLE;
+  @BindString(R.string.title_tab_grid) String GRID_TAB_TITLE;
+  @BindString(R.string.title_tab_list) String LIST_TAB_TITLE;
+  @Bind(R.id.toolbar) Toolbar toolbar;
+  @Bind(R.id.recyclerview) RecyclerView recyclerView;
+  @Bind(R.id.tabs) TabLayout tabLayout;
+
   private FeedAdapter feedAdapter;
+  private DividerItemDecoration dividerItemDecoration;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_feed);
-    Resources res = getResources();
+    ButterKnife.bind(this);
 
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setTitle(res.getString(R.string.title_activity_feed));
+    toolbar.setTitle(FEED_ACTIVITY_TITLE);
     setSupportActionBar(toolbar);
 
-    TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-    tabLayout.addTab(tabLayout.newTab().setText(res.getString(R.string.title_tab_grid)));
-    tabLayout.addTab(tabLayout.newTab().setText(res.getString(R.string.title_tab_list)));
+    tabLayout.addTab(tabLayout.newTab().setText(GRID_TAB_TITLE));
+    tabLayout.addTab(tabLayout.newTab().setText(LIST_TAB_TITLE));
+    tabLayout.setOnTabSelectedListener(onTabSelectedListener);
 
-    feedAdapter = new FeedAdapter(this);
-    recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    recyclerView.addItemDecoration(
-        new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-    recyclerView.setAdapter(feedAdapter);
+    dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
 
+    setupGridLayout();
     requestArticles();
+  }
+
+  private void setupGridLayout() {
+    feedAdapter = new FeedAdapter(this, FeedAdapter.VIEW_TYPE_GRID);
+    recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    recyclerView.removeItemDecoration(dividerItemDecoration);
+    recyclerView.setAdapter(feedAdapter);
+  }
+
+  private void setupListLayout() {
+    feedAdapter = new FeedAdapter(this, FeedAdapter.VIEW_TYPE_LIST);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.addItemDecoration(dividerItemDecoration);
+    recyclerView.setAdapter(feedAdapter);
   }
 
   private void requestArticles() {
@@ -59,4 +78,20 @@ public class FeedActivity extends AppCompatActivity {
       }
     });
   }
+
+  private final TabLayout.OnTabSelectedListener onTabSelectedListener =
+      new TabLayout.OnTabSelectedListener() {
+
+    @Override public void onTabSelected(TabLayout.Tab tab) {
+      if (tab.getPosition() == 0) setupGridLayout();
+      else setupListLayout();
+      requestArticles();
+    }
+
+    @Override public void onTabUnselected(TabLayout.Tab tab) {
+    }
+
+    @Override public void onTabReselected(TabLayout.Tab tab) {
+    }
+  };
 }
