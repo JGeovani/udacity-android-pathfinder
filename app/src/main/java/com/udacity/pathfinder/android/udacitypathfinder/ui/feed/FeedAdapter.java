@@ -8,77 +8,107 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.ParseQueryAdapter;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
-import com.udacity.pathfinder.android.udacitypathfinder.parse.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 
+import java.util.Collections;
 import java.util.List;
 
-public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder> {
-  private ParseQueryAdapter<Article> parseAdapter;
-  private FeedAdapter thingsAdapter = this;
-  private ViewGroup parseParent;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-  public FeedAdapter(Context context, ViewGroup parentIn) {
-    parseParent = parentIn;
-    parseAdapter = new ParseQueryAdapter<Article>(context, "Articles") {
+public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-      @Override
-      public View getItemView(Article article, View view, ViewGroup parent) {
-        if (view == null) {
-          view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_article, parent, false);
-        }
-        super.getItemView(article, view, parent);
+  public static final int VIEW_TYPE_GRID = 0;
+  public static final int VIEW_TYPE_LIST = 1;
 
-        ImageView image = (ImageView) view.findViewById(R.id.article_image);
-        TextView title = (TextView) view.findViewById(R.id.article_title);
-        TextView description = (TextView) view.findViewById(R.id.article_beginning);
+  private List<Article> articles = Collections.emptyList();
+  private Context context;
+  private int viewType;
 
-        Picasso.with(getContext()).load(article.getImageUrl()).into(image);
-        title.setText(article.getTitle());
-        description.setText(article.getDescription());
-
-        return view;
-      }
-    };
-    parseAdapter.addOnQueryLoadListener(new OnQueryLoadListener());
-    parseAdapter.loadObjects();
+  public FeedAdapter(Context context, int viewType) {
+    this.context = context;
+    this.viewType = viewType;
   }
 
-  @Override
-  public FeedViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_article, parent, false);
-    return new FeedViewHolder(v);
-  }
-
-
-  @Override
-  public void onBindViewHolder(FeedViewHolder holder, int i) {
-    parseAdapter.getView(i, holder.view, parseParent);
-  }
-
-  @Override
-  public int getItemCount() {
-    return parseAdapter.getCount();
-  }
-
-  public static class FeedViewHolder extends RecyclerView.ViewHolder {
-    public View view;
-
-    public FeedViewHolder(View v) {
-      super(v);
-      view = v;
+  @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
+    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+    switch (type) {
+      case VIEW_TYPE_GRID:
+        View gridView = inflater.inflate(R.layout.grid_item_article, parent, false);
+        return new GridViewHolder(gridView);
+      case VIEW_TYPE_LIST:
+        View listView = inflater.inflate(R.layout.list_item_article, parent, false);
+        return new ListViewHolder(listView);
+      default:
+        throw new IllegalArgumentException("View type does not exist");
     }
   }
 
-  public class OnQueryLoadListener implements ParseQueryAdapter.OnQueryLoadListener<Article> {
-
-    public void onLoading() {
+  @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    switch (getItemViewType(position)) {
+      case VIEW_TYPE_GRID:
+        bindGridViewHolder(holder, position);
+        break;
+      case VIEW_TYPE_LIST:
+        bindListViewHolder(holder, position);
+        break;
     }
+  }
 
-    public void onLoaded(List<Article> objects, Exception e) {
-      thingsAdapter.notifyDataSetChanged();
+  private void bindGridViewHolder(RecyclerView.ViewHolder holder, int position) {
+    GridViewHolder gridViewHolder = (GridViewHolder) holder;
+    if (articles != null && !articles.isEmpty()) {
+      Article article = articles.get(position);
+      Glide.with(context).load(article.getImageUrl()).into(gridViewHolder.image);
+      gridViewHolder.title.setText(article.getTitle());
+    }
+  }
+
+  private void bindListViewHolder(RecyclerView.ViewHolder holder, int position) {
+    ListViewHolder listViewHolder = (ListViewHolder) holder;
+    if (articles != null && !articles.isEmpty()) {
+      Article article = articles.get(position);
+      Glide.with(context).load(article.getImageUrl()).into(listViewHolder.image);
+      listViewHolder.title.setText(article.getTitle());
+      listViewHolder.description.setText(article.getDescription());
+    }
+  }
+
+  @Override public int getItemViewType(int position) {
+    return viewType;
+  }
+
+  @Override public int getItemCount() {
+    return articles.size();
+  }
+
+  public void updateArticles(List<Article> articles) {
+    this.articles = articles;
+    notifyDataSetChanged();
+  }
+
+  public static class ListViewHolder extends RecyclerView.ViewHolder {
+
+    @Bind(R.id.article_image) ImageView image;
+    @Bind(R.id.article_title) TextView title;
+    @Bind(R.id.article_description) TextView description;
+
+    public ListViewHolder(View view) {
+      super(view);
+      ButterKnife.bind(this, view);
+    }
+  }
+
+  public static class GridViewHolder extends RecyclerView.ViewHolder {
+
+    @Bind(R.id.article_image) ImageView image;
+    @Bind(R.id.article_title) TextView title;
+
+    public GridViewHolder(View view) {
+      super(view);
+      ButterKnife.bind(this, view);
     }
   }
 }

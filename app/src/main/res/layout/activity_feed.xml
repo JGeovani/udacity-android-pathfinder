@@ -27,6 +27,7 @@
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/primary_dark"
+        app:tabIndicatorHeight="4dp"
         />
 
     <android.support.v7.widget.RecyclerView
