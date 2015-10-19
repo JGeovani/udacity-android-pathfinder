@@ -1,10 +1,15 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.article;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
@@ -22,6 +27,8 @@ public class ArticleActivity extends AppCompatActivity {
   @BindString(R.string.title_activity_article) String ARTICLE_ACTIVITY_TITLE;
   @Bind(R.id.toolbar) Toolbar toolbar;
   @Bind(R.id.webview) WebView webView;
+  @Bind(R.id.spinner) ProgressBar spinner;
+  @Bind(R.id.banner) TextView banner;
 
   public static final String KEY_ARTICLE_OBJECT_ID = "articleObjectId";
   private String articleId;
@@ -33,6 +40,11 @@ public class ArticleActivity extends AppCompatActivity {
 
     toolbar.setTitle(ARTICLE_ACTIVITY_TITLE);
     setSupportActionBar(toolbar);
+
+    banner.setVisibility(View.INVISIBLE);
+    spinner.setVisibility(View.VISIBLE);
+
+    webView.setWebViewClient(webViewClient);
 
     Intent intent = getIntent();
     articleId = intent.getStringExtra(KEY_ARTICLE_OBJECT_ID);
@@ -48,4 +60,18 @@ public class ArticleActivity extends AppCompatActivity {
     });
   }
 
+  private final WebViewClient webViewClient = new WebViewClient() {
+
+    @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
+      // Launch any links inside the web view via a browser, not inside the web view itself
+      Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+      view.getContext().startActivity(intent);
+      return true;
+    }
+
+    @Override public void onPageFinished(WebView view, String url) {
+      spinner.setVisibility(View.INVISIBLE);
+      banner.setVisibility(View.VISIBLE);
+    }
+  };
 }
