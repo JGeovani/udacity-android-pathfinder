@@ -22,5 +22,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.article.ArticleActivity"
+            android:label="@string/title_activity_article" >
+        </activity>
     </application>
 </manifest>

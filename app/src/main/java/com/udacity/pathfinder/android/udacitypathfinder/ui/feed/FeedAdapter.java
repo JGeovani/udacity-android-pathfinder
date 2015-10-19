@@ -1,6 +1,7 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.feed;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.article.ArticleActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
   public static final int VIEW_TYPE_GRID = 0;
   public static final int VIEW_TYPE_LIST = 1;
@@ -32,7 +34,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     this.viewType = viewType;
   }
 
-  @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
+  @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
     switch (type) {
       case VIEW_TYPE_GRID:
@@ -46,7 +48,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
   }
 
-  @Override public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+  @Override public void onBindViewHolder(ViewHolder holder, final int position) {
+    holder.view.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        if (articles != null && !articles.isEmpty()) {
+          Article article = articles.get(position);
+          Intent intent = new Intent(context, ArticleActivity.class);
+          intent.putExtra(ArticleActivity.KEY_ARTICLE_OBJECT_ID, article.getObjectId());
+          context.startActivity(intent);
+        }
+      }
+    });
     switch (getItemViewType(position)) {
       case VIEW_TYPE_GRID:
         bindGridViewHolder(holder, position);
@@ -57,7 +69,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
   }
 
-  private void bindGridViewHolder(RecyclerView.ViewHolder holder, int position) {
+  private void bindGridViewHolder(ViewHolder holder, int position) {
     GridViewHolder gridViewHolder = (GridViewHolder) holder;
     if (articles != null && !articles.isEmpty()) {
       Article article = articles.get(position);
@@ -66,7 +78,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
   }
 
-  private void bindListViewHolder(RecyclerView.ViewHolder holder, int position) {
+  private void bindListViewHolder(ViewHolder holder, int position) {
     ListViewHolder listViewHolder = (ListViewHolder) holder;
     if (articles != null && !articles.isEmpty()) {
       Article article = articles.get(position);
@@ -89,7 +101,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     notifyDataSetChanged();
   }
 
-  public static class ListViewHolder extends RecyclerView.ViewHolder {
+  public abstract static class ViewHolder extends RecyclerView.ViewHolder {
+
+    public final View view;
+
+    public ViewHolder(View view) {
+      super(view);
+      this.view = view;
+    }
+  }
+
+  public static class ListViewHolder extends ViewHolder {
 
     @Bind(R.id.article_image) ImageView image;
     @Bind(R.id.article_title) TextView title;
@@ -101,7 +123,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
   }
 
-  public static class GridViewHolder extends RecyclerView.ViewHolder {
+  public static class GridViewHolder extends ViewHolder {
 
     @Bind(R.id.article_image) ImageView image;
     @Bind(R.id.article_title) TextView title;

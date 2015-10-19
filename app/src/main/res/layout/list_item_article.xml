@@ -9,7 +9,6 @@
         android:id="@+id/article_image"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@mipmap/ic_launcher"
         android:scaleType="centerCrop"
         />
 
