@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             tools:context="com.udacity.pathfinder.android.udacitypathfinder.ui.appintro.Slide1"
+  >
+
+
+  <ImageView
+    android:layout_width="429dp"
+    android:layout_height="634dp"
+    android:id="@+id/imageView"
+    android:layout_gravity="center"
+    android:src="@drawable/slide_4"
+    android:background="#141313"/>
+</FrameLayout>

@@ -2,7 +2,6 @@ package com.udacity.pathfinder.android.udacitypathfinder.ui.feed;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.parse.ParseException;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
+import com.udacity.pathfinder.android.udacitypathfinder.auth.AuthCompatActivity;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback;
@@ -23,7 +23,7 @@ import butterknife.BindString;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class FeedActivity extends AppCompatActivity {
+public class FeedActivity extends AuthCompatActivity {
 
   @BindString(R.string.title_activity_feed) String FEED_ACTIVITY_TITLE;
   @BindString(R.string.title_tab_grid) String GRID_TAB_TITLE;
