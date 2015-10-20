@@ -2,6 +2,7 @@ package com.udacity.pathfinder.android.udacitypathfinder.data;
 
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -16,6 +17,18 @@ public class ParseClient {
   private static <T extends ParseObject> ParseQuery<T> buildArticleQuery(ParseQuery<T> query) {
     query.orderByDescending(ParseConstants.PARSE_COL_CREATED_AT);
     return query;
+  }
+
+  /* Does not check remote datastore if object is not found locally*/
+  public static <T extends ParseObject> void request(
+      String className, boolean fromLocal, String objectId, final RequestCallback2<T> callback) {
+    ParseQuery<T> query = ParseQuery.getQuery(className);
+    if (fromLocal) query.fromLocalDatastore();
+    query.getInBackground(objectId, new GetCallback<T>() {
+      @Override public void done(T object, ParseException e) {
+        callback.onResponse(object, e);
+      }
+    });
   }
 
   public static <T extends ParseObject> void request(

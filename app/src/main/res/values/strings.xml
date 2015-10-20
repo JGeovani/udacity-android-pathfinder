@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Udacity Pathfinder</string>
     <string name="title_activity_feed">Feed</string>
+    <string name="title_activity_article"></string>
     <string name="title_tab_grid">Grid</string>
     <string name="title_tab_list">List</string>
 
