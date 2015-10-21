@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
@@ -26,6 +27,7 @@ public class PathfinderApp extends Application {
     Parse.enableLocalDatastore(this);
     // Initialize Parse
     Parse.initialize(this, "m5DPjE3I2Aghdmu49nZcdnsLUkeZFN84jtETLYHu", "GdF3lzXZL3zPF1T1DwDB2G9I1YOBDdLaLPAFs3GY");
+    ParseInstallation.getCurrentInstallation().saveInBackground();
     // Allow anonymous Users to enable local datastore without having to log in
     ParseUser.enableAutomaticUser();
     ParseACL defaultACL = new ParseACL();
