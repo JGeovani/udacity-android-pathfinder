@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+  <gradient
+    android:startColor="@color/udacity_slide_2_background_orange_gradient_start"
+    android:endColor="@color/udacity_slide_2_background_orange_gradient_end"
+    android:angle="-135" />
+</shape>
