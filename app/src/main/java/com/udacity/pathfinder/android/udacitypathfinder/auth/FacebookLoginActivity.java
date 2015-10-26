@@ -31,25 +31,7 @@ public class FacebookLoginActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_facebook_login);
-
-    ParseFacebookUtils.logInWithReadPermissionsInBackground(this, faceBookPermissions,
-        new LogInCallback() {
-      @Override
-      public void done(ParseUser user, ParseException err) {
-        if (user == null) {
-          Log.d(TAG, "User cancelled the Facebook login.");
-          finish();
-        } else if (user.isNew()) {
-          Log.d(TAG, "User signed up and logged in through Facebook!");
-          faceBookLoginRequest();
-        } else {
-          Log.d(TAG, "User logged in through Facebook!");
-          getUserDetailsFromParse();
-          ParseUser.getCurrentUser().pinInBackground();
-          isLoginComplete(true);
-        }
-      }
-    });
+    startFacebookRequest();
   }
 
   // Facebook onActivityResult
@@ -87,13 +69,13 @@ public class FacebookLoginActivity extends Activity {
                 parseUser.put("name", jsonObject.getString("name"));
                 parseUser.put("firstName", jsonObject.getString("first_name"));
                 parseUser.put("lastName", jsonObject.getString("last_name"));
-                parseUser.put("username", jsonObject.getString("email"));
+                parseUser.put("username", jsonObject.getString("id"));
 
 
                 parseUser.saveInBackground();
                 Log.d(TAG, "saved user to parse");
 
-                // Show the user info
+                // Save user info
                 saveNewUser();
               } catch (JSONException e) {
                 Log.d(TAG, "Error parsing returned user data. " + e);
@@ -128,7 +110,7 @@ public class FacebookLoginActivity extends Activity {
     JSONObject userProfile = parseUser.getJSONObject("profile");
     Log.d(TAG, userProfile.toString());
     try {
-      parseUser.setUsername(userProfile.getString("email"));
+      parseUser.setUsername(userProfile.getString("facebookId"));
       parseUser.setEmail(userProfile.getString("email"));
       if (!ParseFacebookUtils.isLinked(parseUser)) {
         Log.d(TAG, "Attempting to link facebook account");
@@ -151,6 +133,8 @@ public class FacebookLoginActivity extends Activity {
       }
     } catch (Exception err) {
       Log.d(TAG, "Error parsing saved user data.");
+
+      finish();
     }
 
   }
@@ -163,6 +147,27 @@ public class FacebookLoginActivity extends Activity {
 
   private void getUserDetailsFromParse() {
     parseUser = ParseUser.getCurrentUser();
+  }
+
+  private void startFacebookRequest(){
+    ParseFacebookUtils.logInWithReadPermissionsInBackground(this, faceBookPermissions,
+      new LogInCallback() {
+        @Override
+        public void done(ParseUser user, ParseException err) {
+          if (user == null) {
+            Log.d(TAG, "User cancelled the Facebook login.");
+            finish();
+          } else if (user.isNew()) {
+            Log.d(TAG, "User signed up and logged in through Facebook!");
+            faceBookLoginRequest();
+          } else {
+            Log.d(TAG, "User logged in through Facebook!");
+            getUserDetailsFromParse();
+            ParseUser.getCurrentUser().pinInBackground();
+            isLoginComplete(true);
+          }
+        }
+      });
   }
 
 

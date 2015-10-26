@@ -103,11 +103,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
     // Check for a valid password.
     if (TextUtils.isEmpty(password)) {
-      et_password.setError(getString(R.string.global_error_required_field));
+      et_password.setError(getString(R.string.global_error_valid_password_required_field));
       focusView = et_password;
       cancel = true;
     } else if (password.length() < 4) {
-      et_password.setError(getString(R.string.global_error_required_field));
+      et_password.setError(getString(R.string.global_error_valid_password_required_field));
       focusView = et_password;
       cancel = true;
     }
@@ -116,7 +116,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     FieldValidator emailValidate = new FieldValidator(true, false);
 
     if (TextUtils.isEmpty(username)) {
-      et_username.setError(getString(R.string.global_error_required_field));
+      et_username.setError(getString(R.string.global_error_valid_email_required_field));
       focusView = et_username;
       cancel = true;
     } else if (!emailValidate.validate(username)) {

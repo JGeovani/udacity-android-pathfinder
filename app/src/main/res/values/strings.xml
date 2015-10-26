@@ -37,9 +37,12 @@
     <!-- Global Strings -->
     <string name="global_submit_button_label" translatable="true">Submit</string>
     <string name="global_ok_button_label" translatable="true">OK</string>
+    <string name="global_try_again_button_label" translatable="true">Try Again</string>
     <string name="global_cancel_button_label" translatable="true">Cancel</string>
-    <string name="global_error_required_field" translatable="true">Valid Password Required Field</string>
+    <string name="global_error_required_field" translatable="true">Required Field</string>
     <string name="global_error_valid_email_required_field" translatable="true">Valid Email Address Required</string>
+    <string name="global_error_valid_password_required_field" translatable="true">Valid Password Required Field</string>
+
 
     <string name="global_hint_email" translatable="true">Email Address</string>
     <string name="global_hint_last_name" translatable="true">Last Name</string>

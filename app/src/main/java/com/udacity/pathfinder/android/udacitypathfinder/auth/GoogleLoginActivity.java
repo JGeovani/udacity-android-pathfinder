@@ -38,7 +38,7 @@ public class GoogleLoginActivity extends Activity implements
   private final String TAG = getClass().getSimpleName();
   ProgressDialog progressDialog;
   ParseUser parseUser;
-  private String gDisplayName, gEmail, gToken, gId, firstName, lastName;
+  private String gDisplayName, gEmail, gToken, gId, firstName, lastName, password;
   private static int RC_SIGN_IN = 0;
   private GoogleApiClient mGoogleApiClient;
   private boolean mIntentInProgress, mSignInClicked;
@@ -175,10 +175,11 @@ public class GoogleLoginActivity extends Activity implements
   }
   @Override
   public void onActivityResult(int requestCode, int responseCode, Intent intent) {
-    Log.d(TAG, "ActivityResult: " + requestCode);
+    Log.d(TAG, "ActivityResult: " + requestCode + ", Response Code = "+responseCode);
     if (requestCode == RC_SIGN_IN) {
       if (responseCode != RESULT_OK) {
         mSignInClicked = false;
+        finish();
       }
       mIntentInProgress = false;
       if (!mGoogleApiClient.isConnecting()) {
@@ -190,7 +191,6 @@ public class GoogleLoginActivity extends Activity implements
   private void signInWithGplus() {
     Log.d(TAG, "Sign in with Google+ started");
     if (!mGoogleApiClient.isConnecting()) {
-      mSignInClicked = true;
       resolveSignInError();
     }
   }
@@ -235,6 +235,9 @@ public class GoogleLoginActivity extends Activity implements
         gDisplayName = personName;
         gId = currentPerson.getId();
         gEmail = Plus.AccountApi.getAccountName(mGoogleApiClient);
+        Md5Hasher hash = new Md5Hasher(gId);
+        password = hash.getHash();
+        Log.d(TAG, password);
         JSONObject userProfile = new JSONObject();
         userProfile.put("googleId", gId);
         userProfile.put("name", gDisplayName);
@@ -249,25 +252,26 @@ public class GoogleLoginActivity extends Activity implements
         parseUser.put("firstName", firstName);
         parseUser.put("lastName", lastName);
         parseUser.put("username", gEmail);
-        parseUser.setPassword(gId);
+        parseUser.setPassword(password);
         parseUser.setEmail(gEmail);
-        parseUser.setUsername(gEmail);
+        parseUser.setUsername(gId);
+
         parseUser.signUpInBackground(new SignUpCallback() {
           public void done(ParseException e) {
             Log.d(TAG, "Google user signed up with parse");
             // Next, login to obtain token
-            ParseUser.logInInBackground(gEmail, gId, new LogInCallback() {
+            ParseUser.logInInBackground(gId, password, new LogInCallback() {
               public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                   ParseUser.becomeInBackground(ParseUser.getCurrentUser().getSessionToken(),
-                      new LogInCallback() {
-                    @Override
-                    public void done(ParseUser parseUser, ParseException e) {
-                      Log.d(TAG, "---> Google user is now signed into parse");
-                      ParseUser.getCurrentUser().pinInBackground();
-                      isLoginComplete(true);
-                    }
-                  });
+                    new LogInCallback() {
+                      @Override
+                      public void done(ParseUser parseUser, ParseException e) {
+                        Log.d(TAG, "---> Google user is now signed into parse");
+                        ParseUser.getCurrentUser().pinInBackground();
+                        isLoginComplete(true);
+                      }
+                    });
                 } else {
                   // Signup failed. Look at the ParseException in log to see what happened.
                   Log.e(TAG, e.getMessage());
@@ -277,14 +281,6 @@ public class GoogleLoginActivity extends Activity implements
             });
           }
         });
-        String br = " | ";
-        Log.d(TAG, gEmail + br
-            + userProfile + br
-            + gId + br
-            + gDisplayName + br
-            + firstName + br
-            + lastName
-        );
       } else {
         Toast.makeText(this, "There was an error communicating with Google API",
             Toast.LENGTH_SHORT).show();
@@ -302,11 +298,12 @@ public class GoogleLoginActivity extends Activity implements
     @Override
     public void run() {
       signInWithGplus();
+      mSignInClicked = true;
     }
   };
 
   private void startLoginProcess() {
-    finishHandler.postDelayed(finishRunnable, 260);
+    finishHandler.postDelayed(finishRunnable, 360);
   }
 
   private void isLoginComplete(boolean isComplete) {
