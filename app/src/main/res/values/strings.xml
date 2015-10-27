@@ -41,4 +41,10 @@
     <string name="nano_url_beginning_ios" translatable="true">https://www.udacity.com/course/beginning-ios-app-development--nd006</string>
     <string name="nano_url_full_stack" translatable="true">https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004</string>
     <string name="nano_url_programming_fundamentals" translatable="true">https://www.udacity.com/course/intro-to-programming-nanodegree--nd000</string>
+    <string name="nano_front_end_short_desc">Become a Front-End Web Developer by completing a variety of projects for your portfolio - become an HTML, CSS and JavaScript pro!</string>
+    <string name="nano_button_learn_more">Learn More</string>
+    <string name="like_summary_title">Your Interests</string>
+    <string name="like_summary_cat_1">Front-End</string>
+    <string name="like_summary_cat_2">Full Stack</string>
+    <string name="like_summary_cat_3">Data Analyst</string>
 </resources>
