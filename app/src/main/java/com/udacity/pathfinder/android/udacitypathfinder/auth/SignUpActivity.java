@@ -1,12 +1,14 @@
 package com.udacity.pathfinder.android.udacitypathfinder.auth;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -21,13 +23,14 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
   private EditText mEmailEditText, mPasswordEditText, mConfirmPasswordEditText, mLastNameEditText, mFirstNameEditText;
   private Button mCreateAccountButton;
   private String mEmail, mPassword, mConfirmPassword, mFirstName, mLastName;
+  int errorCode = 0;
 
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_signup);
-
+    this.setFinishOnTouchOutside(true);
     mEmailEditText = (EditText) findViewById(R.id.etEmail);
     mFirstNameEditText = (EditText) findViewById(R.id.etPassword);
     mLastNameEditText = (EditText) findViewById(R.id.etPassword);
@@ -114,7 +117,6 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     } else {
       // Show a progress spinner, and kick off a background task to
       // perform the user login attempt.
-      Toast.makeText(getApplicationContext(), "signUp", Toast.LENGTH_SHORT).show();
       signUp(mEmail.toLowerCase(Locale.getDefault()), mEmail, mFirstName, mLastName, mPassword);
     }
   }
@@ -129,30 +131,68 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     user.signUpInBackground(new SignUpCallback() {
       public void done(ParseException e) {
         if (e == null) {
-          signUpMsg("Account Created Successfully");
           ParseUser.logInInBackground(mUsername, mPassword, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
               if (e == null) {
+                errorCode = 0;
                 ParseUser.getCurrentUser().pinInBackground();
-                isLoginComplete(true);
-              } else
+                signUpMsg("Account Created Successfully", true);
+              } else {
+                errorCode = 1;
+                Log.e("PARSE ERROR: ", e.toString());
+                signUpMsg("Invalid user name or password", false);
                 isLoginComplete(false);
+              }
             }
           });
-          isLoginComplete(true);
-
         } else {
           // Sign up didn't succeed. Look at the ParseException
           // to figure out what went wrong
-          signUpMsg("Account already taken.");
+          errorCode = 2;
+          Log.e("PARSE ERROR: ", e.toString());
+          signUpMsg("Account already exist", false);
         }
       }
     });
   }
 
-  protected void signUpMsg(String msg) {
-    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+  protected void signUpMsg(String msg, boolean isComplete) {
+    if (isComplete){
+      isLoginComplete(true);
+    }else {
+      isLoginComplete(false);
+    }
+      AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+      alertDialog.setMessage(msg);
+    if (errorCode == 2){
+      alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.global_try_again_button_label),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            clearFields();
+            dialog.dismiss();
+          }
+        });
+      alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.global_cancel_button_label),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+            finish();
+          }
+        });
+    } else {
+      alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.global_ok_button_label),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+            if (errorCode == 0) {
+              finish();
+            }
+          }
+        });
+    }
+      alertDialog.setCanceledOnTouchOutside(false);
+      alertDialog.show();
   }
 
   private void clearErrors() {
@@ -161,10 +201,15 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     mConfirmPasswordEditText.setError(null);
   }
 
+  private void clearFields(){
+    mEmailEditText.setText("");
+    mPasswordEditText.setText("");
+    mConfirmPasswordEditText.setText("");
+  }
+
   private void isLoginComplete(boolean isComplete) {
     SharedPref sp = new SharedPref(getApplicationContext());
     sp.saveLogin(isComplete);
-    finish();
   }
 
 }
