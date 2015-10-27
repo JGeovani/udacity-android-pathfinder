@@ -40,4 +40,14 @@
     <color name="com_parse_ui_twitter_login_button_push">#2588B5</color>
     <color name="com_parse_ui_twitter_login_button_focus">#2788BE</color>
 
+    <color name="nano_front_end_web_developer">#00a4b9</color>
+    <color name="nano_full_stack_developer">#6b80dd</color>
+    <color name="nano_data_analyst">#ac4057</color>
+    <color name="nano_ios_developer">#e7654e</color>
+    <color name="nano_android_developer">#149671</color>
+    <color name="nano_tech_entrepreneur">#6a5f9b</color>
+    <color name="nano_intro_to_programming">#c45381</color>
+    <color name="light_grey">#e1e1e1</color>
+    <color name="dark_grey">#b7b7b7</color>
+
 </resources>

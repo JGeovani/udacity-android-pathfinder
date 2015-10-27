@@ -25,15 +25,6 @@
     <string name="nano_title_full_stack" translatable="true">Full Stack Web Developer Nanodegree</string>
     <string name="nano_title_programming_fundamentals" translatable="true">Programming Fundamentals Nanodegree</string>
 
-    <string name="nano_url_front_end" translatable="true">https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001</string>
-    <string name="nano_url_android" translatable="true">https://www.udacity.com/course/android-developer-nanodegree--nd801</string>
-    <string name="nano_url_data_analyst" translatable="true">https://www.udacity.com/course/data-analyst-nanodegree--nd002</string>
-    <string name="nano_url_ios" translatable="true">https://www.udacity.com/course/ios-developer-nanodegree--nd003</string>
-    <string name="nano_url_tech_entrepreneur" translatable="true">https://www.udacity.com/course/tech-entrepreneur-nanodegree--nd007</string>
-    <string name="nano_url_beginning_ios" translatable="true">https://www.udacity.com/course/beginning-ios-app-development--nd006</string>
-    <string name="nano_url_full_stack" translatable="true">https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004</string>
-    <string name="nano_url_programming_fundamentals" translatable="true">https://www.udacity.com/course/intro-to-programming-nanodegree--nd000</string>
-
     <!-- Global Strings -->
     <string name="global_submit_button_label" translatable="true">Submit</string>
     <string name="global_ok_button_label" translatable="true">OK</string>
@@ -141,4 +132,11 @@
     <string name="com_parse_ui_login_warning_password_reset_failed">"Parse password reset failed, exception: "</string>
     <string name="com_parse_ui_login_dispatch_user_logged_in">"User logged in, starting: "</string>
     <string name="com_parse_ui_login_dispatch_user_not_logged_in">User not logged in, starting ParseLoginActivity</string>
+
+    <string name="nano_front_end_short_desc">Become a Front-End Web Developer by completing a variety of projects for your portfolio - become an HTML, CSS and JavaScript pro!</string>
+    <string name="nano_button_learn_more">Learn More</string>
+    <string name="like_summary_title">Your Interests</string>
+    <string name="like_summary_cat_1">Front-End</string>
+    <string name="like_summary_cat_2">Full Stack</string>
+    <string name="like_summary_cat_3">Data Analyst</string>
 </resources>
