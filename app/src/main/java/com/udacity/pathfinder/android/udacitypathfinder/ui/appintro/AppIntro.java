@@ -6,8 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.udacity.pathfinder.android.udacitypathfinder.R;
+import com.udacity.pathfinder.android.udacitypathfinder.auth.CheckLogin;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
-import com.udacity.pathfinder.android.udacitypathfinder.ui.feed.FeedActivity;
 
 public class AppIntro extends com.github.paolorotolo.appintro.AppIntro {
 
@@ -44,24 +44,24 @@ public class AppIntro extends com.github.paolorotolo.appintro.AppIntro {
 
 
   public void onSkipPressed() {
-    startArticleFeed();
+    startCheckLogin();
   }
 
   @Override
   public void onDonePressed() {
-    startArticleFeed();
+    startCheckLogin();
   }
 
   private void checkLogin() {
     SharedPref sp = new SharedPref(this);
     if (sp.readLoginStatus()) {
-      startArticleFeed();
+      startCheckLogin();
     }
   }
 
-  private void startArticleFeed(){
-    Intent i = new Intent(this, FeedActivity.class);
-    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+  private void startCheckLogin() {
+    Intent i = new Intent(this, CheckLogin.class);
+    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     startActivity(i);
   }
 }

@@ -18,6 +18,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.feed.FeedActivity;
 
 import java.util.Locale;
 
@@ -157,17 +158,22 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     alertDialog.setTitle(title);
     alertDialog.setMessage(message);
     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.global_ok_button_label),
-        new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-          }
-        });
+      new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) {
+          dialog.dismiss();
+        }
+      });
     alertDialog.show();
   }
 
   private void isLoginComplete(boolean isComplete) {
     SharedPref sp = new SharedPref(getApplicationContext());
     sp.saveLogin(isComplete);
+    if (isComplete) {
+      Intent i = new Intent(this, FeedActivity.class);
+      i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      startActivity(i);
+    }
     finish();
   }
 
@@ -187,7 +193,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     Log.d(TAG, "resumed");
     SharedPref sp = new SharedPref(this);
     if (sp.readLoginStatus()) {
-      finish();
+      Intent i = new Intent(this, FeedActivity.class);
+      i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      startActivity(i);
     }
   }
 

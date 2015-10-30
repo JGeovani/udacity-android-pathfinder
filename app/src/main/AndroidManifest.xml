@@ -1,82 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.udacity.pathfinder.android.udacitypathfinder" >
+  package="com.udacity.pathfinder.android.udacitypathfinder"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+  <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
 
-    <application
-        android:name=".PathfinderApp"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Pathfinder" >
+  <application
+    android:name=".PathfinderApp"
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:theme="@style/Theme.Pathfinder">
 
-        <activity
-            android:name=".ui.feed.FeedActivity"
-            android:label="@string/app_name" >
-        </activity>
+    <activity
+      android:name=".ui.feed.FeedActivity"
+      android:label="@string/app_name">
+    </activity>
 
-      <activity
-        android:name=".ui.appintro.AppIntro"
-        android:label="@string/app_name"
-        android:screenOrientation="portrait">
-          <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-          </intent-filter>
-      </activity>
+    <activity
+      android:name=".ui.appintro.AppIntro"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
 
-        <activity
-            android:name=".ui.article.ArticleActivity"
-            android:label="@string/title_activity_article" >
-        </activity>
+    <activity
+      android:name=".auth.CheckLogin"
+      android:label="@string/app_name">
 
-        <activity
-          android:name=".auth.LoginActivity"
-          android:label="@string/app_name"
-          android:screenOrientation="portrait">
-        </activity>
+    </activity>
+    <activity
+      android:name=".ui.article.ArticleActivity"
+      android:label="@string/title_activity_article">
+    </activity>
 
-        <activity
-          android:name=".auth.SignUpActivity"
-          android:label="@string/app_name"
-          android:screenOrientation="portrait">
-        </activity>
-        <activity
-          android:name=".auth.FacebookLoginActivity"
-          android:screenOrientation="portrait"
-          android:label="@string/app_name">
-        </activity>
-        <activity
-          android:name=".auth.TwitterLogin"
-          android:screenOrientation="portrait"
-          android:label="@string/app_name">
-        </activity>
-        <activity
-          android:name=".auth.GoogleLoginActivity"
-          android:screenOrientation="portrait"
-          android:label="@string/app_name">
-        </activity>
-        <activity android:name="com.facebook.FacebookActivity"
-                  android:configChanges=
-                    "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                  android:label="@string/app_name" />
+    <activity
+      android:name=".auth.LoginActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait">
+    </activity>
 
-        <meta-data
-          android:name="com.parse.APPLICATION_ID"
-          android:value="@string/parse_app_id" />
-        <meta-data
-          android:name="com.parse.CLIENT_KEY"
-          android:value="@string/parse_client_key" />
-        <meta-data
-          android:name="com.facebook.sdk.ApplicationId"
-          android:value="@string/facebook_app_id"/>
+    <activity
+      android:name=".auth.SignUpActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait">
+    </activity>
+    <activity
+      android:name=".auth.FacebookLoginActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait">
+    </activity>
+    <activity
+      android:name=".auth.TwitterLogin"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait">
+    </activity>
+    <activity
+      android:name=".auth.GoogleLoginActivity"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait">
+    </activity>
+    <activity
+      android:name="com.facebook.FacebookActivity"
+      android:configChanges=
+        "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+      android:label="@string/app_name"
+      android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
-    </application>
+    <meta-data
+      android:name="com.parse.APPLICATION_ID"
+      android:value="@string/parse_app_id"/>
+    <meta-data
+      android:name="com.parse.CLIENT_KEY"
+      android:value="@string/parse_client_key"/>
+    <meta-data
+      android:name="com.facebook.sdk.ApplicationId"
+      android:value="@string/facebook_app_id"/>
+
+  </application>
 </manifest>

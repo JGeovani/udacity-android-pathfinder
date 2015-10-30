@@ -58,7 +58,7 @@
     <string name="parse_app_id" translatable="false">m5DPjE3I2Aghdmu49nZcdnsLUkeZFN84jtETLYHu</string>
     <string name="parse_client_key" translatable="false">GdF3lzXZL3zPF1T1DwDB2G9I1YOBDdLaLPAFs3GY</string>
     <!-- Facebook Authentication -->
-    <string name="facebook_app_id" translatable="false">411560665671207</string>
+    <string name="facebook_app_id" translatable="false">365362206864879</string>
     <string name="profile_title_logged_in" translatable="true">Login</string>
     <string name="profile_logout_button_label" translatable="true">Logout</string>
     <string name="facebook_login_button_label" translatable="true">Facebook</string>
