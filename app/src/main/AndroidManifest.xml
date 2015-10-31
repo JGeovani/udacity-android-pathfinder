@@ -37,12 +37,12 @@
         </activity>
 
         <service
-            android:name=".data.RequestArticleService"
+            android:name=".data.ArticlePullService"
             android:exported="false"/>
 
         <service android:name="com.parse.PushService" />
         <receiver
-            android:name="com.udacity.pathfinder.android.udacitypathfinder.data.ParseBroadcastReceiver"
+            android:name="com.udacity.pathfinder.android.udacitypathfinder.data.ParsePushReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />

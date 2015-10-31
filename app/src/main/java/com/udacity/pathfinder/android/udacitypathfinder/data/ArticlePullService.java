@@ -13,12 +13,12 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 import java.util.List;
 
 /**
- * This class requests articles from the remote datastore.
+ * This service pulls new articles from the remote datastore.
  */
-public class RequestArticleService extends IntentService {
+public class ArticlePullService extends IntentService {
 
-  public RequestArticleService() {
-    super("RequestArticleService");
+  public ArticlePullService() {
+    super("ArticlePullService");
   }
 
   @Override protected void onHandleIntent(Intent intent) {
@@ -41,6 +41,7 @@ public class RequestArticleService extends IntentService {
           ParseQuery<Article> remoteQuery = ParseQuery.getQuery(ParseConstants.ARTICLE_CLASS_NAME);
           remoteQuery.orderByDescending(ParseConstants.PARSE_COL_CREATED_AT);
           remoteQuery.whereGreaterThan(ParseConstants.PARSE_COL_CREATED_AT, article.getCreatedAt());
+          remoteQuery.whereEqualTo(ParseConstants.ARTICLES_COL_APPROVED, true);
           remoteQuery.findInBackground(new FindCallback<Article>() {
             @Override public void done(List<Article> articles, ParseException e) {
               if (e == null && articles != null) {

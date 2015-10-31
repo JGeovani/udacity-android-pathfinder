@@ -5,10 +5,15 @@ import android.content.Intent;
 
 import com.parse.ParsePushBroadcastReceiver;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
- * This class reacts to Parse push notifications.
+ * This receiver reacts to Parse push notifications.
  */
-public class ParseBroadcastReceiver extends ParsePushBroadcastReceiver {
+public class ParsePushReceiver extends ParsePushBroadcastReceiver {
+
+  private static final String ALERT_NEW_ARTICLES_ADDED = "newArticlesAdded";
 
   /**
    * This method is called when a push notification is received. Depending on the incoming Intent,
@@ -17,11 +22,14 @@ public class ParseBroadcastReceiver extends ParsePushBroadcastReceiver {
    * service for retrieving new articles and adding them to the local datastore.
    */
   @Override protected void onPushReceive(Context context, Intent intent) {
-    // For now, we launch the article service in response to all incoming notifications (for testing
-    // purposes). The Parse job for retrieving new articles will send a push notification when
-    // articles have been successfully committed to the datastore. The Intent extra will contain the
-    // JSON payload of the notification.
-    Intent serviceIntent = new Intent(context, RequestArticleService.class);
-    context.startService(serviceIntent);
+    try {
+      JSONObject data = new JSONObject(intent.getStringExtra(KEY_PUSH_DATA));
+      if (data.getString("alert").equals(ALERT_NEW_ARTICLES_ADDED)) {
+        Intent serviceIntent = new Intent(context, ArticlePullService.class);
+        context.startService(serviceIntent);
+      }
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
   }
 }
