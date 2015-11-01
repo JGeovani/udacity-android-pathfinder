@@ -22,7 +22,7 @@ import java.util.Locale;
 public class SignUpActivity extends Activity implements View.OnClickListener {
   private EditText mEmailEditText, mPasswordEditText, mConfirmPasswordEditText, mLastNameEditText, mFirstNameEditText;
   private Button mCreateAccountButton;
-  private String mEmail, mPassword, mConfirmPassword, mFirstName, mLastName;
+  private String mUserName, mEmail, mPassword, mConfirmPassword, mFirstName, mLastName;
   int errorCode = 0;
 
 
@@ -117,7 +117,8 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     } else {
       // Show a progress spinner, and kick off a background task to
       // perform the user login attempt.
-      signUp(mEmail.toLowerCase(Locale.getDefault()), mEmail, mFirstName, mLastName, mPassword);
+      mUserName = mEmail.toLowerCase(Locale.getDefault());
+        signUp(mUserName, mEmail, mFirstName, mLastName, mPassword);
     }
   }
 
@@ -142,7 +143,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                 errorCode = 1;
                 Log.e("PARSE ERROR: ", e.toString());
                 signUpMsg("Invalid user name or password", false);
-                isLoginComplete(false);
+                isLoginComplete(false, mUsername);
               }
             }
           });
@@ -159,9 +160,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
   protected void signUpMsg(String msg, boolean isComplete) {
     if (isComplete){
-      isLoginComplete(true);
+      isLoginComplete(true, mUserName);
     }else {
-      isLoginComplete(false);
+      isLoginComplete(false, null);
     }
       AlertDialog alertDialog = new AlertDialog.Builder(this).create();
       alertDialog.setMessage(msg);
@@ -207,9 +208,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     mConfirmPasswordEditText.setText("");
   }
 
-  private void isLoginComplete(boolean isComplete) {
+  private void isLoginComplete(boolean isComplete, String userId) {
     SharedPref sp = new SharedPref(getApplicationContext());
-    sp.saveLogin(isComplete);
+    sp.saveLogin(isComplete, userId);
   }
 
 }

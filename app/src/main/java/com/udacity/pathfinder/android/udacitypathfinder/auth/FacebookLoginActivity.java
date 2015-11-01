@@ -26,6 +26,7 @@ public class FacebookLoginActivity extends Activity {
   ParseUser parseUser;
   private String TAG = getClass().getSimpleName();
   List<String> faceBookPermissions = Arrays.asList("public_profile", "email");
+  private String facebookId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class FacebookLoginActivity extends Activity {
               JSONObject userProfile = new JSONObject();
 
               try {
+                facebookId = String.valueOf(jsonObject.getLong("id"));
                 userProfile.put("facebookId", jsonObject.getLong("id"));
                 userProfile.put("name", jsonObject.getString("name"));
                 userProfile.put("firstName", jsonObject.getString("first_name"));
@@ -64,7 +66,7 @@ public class FacebookLoginActivity extends Activity {
                 // Save the user profile info in a user property
                 parseUser = ParseUser.getCurrentUser();
                 parseUser.put("profile", userProfile);
-                parseUser.put("facebookId", String.valueOf(jsonObject.getLong("id")));
+                parseUser.put("facebookId", facebookId);
                 parseUser.put("email", jsonObject.getString("email"));
                 parseUser.put("name", jsonObject.getString("name"));
                 parseUser.put("firstName", jsonObject.getString("first_name"));
@@ -119,7 +121,7 @@ public class FacebookLoginActivity extends Activity {
           @Override
           public void done(ParseException ex) {
             if (ParseFacebookUtils.isLinked(parseUser)) {
-              isLoginComplete(true);
+              isLoginComplete(true, facebookId);
               ParseUser.getCurrentUser().pinInBackground();
               finish();
               Log.e(TAG, "Success, user logged in with Facebook!");
@@ -128,7 +130,7 @@ public class FacebookLoginActivity extends Activity {
         });
       } else {
         ParseUser.getCurrentUser().pinInBackground();
-        isLoginComplete(true);
+        isLoginComplete(true, facebookId);
         Log.d(TAG, "Parse is already linked to Facebook account");
       }
     } catch (Exception err) {
@@ -139,9 +141,9 @@ public class FacebookLoginActivity extends Activity {
 
   }
 
-  private void isLoginComplete(boolean isComplete) {
+  private void isLoginComplete(boolean isComplete, String userId) {
     SharedPref sp = new SharedPref(getApplicationContext());
-    sp.saveLogin(isComplete);
+    sp.saveLogin(isComplete, userId);
     finish();
   }
 
@@ -164,7 +166,7 @@ public class FacebookLoginActivity extends Activity {
             Log.d(TAG, "User logged in through Facebook!");
             getUserDetailsFromParse();
             ParseUser.getCurrentUser().pinInBackground();
-            isLoginComplete(true);
+            isLoginComplete(true, facebookId);
           }
         }
       });
