@@ -29,17 +29,16 @@ public class AppIntro extends com.github.paolorotolo.appintro.AppIntro {
 
     // OPTIONAL METHODS
     // Override bar/separator color
-    setBarColor(Color.parseColor("#373737"));
     setSeparatorColor(Color.parseColor("#FFFFFF"));
 
     // Hide Skip/Done button
-    showSkipButton(true);
+    showSkipButton(false);
     showDoneButton(true);
 
     // Turn vibration on and set intensity
-    // NOTE: you will probably need to ask VIBRATE permesssion in Manifest
+    // NOTE: you will probably need to ask VIBRATE permission in Manifest
     setVibrate(true);
-    setVibrateIntensity(30);
+    setVibrateIntensity(50);
   }
 
 
