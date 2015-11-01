@@ -1,41 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="72dp">
+    android:layout_height="@dimen/list_item_article_height">
 
     <ImageView
         android:id="@+id/article_image"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="@dimen/list_item_article_height"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/article_title"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@id/article_image"
-        android:layout_toEndOf="@id/article_image"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="@dimen/list_item_article_title_padding"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@android:color/black"
+        />
 
-        <TextView
-            android:id="@+id/article_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            />
-
-        <TextView
-            android:id="@+id/article_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:maxLines="1"
-            android:ellipsize="end"
-            />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
