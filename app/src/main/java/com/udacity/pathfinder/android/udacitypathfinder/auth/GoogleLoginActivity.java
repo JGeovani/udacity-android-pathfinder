@@ -38,7 +38,7 @@ public class GoogleLoginActivity extends Activity implements
   private final String TAG = getClass().getSimpleName();
   ProgressDialog progressDialog;
   ParseUser parseUser;
-  private String gDisplayName, gEmail, gToken, gId, firstName, lastName, password;
+  private String gDisplayName, gEmail, gId, firstName, lastName, password;
   private static int RC_SIGN_IN = 0;
   private GoogleApiClient mGoogleApiClient;
   private boolean mIntentInProgress, mSignInClicked;
@@ -228,7 +228,6 @@ public class GoogleLoginActivity extends Activity implements
     try {
       if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
         Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-        String SCOPE = "https://www.googleapis.com/auth/plus.login";
         String personName = currentPerson.getDisplayName();
         firstName = currentPerson.getName().getGivenName();
         lastName = currentPerson.getName().getFamilyName();
@@ -269,13 +268,13 @@ public class GoogleLoginActivity extends Activity implements
                       public void done(ParseUser parseUser, ParseException e) {
                         Log.d(TAG, "---> Google user is now signed into parse");
                         ParseUser.getCurrentUser().pinInBackground();
-                        isLoginComplete(true);
+                        isLoginComplete(true, gId);
                       }
                     });
                 } else {
                   // Signup failed. Look at the ParseException in log to see what happened.
                   Log.e(TAG, e.getMessage());
-                  isLoginComplete(false);
+                  isLoginComplete(false, null);
                 }
               }
             });
@@ -306,9 +305,9 @@ public class GoogleLoginActivity extends Activity implements
     finishHandler.postDelayed(finishRunnable, 360);
   }
 
-  private void isLoginComplete(boolean isComplete) {
+  private void isLoginComplete(boolean isComplete, String userId) {
     SharedPref sp = new SharedPref(this);
-    sp.saveLogin(isComplete);
+    sp.saveLogin(isComplete, userId);
     progressDialog.dismiss();
     finish();
   }

@@ -33,4 +33,8 @@ public class Article extends ParseObject {
   public String getTitle() {
     return getString("title");
   }
+
+  public String getId() {
+    return getString("id");
+  }
 }
