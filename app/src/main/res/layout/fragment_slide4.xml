@@ -1,85 +1,31 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:context="com.udacity.pathfinder.android.udacitypathfinder.ui.appintro.Slide1"
-                android:background="@drawable/blue_gradient">
-
-
-
-
-  <LinearLayout
+<LinearLayout
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="215dp">
-
-    <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="349dp"
-      >
-
-      <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".85"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/udacity_slide_title_red">
-
-        <ImageView
-          android:layout_width="25dp"
-          android:layout_height="wrap_content"
-          android:id="@+id/imageView2"
-          android:src="@drawable/appslide_4_asset_2"
-          android:layout_gravity="right"
-          android:layout_marginRight="30dp"/>
-      </FrameLayout>
-
-      <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_weight=".15"
-        >
-
-        <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/iv_fake_text"
-          android:src="@drawable/appslide_4_asset_1"
-          />
-
-      </FrameLayout>
-
-    </LinearLayout>
-
-  </LinearLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:background="@drawable/blue_gradient"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="80dp"
+    android:gravity="bottom">
 
   <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Over time, we&apos;ll begin recommending top courses &amp; educational tools for you based on your reading habits. So let&apos;s dig in!"
-    android:id="@+id/tv_heading"
-    android:shadowDx="-2"
-    android:shadowDy="2"
-    android:shadowRadius="5"
-    android:shadowColor="@color/shadow_primary_text"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="false"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:textSize="22sp"
-    android:layout_marginTop="60dp"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
-    android:textStyle="bold"
-    android:textColor="#ffffff"
-    android:singleLine="false"/>
+      android:id="@+id/slide_2_heading"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:text="@string/walkthrough_text_3"
+      android:textSize="22sp"
+      android:textColor="@color/white"
+      android:layout_weight="0.5"
+      android:gravity="center" />
 
+  <ImageView
+      android:src="@drawable/walkthrough_slide_3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="fitXY"
+      android:adjustViewBounds="true"
+      android:contentDescription="@string/desc_walkthrough_3" />
 
-</RelativeLayout>
+</LinearLayout>

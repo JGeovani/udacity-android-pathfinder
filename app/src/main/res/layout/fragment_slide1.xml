@@ -5,33 +5,32 @@
              tools:context="com.udacity.pathfinder.android.udacitypathfinder.ui.appintro.Slide1"
              android:background="@drawable/red_gradient">
 
-  <ImageView
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:id="@+id/imageView5"
-    android:layout_gravity="center"
-    android:src="@drawable/splash_logo"
-    android:layout_marginBottom="85dp"/>
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_gravity="center">
 
-  <ImageView
-    android:layout_width="485dp"
-    android:layout_height="715dp"
-    android:id="@+id/imageView"
-    android:layout_gravity="center"
-    android:src="@drawable/splash_logo"
-    android:alpha=".10"
-    android:layout_marginBottom="85dp"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/pathfinder_logo_splash"
+        android:layout_gravity="center"
+        android:src="@drawable/splash_logo" />
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Pathfinder"
-    android:shadowDx="-2"
-    android:shadowDy="2"
-    android:shadowRadius="5"
-    android:shadowColor="@color/shadow_primary_text"
-    android:id="@+id/tv_header"
-    android:layout_gravity="center"
-    android:textSize="50dp"
-    android:textColor="#ffffff"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_title"
+        android:shadowDx="-2"
+        android:shadowDy="2"
+        android:shadowRadius="5"
+        android:shadowColor="@color/shadow_primary_text"
+        android:id="@+id/tv_header"
+        android:layout_gravity="center"
+        android:textSize="50sp"
+        android:textColor="#ffffff"/>
+
+  </LinearLayout>
+
 </FrameLayout>
