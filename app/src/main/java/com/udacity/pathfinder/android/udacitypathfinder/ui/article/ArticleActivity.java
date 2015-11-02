@@ -89,7 +89,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
           arraylist = new ArrayList<>();
           if (likeDb.alreadyLiked(articleId)) {
             isLiked = true;
-            btn_like.setImageResource(R.drawable.heart_icon_1);
+            btn_like.setImageResource(R.mipmap.ic_heart_1);
           }
           List<String> nandegreeData = article.getNanodegrees();
           for(int i=0;i<nandegreeData.size();i++){
@@ -136,15 +136,15 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   private void setLike(boolean isLiked) {
     String[] nano = sp.getNanodegrees();
     if (!isLiked && !likeDb.alreadyLiked(articleId)) {
-      btn_like.setImageResource(R.drawable.heart_icon_1);
+      btn_like.setImageResource(R.mipmap.ic_heart_1);
       likeDb.addLike(articleId,nano);
       this.isLiked = true;
     } else if (!isLiked && likeDb.alreadyLiked(articleId)) {
       likeDb.updateLike(articleId, true);
-      btn_like.setImageResource(R.drawable.heart_icon_1);
+      btn_like.setImageResource(R.mipmap.ic_heart_1);
       this.isLiked = true;
     } else if (isLiked) {
-      btn_like.setImageResource(R.drawable.heart_icon_0);
+      btn_like.setImageResource(R.mipmap.ic_heart_0);
       likeDb.updateLike(articleId, false);
       this.isLiked = false;
     }
