@@ -4,6 +4,7 @@
     <style name="Theme.Pathfinder" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/theme_accent</item>
     </style>
 
     <style name="ParseLoginUI.Button" parent="@android:style/Widget.Button">

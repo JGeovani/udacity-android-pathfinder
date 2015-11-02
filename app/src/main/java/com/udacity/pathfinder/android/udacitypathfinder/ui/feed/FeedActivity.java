@@ -64,6 +64,7 @@ public class FeedActivity extends AuthCompatActivity {
     recyclerView.setLayoutManager(gridLayoutManager);
     recyclerView.removeItemDecoration(dividerItemDecoration);
     recyclerView.setAdapter(feedAdapter);
+    recyclerView.setHasFixedSize(true);
   }
 
   private void setupListLayout() {
@@ -71,6 +72,7 @@ public class FeedActivity extends AuthCompatActivity {
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.addItemDecoration(dividerItemDecoration);
     recyclerView.setAdapter(feedAdapter);
+    recyclerView.setHasFixedSize(true);
   }
 
   private void requestArticles() {

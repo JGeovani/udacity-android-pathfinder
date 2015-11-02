@@ -86,7 +86,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
       Article article = articles.get(position);
       Glide.with(context).load(article.getImageUrl()).into(listViewHolder.image);
       listViewHolder.title.setText(article.getTitle());
-      listViewHolder.description.setText(article.getDescription());
     }
   }
 
@@ -105,34 +104,28 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
   public abstract static class ViewHolder extends RecyclerView.ViewHolder {
 
+    @Bind(R.id.article_image) ImageView image;
+    @Bind(R.id.article_title) TextView title;
     public final View view;
 
     public ViewHolder(View view) {
       super(view);
+      ButterKnife.bind(this, view);
       this.view = view;
     }
   }
 
   public static class ListViewHolder extends ViewHolder {
 
-    @Bind(R.id.article_image) ImageView image;
-    @Bind(R.id.article_title) TextView title;
-    @Bind(R.id.article_description) TextView description;
-
     public ListViewHolder(View view) {
       super(view);
-      ButterKnife.bind(this, view);
     }
   }
 
   public static class GridViewHolder extends ViewHolder {
 
-    @Bind(R.id.article_image) ImageView image;
-    @Bind(R.id.article_title) TextView title;
-
     public GridViewHolder(View view) {
       super(view);
-      ButterKnife.bind(this, view);
     }
   }
 }
