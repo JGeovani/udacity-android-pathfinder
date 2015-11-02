@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,6 +21,9 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback2;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.DbArticleLikes;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -48,13 +52,16 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   ImageButton btn_like;
 
   public static final String KEY_ARTICLE_OBJECT_ID = "articleObjectId";
+  public static final String KEY_ARTICLE_NANODEGREES = "nanodegrees";
   private String articleId;
+  private ArrayList<String> arraylist;
+  String[] nanodegrees;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     likeDb = new DbArticleLikes(this);
-
+    sp = new SharedPref(this);
     setContentView(R.layout.activity_article);
     ButterKnife.bind(this);
     btn_like.setOnClickListener(this);
@@ -79,10 +86,18 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onResponse(Article article, ParseException e) {
           // Check if article is already liked
+          arraylist = new ArrayList<>();
           if (likeDb.alreadyLiked(articleId)) {
             isLiked = true;
             btn_like.setImageResource(R.drawable.heart_icon_1);
           }
+          List<String> nandegreeData = article.getNanodegrees();
+          for(int i=0;i<nandegreeData.size();i++){
+            arraylist.add(nandegreeData.get(i));
+          }
+          Log.d("total: ", String.valueOf(arraylist.size()));
+          sp.saveNanodegree(arraylist);
+
           // start webview
           webView.loadUrl(article.getLink());
         }
@@ -119,9 +134,10 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   }
 
   private void setLike(boolean isLiked) {
+    String[] nano = sp.getNanodegrees();
     if (!isLiked && !likeDb.alreadyLiked(articleId)) {
       btn_like.setImageResource(R.drawable.heart_icon_1);
-      likeDb.addLike(articleId, null);
+      likeDb.addLike(articleId,nano);
       this.isLiked = true;
     } else if (!isLiked && likeDb.alreadyLiked(articleId)) {
       likeDb.updateLike(articleId, true);

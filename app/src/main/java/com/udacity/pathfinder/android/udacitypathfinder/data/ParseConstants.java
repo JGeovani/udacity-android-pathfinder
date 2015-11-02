@@ -7,4 +7,6 @@ public class ParseConstants {
 
   // COLUMNS
   public static final String PARSE_COL_CREATED_AT = "createdAt";
+  public static final String PARSE_COL_NANODEGREES = "nanodegrees";
+
 }
