@@ -139,4 +139,7 @@
     <string name="like_summary_cat_1">Front-End</string>
     <string name="like_summary_cat_2">Full Stack</string>
     <string name="like_summary_cat_3">Data Analyst</string>
+    <string name="desc_walkthrough_1">Description of what Pathfinder App does.</string>
+    <string name="desc_walkthrough_2">How to like an Article.</string>
+    <string name="desc_walkthrough_3">Explanation of how Recommendations work</string>
 </resources>
