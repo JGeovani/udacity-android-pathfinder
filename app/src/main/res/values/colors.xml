@@ -49,7 +49,7 @@
     <color name="nano_intro_to_programming">#c45381</color>
     <color name="light_grey">#e1e1e1</color>
     <color name="dark_grey">#b7b7b7</color>
-
+    <color name="dark_grey_red">#3e3939</color>
     <color name="grid_item_article_title_background">#88676767</color>
 
 </resources>
