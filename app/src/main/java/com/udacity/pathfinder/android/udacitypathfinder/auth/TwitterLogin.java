@@ -48,7 +48,7 @@ public class TwitterLogin extends Activity{
 
     public void twitterLoginRequest() {
         Log.d(TAG, "Make twitter request");
-        String screenname, userid;
+        final String screenname, userid;
         screenname = ParseTwitterUtils.getTwitter().getScreenName();
         userid = ParseTwitterUtils.getTwitter().getUserId();
         JSONObject userProfile = new JSONObject();
@@ -71,13 +71,13 @@ public class TwitterLogin extends Activity{
                     if (ParseTwitterUtils.isLinked(parseUser)) {
                         Log.d(TAG, "Twitter user linked to parse and logged in with Twitter!");
                         ParseUser.getCurrentUser().pinInBackground();
-                        isLoginComplete(true);
+                        isLoginComplete(true, userid);
                     }
                 }
             });
         }
         ParseUser.getCurrentUser().pinInBackground();
-        isLoginComplete(true);
+        isLoginComplete(true, userid);
     }
     /**
      * handler used to prevent leak with "AndroidHttpClient created and never closed"
@@ -92,9 +92,9 @@ public class TwitterLogin extends Activity{
         }
     };
 
-    private void isLoginComplete(boolean isComplete) {
+    private void isLoginComplete(boolean isComplete, String userId) {
         SharedPref sp = new SharedPref(getApplicationContext());
-        sp.saveLogin(isComplete);
+        sp.saveLogin(isComplete, userId);
         progressDialog.setMessage("Cleaning up...");
         progressDialog.show();
         finishHandler.postDelayed(finishRunnable, 1000);

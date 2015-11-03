@@ -136,13 +136,13 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
   }
 
-  private void login(String username, String password) {
+  private void login(final String username, String password) {
     ParseUser.logInInBackground(username, password, new LogInCallback() {
       @Override
       public void done(ParseUser user, ParseException e) {
         if (e == null) {
           ParseUser.getCurrentUser().pinInBackground();
-          isLoginComplete(true);
+          isLoginComplete(true, username);
         } else
           loginUnSuccessful();
       }
@@ -166,9 +166,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     alertDialog.show();
   }
 
-  private void isLoginComplete(boolean isComplete) {
+  private void isLoginComplete(boolean isComplete, String userId) {
     SharedPref sp = new SharedPref(getApplicationContext());
-    sp.saveLogin(isComplete);
+    sp.saveLogin(isComplete, userId);
     if (isComplete) {
       Intent i = new Intent(this, FeedActivity.class);
       i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);

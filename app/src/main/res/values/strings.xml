@@ -142,4 +142,16 @@
     <string name="desc_walkthrough_1">Description of what Pathfinder App does.</string>
     <string name="desc_walkthrough_2">How to like an Article.</string>
     <string name="desc_walkthrough_3">Explanation of how Recommendations work</string>
+
+    <string name="learn_more_nd801"><a href="https://www.udacity.com/course/nd801">Learn More</a></string>
+    <string name="learn_more_nd000"><a href="https://www.udacity.com/course/nd000">Learn More</a></string>
+    <string name="learn_more_nd007"><a href="https://www.udacity.com/course/nd007">Learn More</a></string>
+    <string name="learn_more_nd004"><a href="https://www.udacity.com/course/nd004">Learn More</a></string>
+    <string name="learn_more_nd006"><a href="https://www.udacity.com/course/nd006">Learn More</a></string>
+    <string name="learn_more_nd002"><a href="https://www.udacity.com/course/nd002">Learn More</a></string>
+    <string name="learn_more_nd001"><a href="https://www.udacity.com/course/nd001">Learn More</a></string>
+    <string name="learn_more_nd003"><a href="https://www.udacity.com/course/nd003">Learn More</a></string>
+    <string name="learn_more_ca001"><a href="https://www.udacity.com/course/ca001">Learn More</a></string>
+Learn
+
 </resources>

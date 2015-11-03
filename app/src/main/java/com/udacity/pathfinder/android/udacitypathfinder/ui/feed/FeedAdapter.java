@@ -14,6 +14,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 import com.udacity.pathfinder.android.udacitypathfinder.ui.article.ArticleActivity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
   public static final int VIEW_TYPE_GRID = 0;
   public static final int VIEW_TYPE_LIST = 1;
+  private ArrayList<String> nanodegreesArrayList = new ArrayList<>();
 
   private List<Article> articles = Collections.emptyList();
   private Context context;
