@@ -5,11 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,12 +46,15 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   WebView webView;
   @Bind(R.id.spinner)
   ProgressBar spinner;
-  @Bind(R.id.banner)
-  TextView banner;
+  @Bind(R.id.tv_banner)
+  TextView tv_banner;
   @Bind(R.id.btn_exit)
   ImageButton btn_exit;
   @Bind(R.id.btn_like)
   ImageButton btn_like;
+  @Bind(R.id.tv_title) TextView tv_nanodegree_title;
+  @Bind(R.id.tv_learn_more) TextView tv_nanodegree_learn_more;
+  @Bind(R.id.iv_nanodegree) ImageView iv_nanodegree;
 
   public static final String KEY_ARTICLE_OBJECT_ID = "articleObjectId";
   public static final String KEY_ARTICLE_NANODEGREES = "nanodegrees";
@@ -70,7 +75,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     toolbar.setTitle(ARTICLE_ACTIVITY_TITLE);
     setSupportActionBar(toolbar);
 
-    banner.setVisibility(View.INVISIBLE);
+    tv_banner.setVisibility(View.INVISIBLE);
     spinner.setVisibility(View.VISIBLE);
 
     webView.setWebViewClient(webViewClient);
@@ -97,7 +102,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
           }
           Log.d("total: ", String.valueOf(arraylist.size()));
           sp.saveNanodegree(arraylist);
-
+          setNanodegreeAsset(arraylist.get(0));
           // start webview
           webView.loadUrl(article.getLink());
         }
@@ -117,7 +122,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onPageFinished(WebView view, String url) {
       spinner.setVisibility(View.INVISIBLE);
-      banner.setVisibility(View.VISIBLE);
+      tv_banner.setVisibility(View.VISIBLE);
     }
   };
 
@@ -148,6 +153,71 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
       likeDb.updateLike(articleId, false);
       this.isLiked = false;
     }
+
+  }
+
+  private void setNanodegreeAsset(String nanodegree) {
+    /**
+     * intro to programming = nd000
+     * web developer = ca001
+     * front end web developer = nd001
+     * data analyst = nd002
+     * ios = nd003
+     * full stack web = nd004
+     * beginning ios = nd006
+     * tech entrepreneur = nd007
+     * android = nd801
+     */
+    String learnMore = "learn_more_"+nanodegree;
+    int learnMoreResource = getResources().getIdentifier(learnMore,"string", getPackageName());
+    int imageResource = getResources().getIdentifier(nanodegree, "drawable", getPackageName());
+    String title ="";
+
+    switch (nanodegree){
+
+      case "nd000":
+        title = "Intro to Programming";
+        break;
+
+      case "ca001":
+        title = "Web Developer";
+        break;
+
+      case "nd001":
+        title = "Front-End Web Developer";
+        break;
+
+      case "nd002":
+        title = "Data Analyst";
+        break;
+
+      case "nd003":
+        title = "iOS Developer";
+        break;
+
+      case "nd004":
+        title = "Full Stack Web Developer";
+        break;
+
+      case "nd006":
+        title = "Beginning iOS Developer";
+        break;
+
+      case "nd007":
+        title = "Tech Entrepreneur";
+        break;
+
+      case "nd801":
+        title = "Android Developer";
+        break;
+
+    }
+
+    tv_banner.setText("INTRODUCING");
+    tv_nanodegree_title.setText(title+" Nanodegree");
+    tv_nanodegree_learn_more.setText(learnMoreResource);
+    tv_nanodegree_learn_more.setMovementMethod(LinkMovementMethod.getInstance());
+    iv_nanodegree.setImageResource(imageResource);
 
   }
 
