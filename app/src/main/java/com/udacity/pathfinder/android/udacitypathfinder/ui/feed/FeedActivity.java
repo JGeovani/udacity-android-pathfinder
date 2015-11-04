@@ -1,11 +1,13 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.feed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.parse.ParseException;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
@@ -14,6 +16,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.addArticle.AddArticleActivity;
 import com.udacity.pathfinder.android.udacitypathfinder.ui.misc.DividerItemDecoration;
 
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 public class FeedActivity extends AuthCompatActivity {
@@ -85,6 +89,12 @@ public class FeedActivity extends AuthCompatActivity {
         }
       }
     });
+  }
+
+  @OnClick(R.id.fab)
+  public void addArticle(View view) {
+    Intent intent = new Intent(this, AddArticleActivity.class);
+    startActivity(intent);
   }
 
   private final TabLayout.OnTabSelectedListener onTabSelectedListener =

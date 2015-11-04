@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="nanodegree_titles">
+        <item>Android Developer</item>
+        <item>Beginning iOS App Development</item>
+        <item>Data Analyst</item>
+        <item>Front-End Web Developer</item>
+        <item>Full Stack Web Developer</item>
+        <item>Intro to Programming</item>
+        <item>iOS Developer</item>
+        <item>Tech Entrepreneur</item>
+    </string-array>
+
+</resources>
