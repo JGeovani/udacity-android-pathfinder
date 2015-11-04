@@ -21,6 +21,7 @@ import com.parse.ParseException;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
+import com.udacity.pathfinder.android.udacitypathfinder.data.Recommend;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback2;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.DbArticleLikes;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
@@ -38,6 +39,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   private SharedPref sp;
   private boolean isLiked = false;
   DbArticleLikes likeDb;
+  Recommend recommend;
+
 
   @BindString(R.string.title_activity_article)
   String ARTICLE_ACTIVITY_TITLE;
@@ -70,6 +73,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     likeDb = new DbArticleLikes(this);
+    recommend = new Recommend(this);
     sp = new SharedPref(this);
     setContentView(R.layout.activity_article);
     ButterKnife.bind(this);
@@ -111,7 +115,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
           for (int i = 0; i < nandegreeData.size(); i++) {
             arraylist.add(nandegreeData.get(i));
           }
-          Log.d("total: ", String.valueOf(arraylist.size()));
           sp.saveNanodegree(arraylist);
           webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -168,6 +171,13 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
       btn_like.setImageResource(R.mipmap.ic_heart_0);
       likeDb.updateLike(articleId, false);
       this.isLiked = false;
+    }
+    // getting the count of likes for end user
+    if (likeDb.totalCount() > 4) {
+      Log.d("-=- ", "Total of " + String.valueOf(likeDb.totalCount()) + "likes -=-");
+      sp.saveRecomendation(true);
+    } else {
+      sp.saveRecomendation(false);
     }
   }
 

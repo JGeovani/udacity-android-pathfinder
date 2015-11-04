@@ -12,6 +12,7 @@ public class SharedPref {
   private static final String LOGIN_COMPLETE = "login_complete";
   private static final String USER_ID = "user_id";
   private static final String NANODEGREES = "nanodegrees";
+  private static final String RECOMEND = "recomend";
 
 
   private Context context;
@@ -34,6 +35,15 @@ public class SharedPref {
     editor.putBoolean(LOGIN_COMPLETE, isLoginComplete);
     editor.putString(USER_ID, userId);
     editor.apply();
+  }
+
+  public void saveRecomendation(boolean activate) {
+    editor.putBoolean(RECOMEND, activate);
+    editor.apply();
+  }
+
+  public boolean isRecomended(){
+    return sharedPreferences.getBoolean(RECOMEND, false);
   }
 
   public void saveNanodegree(ArrayList<String> nanodegree) {

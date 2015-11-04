@@ -37,7 +37,7 @@
                 android:layout_height="250dp">
 
                 <ImageView
-                    android:id="@+id/nano_logo"
+                    android:id="@+id/iv_nano_logo"
                     android:layout_width="250dp"
                     android:layout_height="160dp"
                     android:layout_gravity="center"
@@ -46,7 +46,7 @@
                     android:layout_centerHorizontal="true" />
 
                 <TextView
-                    android:id="@+id/nano_title"
+                    android:id="@+id/tv_nano_title"
                     android:text="@string/nano_title_front_end"
                     android:textColor="@color/white"
                     android:textSize="28sp"
@@ -59,7 +59,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/nano_short_description"
+                android:id="@+id/tv_nano_short_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="14dp"
@@ -81,7 +81,8 @@
                 android:textColor="@color/theme_accent"
                 android:background="@color/white"
                 android:textAllCaps="true"
-                android:text="@string/nano_button_learn_more"/>
+                android:text="@string/nano_button_learn_more"
+                android:id="@+id/btn_learn_more"/>
 
         </LinearLayout>
 

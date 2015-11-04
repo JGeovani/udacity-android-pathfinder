@@ -1,11 +1,14 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.feed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.parse.ParseException;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
@@ -13,8 +16,10 @@ import com.udacity.pathfinder.android.udacitypathfinder.auth.AuthCompatActivity;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback;
+import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 import com.udacity.pathfinder.android.udacitypathfinder.ui.misc.DividerItemDecoration;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation.RecommendNanodegree;
 
 import java.util.List;
 
@@ -31,6 +36,9 @@ public class FeedActivity extends AuthCompatActivity {
   @Bind(R.id.toolbar) Toolbar toolbar;
   @Bind(R.id.recyclerview) RecyclerView recyclerView;
   @Bind(R.id.tabs) TabLayout tabLayout;
+  @Bind(R.id.btn_recomendation)
+  ImageButton btn_recomendation;
+  SharedPref sp;
 
   private FeedAdapter feedAdapter;
   private DividerItemDecoration dividerItemDecoration;
@@ -39,6 +47,21 @@ public class FeedActivity extends AuthCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_feed);
     ButterKnife.bind(this);
+    sp = new SharedPref(this);
+    if (!sp.isRecomended()) {
+      btn_recomendation.setImageResource(R.mipmap.ic_paper_plane_0);
+      btn_recomendation.setAlpha((float) .2);
+    }else{
+      btn_recomendation.setImageResource(R.mipmap.ic_paper_plane_1);
+      btn_recomendation.setAlpha((float) 1);
+      btn_recomendation.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          Intent i = new Intent(FeedActivity.this, RecommendNanodegree.class);
+          startActivity(i);
+        }
+      });
+    }
 
     toolbar.setTitle(FEED_ACTIVITY_TITLE);
     setSupportActionBar(toolbar);
