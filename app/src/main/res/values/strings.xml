@@ -143,6 +143,8 @@
     <string name="desc_walkthrough_2">How to like an Article.</string>
     <string name="desc_walkthrough_3">Explanation of how Recommendations work</string>
 
+    <string name="introducing">INTRODUCING</string>
+
     <string name="learn_more_nd801"><a href="https://www.udacity.com/course/nd801">Learn More</a></string>
     <string name="learn_more_nd000"><a href="https://www.udacity.com/course/nd000">Learn More</a></string>
     <string name="learn_more_nd007"><a href="https://www.udacity.com/course/nd007">Learn More</a></string>

@@ -3,7 +3,6 @@ package com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,6 +19,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.Recommend;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Nanodegree;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.article.ArticleActivity;
 
 import java.util.List;
 
@@ -48,7 +48,14 @@ public class RecommendNanodegree extends AppCompatActivity {
   TextView tv_like_2;
   @Bind(R.id.tv_like_3)
   TextView tv_like_3;
+  @Bind(R.id.tv_total_likes_1)
+  TextView tv_total_likes_1;
+  @Bind(R.id.tv_total_likes_2)
+  TextView tv_total_likes_2;
+  @Bind(R.id.tv_total_likes_3)
+  TextView tv_total_likes_3;
   String[][] recommendedNanodegrees;
+  String degreeTitle, degreeUrl;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -108,16 +115,20 @@ public class RecommendNanodegree extends AppCompatActivity {
                         .into(iv_nano_logo);
                       tv_nano_title.setText(degreeObject.getDegreeTitle());
                       tv_short_discription.setText(degreeObject.getShortSummary());
+                      degreeTitle = degreeObject.getDegreeTitle();
+                      degreeUrl = degreeObject.getDegreeUrl();
                       btn_learn_more.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                          Uri uri = Uri.parse(degreeObject.getDegreeUrl());
-                          Intent startBrowser = new Intent(Intent.ACTION_VIEW, uri);
-                          startActivity(startBrowser);
+                          Intent i = new Intent(getBaseContext(), LearnMoreWebView.class);
+                          i.putExtra("url", degreeUrl);
+                          i.putExtra("title", ArticleActivity.capitalizeString(degreeTitle));
+                          startActivity(i);
                         }
                       });
 
                       tv_like_1.setText(degreeTrack);
+                      tv_total_likes_1.setText(String.valueOf(maxProgress));
                       drawable = resource.getDrawable(R.drawable.progress_bar_1_background);
                       pb_like_1.setProgress(progress);
                       pb_like_1.setMax(maxProgress);
@@ -128,6 +139,7 @@ public class RecommendNanodegree extends AppCompatActivity {
                       pb_like_2.setProgress(progress);
                       pb_like_2.setMax(maxProgress);
                       pb_like_2.setProgressDrawable(drawable);
+                      tv_total_likes_2.setText(String.valueOf(progress));
                       tv_like_2.setText(degreeTrack);
                       break;
                     case 2:
@@ -135,6 +147,7 @@ public class RecommendNanodegree extends AppCompatActivity {
                       pb_like_3.setProgress(progress);
                       pb_like_3.setMax(maxProgress);
                       pb_like_3.setProgressDrawable(drawable);
+                      tv_total_likes_3.setText(String.valueOf(progress));
                       tv_like_3.setText(degreeTrack);
                       break;
                   }

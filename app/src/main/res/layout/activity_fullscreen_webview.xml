@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.udacity.pathfinder.android.udacitypathfinder.ui.article.ArticleActivity">
+
+  <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="#560303"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    />
+
+
+  <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="42dp"
+    android:id="@+id/btn_exit"
+    android:src="@mipmap/ic_exit"
+    android:background="@null"
+    android:scaleType="centerInside"
+    android:layout_alignParentRight="true"
+    android:layout_above="@+id/scrollView"
+    android:layout_alignParentTop="true"
+    android:clickable="true"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"/>
+
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/toolbar"
+    android:id="@+id/scrollView"
+    android:fillViewport="false">
+
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:orientation="vertical">
+
+      <WebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+
+    </LinearLayout>
+
+  </ScrollView>
+
+  <ProgressBar
+    android:id="@+id/spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    style="?android:attr/progressBarStyle"
+    />
+
+</RelativeLayout>

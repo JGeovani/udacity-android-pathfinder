@@ -39,7 +39,8 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                  >
 
                     <RelativeLayout
                       android:layout_width="match_parent"
@@ -127,15 +128,49 @@
                         android:layout_marginBottom="20dp"
                         android:id="@+id/tv_summary_title"/>
 
-                    <TextView
-                        android:text="@string/like_summary_cat_1"
-                        android:textColor="@color/nano_front_end_web_developer"
-                        android:textAllCaps="true"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_like_1"/>
+
+                    <LinearLayout
+                      android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="35dp">
+                        <TextView
+                          android:text="@string/like_summary_cat_1"
+                          android:textColor="@color/nano_front_end_web_developer"
+                          android:textAllCaps="true"
+                          android:layout_weight="1"
+                          android:gravity="center_vertical"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/tv_like_1"/>
+
+                        <View
+                          android:layout_width="0dp"
+                          android:layout_height="0dp"
+                          android:layout_weight="1"
+                          />
+
+                        <LinearLayout
+                          android:orientation="vertical"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceSmall"
+                              android:text="0"
+                              android:id="@+id/tv_total_likes_1"
+                              android:layout_gravity="right"/>
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceSmall"
+                              android:text="likes"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
 
                     <ProgressBar
                         android:layout_width="300dp"
@@ -148,15 +183,48 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         />
 
-                    <TextView
-                        android:text="@string/like_summary_cat_2"
-                        android:textColor="@color/nano_full_stack_developer"
-                        android:textAllCaps="true"
-                        android:layout_weight="1"
-                        android:layout_width="fill_parent"
-                        android:gravity="center_vertical"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_like_2"/>
+                    <LinearLayout
+                      android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="35dp">
+
+                        <TextView
+                          android:text="@string/like_summary_cat_2"
+                          android:textColor="@color/nano_full_stack_developer"
+                          android:textAllCaps="true"
+                          android:layout_weight="1"
+                          android:layout_width="wrap_content"
+                          android:gravity="center_vertical"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/tv_like_2"/>
+
+                        <View
+                          android:layout_width="0dp"
+                          android:layout_height="0dp"
+                          android:layout_weight="1"
+                          />
+
+                        <LinearLayout
+                          android:orientation="vertical"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceSmall"
+                              android:text="0"
+                              android:id="@+id/tv_total_likes_2"
+                              android:layout_gravity="right"/>
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceSmall"
+                              android:text="likes"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <ProgressBar
                         android:layout_width="300dp"
@@ -169,14 +237,47 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:id="@+id/pb_like_2"/>
 
-                    <TextView
-                        android:text="@string/like_summary_cat_3"
-                        android:textColor="@color/nano_data_analyst"
-                        android:textAllCaps="true"
-                        android:gravity="center_vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_like_3"/>
+                    <LinearLayout
+                      android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="35dp">
+
+                        <TextView
+                            android:text="@string/like_summary_cat_3"
+                            android:textColor="@color/nano_data_analyst"
+                            android:textAllCaps="true"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_like_3"/>
+
+                        <View
+                          android:layout_width="0dp"
+                          android:layout_height="0dp"
+                          android:layout_weight="1"
+                          />
+
+                        <LinearLayout
+                          android:orientation="vertical"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent">
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceSmall"
+                              android:text="0"
+                              android:id="@+id/tv_total_likes_3"
+                              android:layout_gravity="right"/>
+
+                            <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceSmall"
+                              android:text="likes"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <ProgressBar
                         android:layout_width="300dp"
