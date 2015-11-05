@@ -56,4 +56,10 @@ public class LearnMoreWebView extends AppCompatActivity {
     webView.loadUrl(url);
   }
 
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    webView.removeAllViews();;
+    webView.destroy();
+  }
 }

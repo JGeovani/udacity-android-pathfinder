@@ -73,7 +73,7 @@
               android:layout_height="match_parent"
               android:id="@+id/iv_nanodegree"
               android:layout_gravity="right"
-              android:alpha=".4"/>
+              />
 
             <LinearLayout
               android:orientation="vertical"
@@ -86,7 +86,7 @@
                   android:layout_height="wrap_content"
                   android:text="Nanodegree Banner"
                   android:textStyle="bold"
-                  android:textColor="@android:color/white"
+                  android:textColor="@android:color/black"
                   android:layout_gravity="center_horizontal"
                   style="@style/TextShadowSmall"
                   android:paddingTop="15dp"/>
@@ -98,7 +98,7 @@
                 android:text="Nanodegree Title"
                 android:id="@+id/tv_title"
                 style="@style/TextShadow"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="5dp"
                 />
@@ -109,7 +109,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Learn More"
                 android:id="@+id/tv_learn_more"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"

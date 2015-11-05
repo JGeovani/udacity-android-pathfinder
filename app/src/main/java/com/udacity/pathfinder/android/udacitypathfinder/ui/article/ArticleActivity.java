@@ -91,7 +91,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     toolbar.setTitle(ARTICLE_ACTIVITY_TITLE);
     setSupportActionBar(toolbar);
     isWebLoadComplete(false);
-    webView.setWebViewClient(webViewClient);
     Intent intent = getIntent();
     articleId = intent.getStringExtra(KEY_ARTICLE_OBJECT_ID);
     requestArticle();
@@ -145,6 +144,13 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
           sp.saveNanodegree(arraylist);
           webView.setWebViewClient(new WebViewClient() {
             @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+              // Launch any links inside the web view via a browser, not inside the web view itself
+              Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+              view.getContext().startActivity(intent);
+              return true;
+            }
+            @Override
             public void onPageFinished(WebView view, String url) {
               setNanodegreeAsset(arraylist.get(0));
               Handler handler = new Handler();
@@ -155,22 +161,13 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
               }, 750);
             }
           });
-          webView.loadUrl(article.getLink());
+
+          if(webView!=null)
+            webView.loadUrl(article.getLink());
         }
       });
   }
 
-  private final WebViewClient webViewClient = new WebViewClient() {
-
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-      // Launch any links inside the web view via a browser, not inside the web view itself
-      Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-      view.getContext().startActivity(intent);
-      return true;
-    }
-
-  };
 
   @Override
   public void onClick(View v) {
@@ -263,5 +260,12 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
       }
     }
     return String.valueOf(chars);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    webView.removeAllViews();
+    webView.destroy();
   }
 }
