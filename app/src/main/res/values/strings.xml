@@ -22,7 +22,7 @@
     <!-- Add Article -->
     <string name="article_title_hint">Title</string>
     <string name="article_url_hint">Article URL</string>
-    <string name="image_url_hint">Image URL</string>
+    <string name="image_url_hint">Image URL (optional)</string>
     <string name="nanodegrees_hint">Nanodegree(s)</string>
     <string name="dialog_nanodegrees_title">Select all that apply</string>
     <string name="dialog_nanodegrees_positive_text">Ok</string>
