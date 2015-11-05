@@ -1,6 +1,5 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.addArticle;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -18,7 +17,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
-import com.udacity.pathfinder.android.udacitypathfinder.ui.feed.FeedActivity;
 
 import java.util.ArrayList;
 
@@ -63,7 +61,7 @@ public class AddArticleActivity extends AppCompatActivity {
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.action_cancel) {
-      startFeedActivity();
+      finish();
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -79,12 +77,6 @@ public class AddArticleActivity extends AppCompatActivity {
     if (nanodegreesDialog != null && nanodegreesDialog.isShowing()) {
       nanodegreesDialog.dismiss();
     }
-  }
-
-  private void startFeedActivity() {
-    Intent intent = new Intent(this, FeedActivity.class);
-    startActivity(intent);
-    finish();
   }
 
   @OnClick(R.id.nanodegrees)
@@ -134,7 +126,7 @@ public class AddArticleActivity extends AppCompatActivity {
       article.put(ParseConstants.ARTICLES_COL_NANODEGREES, nanodegrees);
       article.saveEventually();
 
-      startFeedActivity();
+      finish();
     } else {
       Snackbar.make(view, validation.second, Snackbar.LENGTH_LONG).show();
     }
