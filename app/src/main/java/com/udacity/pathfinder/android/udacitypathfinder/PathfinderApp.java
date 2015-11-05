@@ -10,6 +10,7 @@ import com.parse.ParseObject;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.Nanodegree;
 
 import timber.log.Timber;
 
@@ -26,6 +27,7 @@ public class PathfinderApp extends Application {
 
     // Register sub Classes
     ParseObject.registerSubclass(Article.class);
+    ParseObject.registerSubclass(Nanodegree.class);
     // Enable Local Datastore.
     Parse.enableLocalDatastore(this);
     // Initialize Parse

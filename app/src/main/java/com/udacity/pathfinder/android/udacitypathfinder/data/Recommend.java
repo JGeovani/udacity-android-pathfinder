@@ -25,7 +25,7 @@ public class Recommend {
 
   public String[][] nanodegree() {
 
-    String[][] recomendedDegrees = new String[3][2];
+    String[][] recommendedDegrees = new String[3][2];
     int count = 0;
     Object[] mapSet = nanoMap.entrySet().toArray();
     Arrays.sort(mapSet, new Comparator() {
@@ -38,13 +38,12 @@ public class Recommend {
       String degree = ((Map.Entry<String, Integer>) data).getKey();
       String score = String.valueOf(((Map.Entry<String, Integer>) data).getValue());
       if (count <3){
-        recomendedDegrees[count][0] = degree;
-        recomendedDegrees[count][1] = score;
-        Log.d("Recomendation # "+(count+1)+" = ", (degree + " : Total Likes = "+ score));
+        recommendedDegrees[count][0] = degree;
+        recommendedDegrees[count][1] = score;
+        Log.d("Recommendation # "+(count+1)+" = ", (degree + " : Total Likes = "+ score));
         count++;
       }
-
     }
-    return recomendedDegrees;
+    return recommendedDegrees;
   }
 }

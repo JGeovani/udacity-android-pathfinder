@@ -1,5 +1,7 @@
 package com.udacity.pathfinder.android.udacitypathfinder.data;
 
+import android.util.Log;
+
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -19,6 +21,11 @@ public class ParseClient {
     return query;
   }
 
+  private static <T extends ParseObject> ParseQuery<T> buildNanodegreeQuery(ParseQuery<T> query) {
+    query.orderByDescending(ParseConstants.PARSE_COL_DEGREE_ID);
+    return query;
+  }
+
   /* Does not check remote datastore if object is not found locally*/
   public static <T extends ParseObject> void request(
       String className, boolean fromLocal, String objectId, final RequestCallback2<T> callback) {
@@ -34,10 +41,13 @@ public class ParseClient {
   public static <T extends ParseObject> void request(
       String className, boolean fromLocal, RequestCallback<T> callback) {
     ParseQuery<T> query = ParseQuery.getQuery(className);
+    Log.d("ParseClient", className);
     switch (className) {
       case ParseConstants.ARTICLE_CLASS_NAME:
         request(className, fromLocal, callback, buildArticleQuery(query));
         break;
+      case ParseConstants.NANODEGREE_CLASS_NAME:
+        request(className, fromLocal, callback, buildNanodegreeQuery(query) );
       default:
         Timber.d("Invalid class name: " + className);
         break;

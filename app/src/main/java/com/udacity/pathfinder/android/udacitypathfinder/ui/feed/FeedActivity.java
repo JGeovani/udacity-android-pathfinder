@@ -48,6 +48,22 @@ public class FeedActivity extends AuthCompatActivity {
     setContentView(R.layout.activity_feed);
     ButterKnife.bind(this);
     sp = new SharedPref(this);
+    checkRecommendationStatus();
+
+    toolbar.setTitle(FEED_ACTIVITY_TITLE);
+    setSupportActionBar(toolbar);
+
+    tabLayout.addTab(tabLayout.newTab().setText(GRID_TAB_TITLE));
+    tabLayout.addTab(tabLayout.newTab().setText(LIST_TAB_TITLE));
+    tabLayout.setOnTabSelectedListener(onTabSelectedListener);
+
+    dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+
+    setupGridLayout();
+    requestArticles();
+  }
+
+  private void checkRecommendationStatus() {
     if (!sp.isRecomended()) {
       btn_recomendation.setImageResource(R.mipmap.ic_paper_plane_0);
       btn_recomendation.setAlpha((float) .2);
@@ -62,18 +78,6 @@ public class FeedActivity extends AuthCompatActivity {
         }
       });
     }
-
-    toolbar.setTitle(FEED_ACTIVITY_TITLE);
-    setSupportActionBar(toolbar);
-
-    tabLayout.addTab(tabLayout.newTab().setText(GRID_TAB_TITLE));
-    tabLayout.addTab(tabLayout.newTab().setText(LIST_TAB_TITLE));
-    tabLayout.setOnTabSelectedListener(onTabSelectedListener);
-
-    dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
-
-    setupGridLayout();
-    requestArticles();
   }
 
   private void setupGridLayout() {
@@ -100,7 +104,8 @@ public class FeedActivity extends AuthCompatActivity {
 
   private void requestArticles() {
     ParseClient.request(ParseConstants.ARTICLE_CLASS_NAME, true, new RequestCallback<Article>() {
-      @Override public void onResponse(List<Article> articles, ParseException e) {
+      @Override
+      public void onResponse(List<Article> articles, ParseException e) {
         if (e == null && articles != null) {
           if (!articles.isEmpty()) feedAdapter.updateArticles(articles);
         } else {
@@ -125,4 +130,10 @@ public class FeedActivity extends AuthCompatActivity {
     @Override public void onTabReselected(TabLayout.Tab tab) {
     }
   };
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    checkRecommendationStatus();
+  }
 }
