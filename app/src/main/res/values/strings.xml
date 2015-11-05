@@ -27,6 +27,10 @@
     <string name="dialog_nanodegrees_title">Select all that apply</string>
     <string name="dialog_nanodegrees_positive_text">Ok</string>
     <string name="dialog_nanodegrees_negative_text">Cancel</string>
+    <string name="validation_enter_title">Please enter a title</string>
+    <string name="validation_invalid_article_url">Please enter a valid article URL</string>
+    <string name="validation_invalid_image_url">Please enter a valid image URL</string>
+    <string name="validation_select_nanodegree">Please select a relevant Nanodegree</string>
 
     <string name="nano_title_front_end" translatable="true">Front-end Developer Nanodegree</string>
     <string name="nano_title_android" translatable="true">Android Developer Nanodegree</string>
