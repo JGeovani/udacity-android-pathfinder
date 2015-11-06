@@ -37,9 +37,6 @@
     <item name="android:textSize">18sp</item>
   </style>
 
-  <style name="ParseLoginUI.EditText" parent="@android:style/Widget.EditText">
-    <item name="android:singleLine">true</item>
-  </style>
 
   <style name="TextShadow">
     <item name="android:paddingLeft">4px</item>
@@ -70,4 +67,13 @@
     <item name="android:shadowDy">1</item>
     <item name="android:shadowRadius">1</item>
   </style>
+    <style name="ParseLoginUI.EditText" parent="@android:style/Widget.EditText">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="add_article_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/dark_grey</item>
+    </style>
 </resources>

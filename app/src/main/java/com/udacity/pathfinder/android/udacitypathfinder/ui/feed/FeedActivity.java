@@ -18,6 +18,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.addArticle.AddArticleActivity;
 import com.udacity.pathfinder.android.udacitypathfinder.ui.misc.DividerItemDecoration;
 import com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation.RecommendNanodegree;
 
@@ -26,6 +27,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 public class FeedActivity extends AuthCompatActivity {
@@ -113,6 +115,12 @@ public class FeedActivity extends AuthCompatActivity {
         }
       }
     });
+  }
+
+  @OnClick(R.id.fab)
+  public void addArticle(View view) {
+    Intent intent = new Intent(this, AddArticleActivity.class);
+    startActivity(intent);
   }
 
   private final TabLayout.OnTabSelectedListener onTabSelectedListener =

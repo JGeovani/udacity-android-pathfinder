@@ -3,6 +3,7 @@
     <string name="app_name">Udacity Pathfinder</string>
     <string name="title_activity_feed">Feed</string>
     <string name="title_activity_article">Article</string>
+    <string name="title_activity_add_article">Add article</string>
     <string name="title_tab_grid">Grid</string>
     <string name="title_tab_list">List</string>
 
@@ -15,6 +16,21 @@
     <string name="button_view_story" translatable="true">View Story</string>
     <string name="interests_graph_header" translatable="true">Your Interests</string>
     <string name="liking_prompt" translatable="true">Enjoying this article?</string>
+
+    <string name="action_cancel">cancel</string>
+
+    <!-- Add Article -->
+    <string name="article_title_hint">Title</string>
+    <string name="article_url_hint">Article URL</string>
+    <string name="image_url_hint">Image URL (optional)</string>
+    <string name="nanodegrees_hint">Nanodegree(s)</string>
+    <string name="dialog_nanodegrees_title">Select all that apply</string>
+    <string name="dialog_nanodegrees_positive_text">Ok</string>
+    <string name="dialog_nanodegrees_negative_text">Cancel</string>
+    <string name="validation_enter_title">Please enter a title</string>
+    <string name="validation_invalid_article_url">Please enter a valid article URL</string>
+    <string name="validation_invalid_image_url">Please enter a valid image URL</string>
+    <string name="validation_select_nanodegree">Please select a relevant Nanodegree</string>
 
     <string name="nano_title_front_end" translatable="true">Front-end Developer Nanodegree</string>
     <string name="nano_title_android" translatable="true">Android Developer Nanodegree</string>
