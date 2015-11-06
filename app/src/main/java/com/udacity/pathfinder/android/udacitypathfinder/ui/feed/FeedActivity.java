@@ -53,6 +53,7 @@ public class FeedActivity extends AuthCompatActivity {
     checkRecommendationStatus();
 
     toolbar.setTitle(FEED_ACTIVITY_TITLE);
+    toolbar.setLogo(R.drawable.ic_app_compass);
     setSupportActionBar(toolbar);
 
     tabLayout.addTab(tabLayout.newTab().setText(GRID_TAB_TITLE));

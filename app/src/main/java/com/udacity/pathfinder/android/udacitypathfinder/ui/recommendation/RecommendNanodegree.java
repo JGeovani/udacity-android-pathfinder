@@ -113,7 +113,7 @@ public class RecommendNanodegree extends AppCompatActivity {
                       Glide.with(getBaseContext())
                         .load(degreeObject.getImage())
                         .into(iv_nano_logo);
-                      tv_nano_title.setText(degreeObject.getDegreeTitle());
+                      tv_nano_title.setText(ArticleActivity.capitalizeString(degreeObject.getDegreeTitle()));
                       tv_short_discription.setText(degreeObject.getShortSummary());
                       degreeTitle = degreeObject.getDegreeTitle();
                       degreeUrl = degreeObject.getDegreeUrl();

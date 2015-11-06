@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                card_view:cardElevation="4dp">
+                card_view:cardElevation="4dp"
+              >
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -132,7 +133,7 @@
                     <LinearLayout
                       android:orientation="horizontal"
                       android:layout_width="match_parent"
-                      android:layout_height="35dp">
+                      android:layout_height="wrap_content">
                         <TextView
                           android:text="@string/like_summary_cat_1"
                           android:textColor="@color/nano_front_end_web_developer"
@@ -150,7 +151,7 @@
                           />
 
                         <LinearLayout
-                          android:orientation="vertical"
+                          android:orientation="horizontal"
                           android:layout_width="wrap_content"
                           android:layout_height="match_parent">
 
@@ -160,7 +161,8 @@
                               android:textAppearance="?android:attr/textAppearanceSmall"
                               android:text="0"
                               android:id="@+id/tv_total_likes_1"
-                              android:layout_gravity="right"/>
+                              android:layout_gravity="right"
+                              android:paddingEnd="5dp"/>
 
                             <TextView
                               android:layout_width="wrap_content"
@@ -186,7 +188,7 @@
                     <LinearLayout
                       android:orientation="horizontal"
                       android:layout_width="match_parent"
-                      android:layout_height="35dp">
+                      android:layout_height="wrap_content">
 
                         <TextView
                           android:text="@string/like_summary_cat_2"
@@ -205,7 +207,7 @@
                           />
 
                         <LinearLayout
-                          android:orientation="vertical"
+                          android:orientation="horizontal"
                           android:layout_width="wrap_content"
                           android:layout_height="match_parent">
 
@@ -215,7 +217,8 @@
                               android:textAppearance="?android:attr/textAppearanceSmall"
                               android:text="0"
                               android:id="@+id/tv_total_likes_2"
-                              android:layout_gravity="right"/>
+                              android:layout_gravity="right"
+                              android:paddingEnd="5dp"/>
 
                             <TextView
                               android:layout_width="wrap_content"
@@ -240,7 +243,7 @@
                     <LinearLayout
                       android:orientation="horizontal"
                       android:layout_width="match_parent"
-                      android:layout_height="35dp">
+                      android:layout_height="wrap_content">
 
                         <TextView
                             android:text="@string/like_summary_cat_3"
@@ -258,7 +261,7 @@
                           />
 
                         <LinearLayout
-                          android:orientation="vertical"
+                          android:orientation="horizontal"
                           android:layout_width="wrap_content"
                           android:layout_height="match_parent">
 
@@ -268,7 +271,8 @@
                               android:textAppearance="?android:attr/textAppearanceSmall"
                               android:text="0"
                               android:id="@+id/tv_total_likes_3"
-                              android:layout_gravity="right"/>
+                              android:layout_gravity="right"
+                              android:paddingEnd="5dp"/>
 
                             <TextView
                               android:layout_width="wrap_content"

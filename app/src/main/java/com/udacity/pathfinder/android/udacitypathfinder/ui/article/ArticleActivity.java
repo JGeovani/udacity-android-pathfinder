@@ -1,11 +1,11 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.article;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -71,6 +71,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   @Bind(R.id.fl_nanodegree)
   FrameLayout fl_nanodegree;
 
+
   public static final String KEY_ARTICLE_OBJECT_ID = "articleObjectId";
   private String articleId, degreeUrl, degreeTitle;
   private ArrayList<String> arraylist;
@@ -86,11 +87,12 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     sp = new SharedPref(this);
     setContentView(R.layout.activity_article);
     ButterKnife.bind(this);
+    isWebLoadComplete(false);
     btn_like.setOnClickListener(this);
     btn_exit.setOnClickListener(this);
     toolbar.setTitle(ARTICLE_ACTIVITY_TITLE);
+    toolbar.setLogo(R.drawable.ic_app_compass);
     setSupportActionBar(toolbar);
-    isWebLoadComplete(false);
     Intent intent = getIntent();
     articleId = intent.getStringExtra(KEY_ARTICLE_OBJECT_ID);
     requestArticle();
@@ -121,7 +123,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
       Log.d(TAG, "WebView loaded, now suggesting " + tv_nanodegree_title.getText());
     } else {
       spinner.setVisibility(View.VISIBLE);
-      fl_nanodegree.setVisibility(View.INVISIBLE);
+      fl_nanodegree.setVisibility(View.GONE);
       Log.d(TAG, "WebView is now loading");
     }
   }
@@ -142,12 +144,14 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
             arraylist.add(nandegreeData.get(i));
           }
           sp.saveNanodegree(arraylist);
+          // We need to set DomStorage to enabled to prevent url from escaping webview and causing
+          //  "Cannot call determinedVisibility()" with BinderManager
+          webView.getSettings().setDomStorageEnabled(true);
           webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-              // Launch any links inside the web view via a browser, not inside the web view itself
-              Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-              view.getContext().startActivity(intent);
+              // we want all views to stay within webView
+              view.loadUrl(url);
               return true;
             }
             @Override
@@ -161,9 +165,9 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
               }, 750);
             }
           });
-
           if(webView!=null)
-            webView.loadUrl(article.getLink());
+            toolbar.setTitle(getSafeTitle(capitalizeString(article.getTitle())));
+             webView.loadUrl(article.getLink());
         }
       });
   }
@@ -260,6 +264,16 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
       }
     }
     return String.valueOf(chars);
+  }
+
+  public String getSafeTitle(String data){
+    int length = 18;
+    if(!TextUtils.isEmpty(data)){
+      if(data.length() >= length){
+        return data.substring(0, length)+"...";
+      }
+    }
+    return data;
   }
 
   @Override
