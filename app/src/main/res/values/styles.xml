@@ -51,6 +51,16 @@
     <item name="android:shadowRadius">1</item>
   </style>
 
+  <style name="TextShadowLarge">
+    <item name="android:paddingLeft">0px</item>
+    <item name="android:paddingBottom">0px</item>
+    <item name="android:textColor">#ffffffff</item>
+    <item name="android:shadowColor">#000000</item>
+    <item name="android:shadowDx">5</item>
+    <item name="android:shadowDy">5</item>
+    <item name="android:shadowRadius">1</item>
+  </style>
+
   <style name="TextShadowSmall">
     <item name="android:paddingLeft">2px</item>
     <item name="android:paddingBottom">2px</item>
