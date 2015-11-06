@@ -125,7 +125,6 @@
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="5dp"
                 android:clickable="true"
-                style="@style/TextShadowSmall"
                 android:linksClickable="true"
                 android:paddingTop="3dp"
                 android:textStyle="bold"/>

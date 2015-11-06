@@ -9,7 +9,7 @@
 
     <string name="app_title">Pathfinder</string>
     <string name="walkthrough_text_1" translatable="true">Pathfinder suggests tech-related articles and stories from around the internet.</string>
-    <string name="walkthrough_text_2" translatable="true">Read an article &amp; rate it by clicking a smiley. While you’re reading, we’ll be doing some thinking in the background.</string>
+    <string name="walkthrough_text_2" translatable="true">Read an article &amp; rate it by clicking heart icon. While you’re reading, we’ll be doing some thinking in the background.</string>
     <string name="walkthrough_text_3" translatable="true">Over time, we’ll begin recommending top courses &amp; educational tools for you based on your reading habits. So let’s dig in!</string>
 
     <string name="button_learn_more" translatable="true">Learn More</string>
