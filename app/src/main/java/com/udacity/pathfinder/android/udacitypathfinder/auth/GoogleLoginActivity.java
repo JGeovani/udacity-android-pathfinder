@@ -4,10 +4,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -66,8 +68,15 @@ public class GoogleLoginActivity extends Activity implements
   protected void onStart() {
     Log.d(TAG, "Start");
     super.onStart();
-    // Google Plus API
-    mGoogleApiClient.connect();
+    if (!isNetworkConnected()){
+      Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_LONG).show();
+      finish();
+    }else {
+      // Google Plus API
+      progressDialog.setMessage("Communicating with Google");
+      progressDialog.show();
+      mGoogleApiClient.connect();
+    }
   }
 
   protected void onStop() {
@@ -80,6 +89,8 @@ public class GoogleLoginActivity extends Activity implements
 
   protected void onResume() {
     Log.d(TAG, "Resume");
+    progressDialog.setMessage("Communicating with Google");
+    progressDialog.show();
     super.onResume();
   }
 
@@ -125,6 +136,7 @@ public class GoogleLoginActivity extends Activity implements
    * @return true if we have the permission, false if we do not.
    */
   private boolean checkAccountsPermission() {
+    progressDialog.dismiss();
     final String perm = Manifest.permission.GET_ACCOUNTS;
     int permissionCheck = ContextCompat.checkSelfPermission(this, perm);
     if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
@@ -179,6 +191,7 @@ public class GoogleLoginActivity extends Activity implements
     if (requestCode == RC_SIGN_IN) {
       if (responseCode != RESULT_OK) {
         mSignInClicked = false;
+        Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_LONG).show();
         finish();
       }
       mIntentInProgress = false;
@@ -189,6 +202,7 @@ public class GoogleLoginActivity extends Activity implements
   }
 
   private void signInWithGplus() {
+    progressDialog.dismiss();
     Log.d(TAG, "Sign in with Google+ started");
     if (!mGoogleApiClient.isConnecting()) {
       resolveSignInError();
@@ -281,8 +295,9 @@ public class GoogleLoginActivity extends Activity implements
           }
         });
       } else {
-        Toast.makeText(this, "There was an error communicating with Google API",
-            Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Please check your data connection",
+            Toast.LENGTH_LONG).show();
+        finish();
       }
     } catch (Exception e) {
       Log.e(TAG, e.toString());
@@ -300,6 +315,11 @@ public class GoogleLoginActivity extends Activity implements
       mSignInClicked = true;
     }
   };
+
+  private boolean isNetworkConnected() {
+    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    return cm.getActiveNetworkInfo() != null;
+  }
 
   private void startLoginProcess() {
     finishHandler.postDelayed(finishRunnable, 360);
