@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/edit_name"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="300dp"
+  android:layout_height="wrap_content"
+  android:layout_gravity="center"
+  android:orientation="vertical"
+              android:minWidth="300dp">
+
+  <ImageButton
+    android:id="@+id/imageButton"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:scaleType="fitCenter"
+    android:src="@drawable/udacity_logo"
+    />
+
+  <TextView
+    android:id="@+id/tv_email_address"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/com_parse_ui_vertical_margin"
+    android:layout_marginRight="@dimen/com_parse_ui_vertical_margin"
+    android:layout_marginTop="@dimen/com_parse_ui_vertical_spacing"
+    android:text="@string/udacity_login_email_label"/>
+
+  <EditText
+    android:id="@+id/et_email_address"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/com_parse_ui_vertical_margin"
+    android:layout_marginRight="@dimen/com_parse_ui_vertical_margin"
+    android:imeOptions="actionNext"
+    android:inputType="textEmailAddress"/>
+
+  <TextView
+    android:id="@+id/tv_password_address"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/com_parse_ui_vertical_margin"
+    android:layout_marginRight="@dimen/com_parse_ui_vertical_margin"
+    android:text="@string/udacity_login_password_label"/>
+
+  <EditText
+    android:id="@+id/et_password"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/com_parse_ui_vertical_margin"
+    android:layout_marginRight="@dimen/com_parse_ui_vertical_margin"
+    android:imeOptions="actionDone"
+    android:inputType="textPassword"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/com_parse_ui_vertical_margin"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/btn_cancel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_weight=".5"
+      android:text="@string/global_cancel_button_label"/>
+
+    <Button
+      android:id="@+id/btn_submit"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight=".5"
+      android:text="@string/global_submit_button_label"/>
+  </LinearLayout>
+
+
+</LinearLayout>

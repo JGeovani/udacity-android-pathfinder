@@ -41,7 +41,7 @@ public class ArticlePullService extends IntentService {
           ParseQuery<Article> remoteQuery = ParseQuery.getQuery(ParseConstants.ARTICLE_CLASS_NAME);
           remoteQuery.orderByDescending(ParseConstants.PARSE_COL_CREATED_AT);
           remoteQuery.whereGreaterThan(ParseConstants.PARSE_COL_CREATED_AT, article.getCreatedAt());
-          remoteQuery.whereEqualTo(ParseConstants.ARTICLES_COL_APPROVED, true);
+          //remoteQuery.whereEqualTo(ParseConstants.ARTICLES_COL_APPROVED, true);
           remoteQuery.findInBackground(new FindCallback<Article>() {
             @Override public void done(List<Article> articles, ParseException e) {
               if (e == null && articles != null) {

@@ -11,19 +11,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/title_bar_dark_grey"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         />
+
+
+  <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="42dp"
+    android:id="@+id/btn_exit"
+    android:src="@mipmap/ic_exit"
+    android:background="@null"
+    android:scaleType="centerInside"
+    android:layout_alignParentRight="true"
+    android:layout_above="@+id/scrollView"
+    android:layout_alignParentTop="true"
+    android:clickable="true"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"/>
+
+  <ImageButton
+      android:layout_width="wrap_content"
+      android:layout_height="42dp"
+      android:id="@+id/btn_like"
+      android:src="@mipmap/ic_heart_0"
+      android:background="@null"
+      android:scaleType="centerInside"
+      android:clickable="true"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:layout_alignParentTop="true"
+      android:layout_toLeftOf="@+id/btn_exit"
+      android:layout_above="@+id/scrollView"/>
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/toolbar">
+        android:layout_below="@id/toolbar"
+        android:id="@+id/scrollView"
+        android:fillViewport="false">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="#555555">
 
             <WebView
                 android:id="@+id/webview"
@@ -31,15 +63,73 @@
                 android:layout_height="wrap_content"
                 />
 
-            <TextView
-                android:id="@+id/banner"
-                android:layout_width="fill_parent"
-                android:layout_height="100dp"
-                android:background="@color/primary"
-                android:text="Nanodegree Banner"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                />
+          <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/fl_nanodegree"
+            android:visibility="gone">
+            <View
+              android:id="@+id/border"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignBottom="@+id/image"
+              android:layout_alignLeft="@+id/image"
+              android:layout_alignRight="@+id/image"
+              android:layout_alignTop="@+id/main_image"
+              android:background="#fff"
+              android:layout_marginTop="5dp"
+              android:layout_marginBottom="5dp"/>
+            <ImageView
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/iv_nanodegree"
+              android:layout_gravity="right"
+              android:alpha=".4"
+              android:background="#ffffff"/>
+
+            <LinearLayout
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              >
+
+              <TextView
+                  android:id="@+id/tv_banner"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Nanodegree Banner"
+                  android:textStyle="bold"
+                  android:textColor="#6b6b6b"
+                  android:layout_gravity="center_horizontal"
+                  style="@style/TextShadowSmall"
+                  android:paddingTop="15dp"/>
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Nanodegree Title"
+                android:id="@+id/tv_title"
+                style="@style/TextShadowLarge"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#4d4d4d"
+                android:textStyle="bold"/>
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Learn More"
+                android:id="@+id/tv_learn_more"
+                android:textColor="#a80000"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="5dp"
+                android:clickable="true"
+                android:linksClickable="true"
+                android:paddingTop="3dp"
+                android:textStyle="bold"/>
+            </LinearLayout>
+          </FrameLayout>
 
         </LinearLayout>
 

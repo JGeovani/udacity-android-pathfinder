@@ -3,6 +3,8 @@ package com.udacity.pathfinder.android.udacitypathfinder.data.models;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import java.util.List;
+
 @ParseClassName("Articles")
 public class Article extends ParseObject {
 
@@ -26,11 +28,15 @@ public class Article extends ParseObject {
     return getString("link");
   }
 
-  public String getNanodegree() {
-    return getString("nanodegree");
+  public List<String> getNanodegrees() {
+    return getList("nanodegrees");
   }
 
   public String getTitle() {
     return getString("title");
+  }
+
+  public String getId() {
+    return getString("id");
   }
 }

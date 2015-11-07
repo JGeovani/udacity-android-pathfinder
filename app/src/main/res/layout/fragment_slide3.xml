@@ -1,0 +1,31 @@
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:background="@drawable/green_gradient"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="80dp"
+    android:gravity="bottom">
+
+  <TextView
+      android:id="@+id/slide_2_heading"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:text="@string/walkthrough_text_2"
+      android:textSize="22sp"
+      android:textColor="@color/white"
+      android:layout_weight="0.5"
+      android:gravity="center" />
+
+  <ImageView
+      android:src="@drawable/walkthrough_slide_2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="fitXY"
+      android:adjustViewBounds="true"
+      android:contentDescription="@string/desc_walkthrough_2" />
+
+</LinearLayout>
