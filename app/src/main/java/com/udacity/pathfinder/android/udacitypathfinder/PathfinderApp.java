@@ -33,7 +33,6 @@ public class PathfinderApp extends Application {
     Parse.enableLocalDatastore(this);
     // Initialize Parse
     Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
-    ParseInstallation.getCurrentInstallation().saveInBackground();
     // Enable Parse Debugging
     Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
     // Facebook Authentication Initialization
@@ -51,5 +50,6 @@ public class PathfinderApp extends Application {
     }
     ParseACL defaultACL = new ParseACL();
     ParseACL.setDefaultACL(defaultACL, true);
+    ParseInstallation.getCurrentInstallation().saveInBackground();
   }
 }

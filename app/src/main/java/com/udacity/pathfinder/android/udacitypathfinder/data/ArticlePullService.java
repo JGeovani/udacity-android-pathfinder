@@ -22,7 +22,6 @@ public class ArticlePullService extends IntentService {
   }
 
   @Override protected void onHandleIntent(Intent intent) {
-    // TODO: Handle article request on initial application load
     requestNewArticles();
   }
 
