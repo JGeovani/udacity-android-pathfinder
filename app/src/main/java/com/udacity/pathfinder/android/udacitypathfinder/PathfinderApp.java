@@ -6,6 +6,7 @@ import android.util.Log;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
@@ -48,7 +49,9 @@ public class PathfinderApp extends Application {
       Log.d("PARSE", "Already have a user cached " + ParseUser.getCurrentUser().getUsername());
     }
     ParseACL defaultACL = new ParseACL();
+    // Cloud code needs public read access to article data
+    defaultACL.setPublicReadAccess(true);
     ParseACL.setDefaultACL(defaultACL, true);
-
+    ParseInstallation.getCurrentInstallation().saveInBackground();
   }
 }
