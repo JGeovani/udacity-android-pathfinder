@@ -73,7 +73,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     GridViewHolder gridViewHolder = (GridViewHolder) holder;
     if (articles != null && !articles.isEmpty()) {
       Article article = articles.get(position);
-      Glide.with(context).load(article.getImageUrl()).into(gridViewHolder.image);
+      Glide.with(context)
+          .load(article.getImageUrl())
+          .error(R.drawable.default_article_image)
+          .into(gridViewHolder.image);
       gridViewHolder.title.setText(article.getTitle());
     }
   }
@@ -82,7 +85,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     ListViewHolder listViewHolder = (ListViewHolder) holder;
     if (articles != null && !articles.isEmpty()) {
       Article article = articles.get(position);
-      Glide.with(context).load(article.getImageUrl()).into(listViewHolder.image);
+      Glide.with(context)
+          .load(article.getImageUrl())
+          .error(R.drawable.default_article_image)
+          .into(listViewHolder.image);
       listViewHolder.title.setText(article.getTitle());
     }
   }
