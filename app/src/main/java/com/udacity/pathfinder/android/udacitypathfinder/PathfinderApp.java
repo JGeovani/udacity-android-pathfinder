@@ -49,6 +49,8 @@ public class PathfinderApp extends Application {
       Log.d("PARSE", "Already have a user cached " + ParseUser.getCurrentUser().getUsername());
     }
     ParseACL defaultACL = new ParseACL();
+    // Cloud code needs public read access to article data
+    defaultACL.setPublicReadAccess(true);
     ParseACL.setDefaultACL(defaultACL, true);
     ParseInstallation.getCurrentInstallation().saveInBackground();
   }
