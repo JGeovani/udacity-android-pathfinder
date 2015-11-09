@@ -38,14 +38,14 @@ October 1 - Project Start
 3. ~~Complete Nanodegree Datastore (October 22 - BM~~)
 
 ### Sprint 3 (Ends: October 29)
-1. Complete Pagination/Syncing for Article Feeds (October 29 - MH)
-2. Complete Parse Job to Refresh Nanodegree Datastore (October 29 - BM)
+1. ~~Complete Pagination/Syncing for Article Feeds (October 29 - MH)~~
+2. ~~Complete Parse Job to Refresh Nanodegree Datastore (October 29 - BM)~~
 3. Populate Article Store with Static Content (min 10 for each category = 80 articles) - (October 29 - All)
-4. Complete Recommendation Datastore (October 29 - BM)
-5. Implement ‘Add Article’ ui popup (DialogFrag?) - (October 29 - MH)
-6. Complete Like Datastore (October 29 - BM)
-7. Complete Like Functionality (October 29 - MH)
-8. Polish Sprint 1/2 Features (Prod assets, standardized fonts/colors/text sizes, HD images, etc.)
+4. ~~Complete Recommendation Datastore (October 29 - BM)~~
+5. ~~Implement ‘Add Article’ ui popup (DialogFrag?) - (October 29 - MH)~~
+6. ~~Complete Like Datastore (October 29 - BM)~~
+7. Complete Like Functionality (October 29 - MH) - Partial
+8. ~~Polish Sprint 1/2 Features (Prod assets, standardized fonts/colors/text sizes, HD images, etc.)~~
 
 ### Finishing Up (November 6 - Project Due)
 1. Prepare for Play Store (November 6 - DC)
