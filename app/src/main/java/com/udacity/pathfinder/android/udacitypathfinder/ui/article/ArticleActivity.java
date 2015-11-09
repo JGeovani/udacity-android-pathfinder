@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.parse.ParseException;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
@@ -200,9 +201,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
       likeDb.updateLike(articleId, false);
       this.isLiked = false;
     }
-    // getting the count of likes for end user
-    if (likeDb.totalCount() > 4) {
-      Log.d("-=- ", "Total of " + String.valueOf(likeDb.totalCount()) + "likes -=-");
+    // Checking if recommendation is ready
+    if (recommend.isReady()) {
       sp.saveRecomendation(true);
     } else {
       sp.saveRecomendation(false);
@@ -234,9 +234,10 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
               }
             }
           );
-          Glide.with(this).
-            load(object.getBannerImage()
-            ).into(iv_nanodegree);
+          Glide.with(this)
+            .load(object.getBannerImage())
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(iv_nanodegree);
           /**
            * If desired we can load from app image resources,
            * yet this will take away dynamic loading from url

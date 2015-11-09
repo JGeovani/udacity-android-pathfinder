@@ -44,7 +44,7 @@ public class ForgetParsePasswordDialogFragment extends DialogFragment {
 
   protected void checkEmailID() {
     if (TextUtils.isEmpty(password)) {
-      et_forgetpassword.setError(getString(R.string.global_hint_password));
+      et_forgetpassword.setError(getString(R.string.global_error_valid_email_required_field));
     } else if (!password.contains("@")) {
       et_forgetpassword.setError(getString(R.string.global_error_valid_email_required_field));
     } else

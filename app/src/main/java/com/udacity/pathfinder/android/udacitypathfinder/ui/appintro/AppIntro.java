@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.auth.CheckLogin;
+import com.udacity.pathfinder.android.udacitypathfinder.data.local.CacheNanodegreeImageAssets;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
 
 public class AppIntro extends com.github.paolorotolo.appintro.AppIntro {
@@ -62,5 +63,8 @@ public class AppIntro extends com.github.paolorotolo.appintro.AppIntro {
     Intent i = new Intent(this, CheckLogin.class);
     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     startActivity(i);
+    // load nanodegree images in background thread and cache
+    new Thread(new CacheNanodegreeImageAssets(this)).start();
   }
+
 }
