@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Udacity Pathfinder</string>
+    <string name="app_name">Pathfinder</string>
     <string name="title_activity_feed">Feed</string>
     <string name="title_activity_article">Article</string>
-    <string name="title_activity_add_article">Add article</string>
+    <string name="title_activity_add_article">New Article</string>
     <string name="title_tab_grid">Grid</string>
     <string name="title_tab_list">List</string>
 
@@ -17,15 +17,15 @@
     <string name="interests_graph_header" translatable="true">Your Interests</string>
     <string name="liking_prompt" translatable="true">Enjoying this article?</string>
 
-    <string name="action_cancel">cancel</string>
+    <string name="action_cancel">Cancel</string>
 
     <!-- Add Article -->
     <string name="article_title_hint">Title</string>
     <string name="article_url_hint">Article URL</string>
     <string name="image_url_hint">Image URL (optional)</string>
-    <string name="nanodegrees_hint">Nanodegree(s)</string>
+    <string name="nanodegrees_hint">Select Nanodegree(s)</string>
     <string name="dialog_nanodegrees_title">Select all that apply</string>
-    <string name="dialog_nanodegrees_positive_text">Ok</string>
+    <string name="dialog_nanodegrees_positive_text">OK</string>
     <string name="dialog_nanodegrees_negative_text">Cancel</string>
     <string name="validation_enter_title">Please enter a title</string>
     <string name="validation_invalid_article_url">Please enter a valid article URL</string>
@@ -170,6 +170,9 @@
     <string name="learn_more_nd001"><a href="https://www.udacity.com/course/nd001">Learn More</a></string>
     <string name="learn_more_nd003"><a href="https://www.udacity.com/course/nd003">Learn More</a></string>
     <string name="learn_more_ca001"><a href="https://www.udacity.com/course/ca001">Learn More</a></string>
-Learn
+    <string name="rec_likes">likes</string>
+    <string name="rec_likes_default_value">0</string>
+    <string name="rec_toolbar_title">Your Recommended Nanodegree</string>
+    Learn
 
 </resources>

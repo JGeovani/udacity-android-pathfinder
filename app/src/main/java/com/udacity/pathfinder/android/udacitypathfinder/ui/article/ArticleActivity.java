@@ -92,6 +92,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     btn_like.setOnClickListener(this);
     btn_exit.setOnClickListener(this);
     toolbar.setTitle(ARTICLE_ACTIVITY_TITLE);
+    toolbar.setSubtitle("Subtitle");
     toolbar.setLogo(R.drawable.ic_app_compass);
     setSupportActionBar(toolbar);
     Intent intent = getIntent();
@@ -168,6 +169,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
           });
           if(webView!=null)
             toolbar.setTitle(getSafeTitle(capitalizeString(article.getTitle())));
+            toolbar.setSubtitle(article.getDomain());
              webView.loadUrl(article.getLink());
         }
       });

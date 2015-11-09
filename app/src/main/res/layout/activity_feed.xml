@@ -21,7 +21,8 @@
                   android:background="?attr/colorPrimary"
                   android:theme="@style/ThemeOverlay.AppCompat.Dark"
                   app:layout_scrollFlags="scroll|enterAlways"
-
+                    app:contentInsetLeft="8dp"
+                    app:contentInsetStart="8dp"
                   />
 
                 <ImageButton

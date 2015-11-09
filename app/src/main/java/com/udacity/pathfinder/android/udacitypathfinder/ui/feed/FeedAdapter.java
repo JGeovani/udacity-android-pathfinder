@@ -78,6 +78,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
           .error(R.drawable.default_article_image)
           .into(gridViewHolder.image);
       gridViewHolder.title.setText(article.getTitle());
+      gridViewHolder.source.setText(article.getDomain());
     }
   }
 
@@ -90,6 +91,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
           .error(R.drawable.default_article_image)
           .into(listViewHolder.image);
       listViewHolder.title.setText(article.getTitle());
+      listViewHolder.source.setText(article.getDomain());
     }
   }
 
@@ -110,6 +112,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     @Bind(R.id.article_image) ImageView image;
     @Bind(R.id.article_title) TextView title;
+    @Bind(R.id.article_source) TextView source;
     public final View view;
 
     public ViewHolder(View view) {

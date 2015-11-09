@@ -14,7 +14,7 @@
     <dimen name="grid_item_article_title_background_height">100dp</dimen>
     <dimen name="grid_item_article_title_padding">8dp</dimen>
     <dimen name="list_item_article_height">72dp</dimen>
-    <dimen name="list_item_article_title_padding">16dp</dimen>
+    <dimen name="list_item_article_title_padding">8dp</dimen>
 
     <dimen name="tab_indicator_height">4dp</dimen>
     <dimen name="fab_margin">16dp</dimen>

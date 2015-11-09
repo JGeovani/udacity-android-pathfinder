@@ -5,10 +5,12 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +33,8 @@ import timber.log.Timber;
 public class RecommendNanodegree extends AppCompatActivity {
   @Bind(R.id.tv_nano_short_description)
   TextView tv_short_discription;
+  @Bind(R.id.tv_toolbar)
+  Toolbar tv_toolbar;
   @Bind(R.id.iv_nano_logo)
   ImageView iv_nano_logo;
   @Bind(R.id.tv_nano_title)
@@ -64,6 +68,7 @@ public class RecommendNanodegree extends AppCompatActivity {
     Recommend recommend = new Recommend(this);
     setContentView(R.layout.activity_recommendation);
     ButterKnife.bind(this);
+    tv_toolbar.setTitle(R.string.rec_toolbar_title);
 
     // Obtain recommended nanodegrees
     recommendedNanodegrees = recommend.nanodegree();
