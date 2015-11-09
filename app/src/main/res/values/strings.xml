@@ -6,6 +6,7 @@
     <string name="title_activity_add_article">New Article</string>
     <string name="title_tab_grid">Grid</string>
     <string name="title_tab_list">List</string>
+    <string name="title_tab_liked">Liked</string>
 
     <string name="app_title">Pathfinder</string>
     <string name="walkthrough_text_1" translatable="true">Pathfinder suggests tech-related articles and stories from around the internet.</string>
@@ -173,6 +174,7 @@
     <string name="rec_likes">likes</string>
     <string name="rec_likes_default_value">0</string>
     <string name="rec_toolbar_title">Your Recommended Nanodegree</string>
+    <string name="desc_article_header_img">Header image for this article.</string>
     Learn
 
 </resources>

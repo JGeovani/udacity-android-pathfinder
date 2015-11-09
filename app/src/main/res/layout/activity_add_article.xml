@@ -41,8 +41,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/add_article_text_size"
                 android:hint="@string/article_title_hint"
-                android:textColorHint="@color/text_hint"
-                />
+                android:textColorHint="@color/text_hint" />
 
             <View style="@style/add_article_divider"
                 android:layout_marginTop="@dimen/add_article_divider_margin"

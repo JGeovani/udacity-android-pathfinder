@@ -3,10 +3,14 @@ package com.udacity.pathfinder.android.udacitypathfinder.ui.article;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -16,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -53,16 +58,18 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   String ARTICLE_ACTIVITY_TITLE;
   @Bind(R.id.toolbar)
   Toolbar toolbar;
+  @Bind(R.id.collapsing_toolbar)
+  CollapsingToolbarLayout collapsing_toolbar;
+  @Bind(R.id.article_toolbar_background)
+  ImageView iv_toolbar_background;
   @Bind(R.id.webview)
   WebView webView;
   @Bind(R.id.spinner)
   ProgressBar spinner;
   @Bind(R.id.tv_banner)
   TextView tv_banner;
-  @Bind(R.id.btn_exit)
-  ImageButton btn_exit;
   @Bind(R.id.btn_like)
-  ImageButton btn_like;
+  FloatingActionButton btn_like;
   @Bind(R.id.tv_title)
   TextView tv_nanodegree_title;
   @Bind(R.id.tv_learn_more)
@@ -90,14 +97,23 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     ButterKnife.bind(this);
     isWebLoadComplete(false);
     btn_like.setOnClickListener(this);
-    btn_exit.setOnClickListener(this);
-    toolbar.setTitle(ARTICLE_ACTIVITY_TITLE);
-    toolbar.setSubtitle("Subtitle");
-    toolbar.setLogo(R.drawable.ic_app_compass);
-    setSupportActionBar(toolbar);
     Intent intent = getIntent();
     articleId = intent.getStringExtra(KEY_ARTICLE_OBJECT_ID);
+    collapsing_toolbar.setExpandedTitleTextAppearance(R.style.CustomToolbar);
     requestArticle();
+  }
+
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_article_detail, menu);
+    return true;
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_cancel) {
+      finish();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   private void getNanodegreeData() {
@@ -139,11 +155,11 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
           arraylist = new ArrayList<>();
           if (likeDb.alreadyLiked(articleId)) {
             isLiked = true;
-            btn_like.setImageResource(R.mipmap.ic_heart_1);
+            btn_like.setImageResource(R.drawable.ic_action_heart_pressed);
           }
-          List<String> nandegreeData = article.getNanodegrees();
-          for (int i = 0; i < nandegreeData.size(); i++) {
-            arraylist.add(nandegreeData.get(i));
+          List<String> nanodegreeData = article.getNanodegrees();
+          for (int i = 0; i < nanodegreeData.size(); i++) {
+            arraylist.add(nanodegreeData.get(i));
           }
           sp.saveNanodegree(arraylist);
           // We need to set DomStorage to enabled to prevent url from escaping webview and causing
@@ -156,6 +172,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
               view.loadUrl(url);
               return true;
             }
+
             @Override
             public void onPageFinished(WebView view, String url) {
               setNanodegreeAsset(arraylist.get(0));
@@ -167,10 +184,16 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
               }, 750);
             }
           });
-          if(webView!=null)
-            toolbar.setTitle(getSafeTitle(capitalizeString(article.getTitle())));
-            toolbar.setSubtitle(article.getDomain());
-             webView.loadUrl(article.getLink());
+          if(webView!=null) {
+
+            Glide.with(getApplicationContext())
+                    .load(article.getImageUrl())
+                    .into(iv_toolbar_background);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(getSafeTitle(capitalizeString(article.getTitle())));
+            getSupportActionBar().setSubtitle(article.getDomain());
+            webView.loadUrl(article.getLink());
+          }
         }
       });
   }
@@ -182,24 +205,21 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
       case R.id.btn_like:
         setLike(isLiked);
         break;
-      case R.id.btn_exit:
-        finish();
-        break;
     }
   }
 
   private void setLike(boolean isLiked) {
     String[] nano = sp.getNanodegrees();
     if (!isLiked && !likeDb.alreadyLiked(articleId)) {
-      btn_like.setImageResource(R.mipmap.ic_heart_1);
+      btn_like.setImageResource(R.drawable.ic_action_heart_pressed);
       likeDb.addLike(articleId, nano);
       this.isLiked = true;
     } else if (!isLiked && likeDb.alreadyLiked(articleId)) {
       likeDb.updateLike(articleId, true);
-      btn_like.setImageResource(R.mipmap.ic_heart_1);
+      btn_like.setImageResource(R.drawable.ic_action_heart_pressed);
       this.isLiked = true;
     } else if (isLiked) {
-      btn_like.setImageResource(R.mipmap.ic_heart_0);
+      btn_like.setImageResource(R.drawable.ic_action_heart);
       likeDb.updateLike(articleId, false);
       this.isLiked = false;
     }

@@ -35,10 +35,11 @@ public class FeedActivity extends AuthCompatActivity {
   @BindString(R.string.title_activity_feed) String FEED_ACTIVITY_TITLE;
   @BindString(R.string.title_tab_grid) String GRID_TAB_TITLE;
   @BindString(R.string.title_tab_list) String LIST_TAB_TITLE;
+  @BindString(R.string.title_tab_liked) String LIKED_TAB_TITLE;
   @Bind(R.id.toolbar) Toolbar toolbar;
   @Bind(R.id.recyclerview) RecyclerView recyclerView;
   @Bind(R.id.tabs) TabLayout tabLayout;
-  @Bind(R.id.btn_recomendation)
+  @Bind(R.id.btn_recommendation)
   ImageButton btn_recomendation;
   SharedPref sp;
 
@@ -58,6 +59,7 @@ public class FeedActivity extends AuthCompatActivity {
 
     tabLayout.addTab(tabLayout.newTab().setText(GRID_TAB_TITLE));
     tabLayout.addTab(tabLayout.newTab().setText(LIST_TAB_TITLE));
+    tabLayout.addTab(tabLayout.newTab().setText(LIKED_TAB_TITLE));
     tabLayout.setOnTabSelectedListener(onTabSelectedListener);
 
     dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
@@ -98,6 +100,14 @@ public class FeedActivity extends AuthCompatActivity {
   }
 
   private void setupListLayout() {
+    feedAdapter = new FeedAdapter(this, FeedAdapter.VIEW_TYPE_LIST);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.addItemDecoration(dividerItemDecoration);
+    recyclerView.setAdapter(feedAdapter);
+    recyclerView.setHasFixedSize(true);
+  }
+
+  private void setupLikedLayout() {
     feedAdapter = new FeedAdapter(this, FeedAdapter.VIEW_TYPE_LIST);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.addItemDecoration(dividerItemDecoration);
