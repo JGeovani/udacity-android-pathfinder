@@ -52,6 +52,33 @@ October 1 - Project Start
 2. Update with Release Assets/Build Config/Signing (November 6 - DC)
 3. Thoroughly Test All Functionality (November 6 - All) 
 4. Dog Fooding - *Source ~1000 Articles, Allow Subset of Audacity Employees to Use App* (November 6 - Udacity Employees)
-5. Polish all Activities
+5. ~~Polish all Activities~~
 6. Enhance MVP - Glassdoor API, Udacity Stories, Article Detail Branding/UI Customizations
-7. Polish Sprint 1/2/3 Features (Prod assets, standardized fonts/colors/text sizes, HD images, etc.)
+7. ~~Polish Sprint 1/2/3 Features (Prod assets, standardized fonts/colors/text sizes, HD images, etc.)~~
+
+### Final Checklist
+
+#### Changes
+- Feed/Icon spacing at top of Feed Activity
+- Arrow icon spacing
+- Add Article popup: lookup image, pull title automatically
+- Show number of times each article is liked
+- Only Liked articles in Liked feed
+- Change heart-pressed color
+- Recommendation UI bug
+- Recommendation threshold
+- Android Notification w/ Link to Recommendation Activity
+
+#### Release Prep
+##### Auth
+- Production Facebook
+- Production Twitter
+- Production Google
+- Production Udacity
+- Proudciton Parse
+
+##### Keys
+- Production Android keystore
+- Twitter??
+- Facebook??
+- Parse??
