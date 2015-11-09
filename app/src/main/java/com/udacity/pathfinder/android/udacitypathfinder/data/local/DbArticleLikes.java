@@ -109,6 +109,7 @@ public class DbArticleLikes {
   }
 
 
+
   public HashMap<String, Integer> getNanoScore() {
     HashMap<String, Integer> scores = new HashMap<>();
     String[] column = {DbHelper.COLUMN_ID, DbHelper.COLUMN_ARTICLE_IS_LIKED, DbHelper.COLUMN_USERNAME, DbHelper.COLUMN_ARTICLE_NANODEGREES};

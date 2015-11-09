@@ -23,6 +23,7 @@ public class Recommend {
     nanoMap = db.getNanoScore();
   }
 
+  // return top 3 scores in order of highest score value
   public String[][] nanodegree() {
 
     String[][] recommendedDegrees = new String[3][2];
@@ -45,5 +46,16 @@ public class Recommend {
       }
     }
     return recommendedDegrees;
+  }
+
+  // check to see if recommendation is ready
+  public boolean isReady() {
+    boolean isRecommendationReady = false;
+    String[][] nanodegreeTopThree = nanodegree();
+    if (nanodegreeTopThree[0][1]!=null) {
+      int topScore = Integer.parseInt(nanodegreeTopThree[0][1]);
+      if (topScore >= 4) isRecommendationReady = true;
+    }
+    return isRecommendationReady;
   }
 }

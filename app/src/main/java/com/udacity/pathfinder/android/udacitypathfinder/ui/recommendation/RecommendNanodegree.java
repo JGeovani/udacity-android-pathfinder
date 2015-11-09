@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.parse.ParseException;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
@@ -112,6 +113,7 @@ public class RecommendNanodegree extends AppCompatActivity {
                       //configure #1 nanodegree recommendation
                       Glide.with(getBaseContext())
                         .load(degreeObject.getImage())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(iv_nano_logo);
                       tv_nano_title.setText(ArticleActivity.capitalizeString(degreeObject.getDegreeTitle()));
                       tv_short_discription.setText(degreeObject.getShortSummary());
