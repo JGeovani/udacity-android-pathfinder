@@ -9,12 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
-
             <FrameLayout
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
                 <android.support.v7.widget.Toolbar
                   android:id="@+id/toolbar"
                   android:layout_width="match_parent"
@@ -35,9 +33,6 @@
                   android:clickable="true"
                   android:paddingTop="8dp"
                   android:paddingBottom="8dp"
-                  android:layout_alignParentTop="true"
-                  android:layout_toLeftOf="@+id/btn_exit"
-                  android:layout_above="@+id/scrollView"
                   android:layout_gravity="right"/>
             </FrameLayout>
 

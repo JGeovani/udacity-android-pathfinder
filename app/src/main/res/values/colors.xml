@@ -52,6 +52,6 @@
     <color name="dark_grey_red">#3e3939</color>
     <color name="title_bar_dark_grey">#3e3e3e</color>
     <color name="text_hint">#80000000</color>
-    <color name="grid_item_article_title_background">#88676767</color>
+    <color name="grid_item_article_title_background">#88676785</color>
 
 </resources>

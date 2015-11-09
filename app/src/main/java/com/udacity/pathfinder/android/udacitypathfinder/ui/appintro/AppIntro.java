@@ -4,6 +4,7 @@ package com.udacity.pathfinder.android.udacitypathfinder.ui.appintro;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.auth.CheckLogin;
@@ -15,31 +16,20 @@ public class AppIntro extends com.github.paolorotolo.appintro.AppIntro {
   // Please DO NOT override onCreate. Use init
   @Override
   public void init(Bundle savedInstanceState) {
-    // check if user has already login
-    checkLogin();
+      checkLogin();
+      addSlide(SlideFragment.newInstance(R.layout.fragment_slide1));
+      addSlide(SlideFragment.newInstance(R.layout.fragment_slide2));
+      addSlide(SlideFragment.newInstance(R.layout.fragment_slide3));
+      addSlide(SlideFragment.newInstance(R.layout.fragment_slide4));
 
-    // Add your slide's fragments here
-    // AppIntro will automatically generate the dots indicator and buttons.
-    addSlide(SlideFragment.newInstance(R.layout.fragment_slide1));
-    addSlide(SlideFragment.newInstance(R.layout.fragment_slide2));
-    addSlide(SlideFragment.newInstance(R.layout.fragment_slide3));
-    addSlide(SlideFragment.newInstance(R.layout.fragment_slide4));
-    // Instead of fragments, you can also use our default slide
-    // Just set a title, description, background and image. AppIntro will do the rest
-//    addSlide(AppIntroFragment.newInstance(title, description, image, background_colour));
+      setSeparatorColor(Color.parseColor("#FFFFFF"));
+      TextView separator = (TextView) findViewById(R.id.bottom_separator);
+      separator.getLayoutParams().height = 3;
 
-    // OPTIONAL METHODS
-    // Override bar/separator color
-    setSeparatorColor(Color.parseColor("#FFFFFF"));
-
-    // Hide Skip/Done button
-    showSkipButton(false);
-    showDoneButton(true);
-
-    // Turn vibration on and set intensity
-    // NOTE: you will probably need to ask VIBRATE permission in Manifest
-    setVibrate(true);
-    setVibrateIntensity(50);
+      showSkipButton(false);
+      showDoneButton(true);
+      setVibrate(true);
+      setVibrateIntensity(35);
   }
 
 

@@ -6,7 +6,10 @@
     android:layout_gravity="center"
     android:layout_width="@dimen/grid_item_article_card_view_dimen"
     android:layout_height="@dimen/grid_item_article_card_view_dimen"
-    android:layout_margin="@dimen/grid_item_article_card_view_margin"
+    android:layout_marginTop="@dimen/grid_item_article_card_view_margin"
+    android:layout_marginLeft="@dimen/grid_item_article_card_view_margin"
+    android:layout_marginRight="@dimen/grid_item_article_card_view_margin"
+    android:layout_marginBottom="0dp"
     card_view:cardCornerRadius="@dimen/grid_item_article_card_view_corner_radius">
 
     <RelativeLayout
@@ -23,7 +26,7 @@
         <FrameLayout
             android:id="@+id/article_title_background"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/grid_item_article_title_background_height"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/grid_item_article_title_background">
 
@@ -32,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:textSize="16sp"
                 android:padding="@dimen/grid_item_article_title_padding"
                 android:textColor="@android:color/white"
                 />
