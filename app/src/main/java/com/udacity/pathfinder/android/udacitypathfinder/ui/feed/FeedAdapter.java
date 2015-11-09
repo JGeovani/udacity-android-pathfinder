@@ -24,6 +24,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
   public static final int VIEW_TYPE_GRID = 0;
   public static final int VIEW_TYPE_LIST = 1;
+  public static final int VIEW_TYPE_LIKED = 2;
 
   private List<Article> articles = Collections.emptyList();
   private Context context;
@@ -43,6 +44,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
       case VIEW_TYPE_LIST:
         View listView = inflater.inflate(R.layout.list_item_article, parent, false);
         return new ListViewHolder(listView);
+      case VIEW_TYPE_LIKED:
+        View likedView = inflater.inflate(R.layout.list_item_article, parent, false);
+        return new LikedViewHolder(likedView);
       default:
         throw new IllegalArgumentException("View type does not exist");
     }
@@ -66,6 +70,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
       case VIEW_TYPE_LIST:
         bindListViewHolder(holder, position);
         break;
+      case VIEW_TYPE_LIKED:
+        bindLikedViewHolder(holder, position);
+        break;
     }
   }
 
@@ -77,7 +84,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
           .load(article.getImageUrl())
           .error(R.drawable.default_article_image)
           .into(gridViewHolder.image);
-      gridViewHolder.title.setText(article.getTitle());
+      gridViewHolder.title.setText(article.getTitle().trim());
       gridViewHolder.source.setText(article.getDomain());
     }
   }
@@ -90,8 +97,26 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
           .load(article.getImageUrl())
           .error(R.drawable.default_article_image)
           .into(listViewHolder.image);
-      listViewHolder.title.setText(article.getTitle());
+      listViewHolder.title.setText(article.getTitle().trim());
       listViewHolder.source.setText(article.getDomain());
+    }
+  }
+
+  /**
+   * Need to add code that determines if article has been liked by user.
+   * @param holder
+   * @param position
+   */
+  private void bindLikedViewHolder(ViewHolder holder, int position) {
+    LikedViewHolder likedViewHolder = (LikedViewHolder) holder;
+    if (articles != null && !articles.isEmpty()) {
+      Article article = articles.get(position);
+      Glide.with(context)
+              .load(article.getImageUrl())
+              .error(R.drawable.default_article_image)
+              .into(likedViewHolder.image);
+      likedViewHolder.title.setText(article.getTitle().trim());
+      likedViewHolder.source.setText(article.getDomain());
     }
   }
 
@@ -134,5 +159,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     public GridViewHolder(View view) {
       super(view);
     }
+  }
+
+  public static class LikedViewHolder extends ViewHolder {
+    public LikedViewHolder(View view) { super(view); }
   }
 }

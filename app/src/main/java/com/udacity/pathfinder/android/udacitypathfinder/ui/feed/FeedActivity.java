@@ -108,9 +108,8 @@ public class FeedActivity extends AuthCompatActivity {
   }
 
   private void setupLikedLayout() {
-    feedAdapter = new FeedAdapter(this, FeedAdapter.VIEW_TYPE_LIST);
+    feedAdapter = new FeedAdapter(this, FeedAdapter.VIEW_TYPE_LIKED);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    recyclerView.addItemDecoration(dividerItemDecoration);
     recyclerView.setAdapter(feedAdapter);
     recyclerView.setHasFixedSize(true);
   }
@@ -138,8 +137,19 @@ public class FeedActivity extends AuthCompatActivity {
       new TabLayout.OnTabSelectedListener() {
 
     @Override public void onTabSelected(TabLayout.Tab tab) {
-      if (tab.getPosition() == 0) setupGridLayout();
-      else setupListLayout();
+      switch (tab.getPosition()) {
+        case 0:
+          setupGridLayout();
+          break;
+        case 1:
+          setupListLayout();
+          break;
+        case 2:
+          setupLikedLayout();
+          break;
+        default:
+          break;
+      }
       requestArticles();
     }
 

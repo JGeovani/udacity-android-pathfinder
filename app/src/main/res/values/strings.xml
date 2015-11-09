@@ -175,6 +175,7 @@
     <string name="rec_likes_default_value">0</string>
     <string name="rec_toolbar_title">Your Recommended Nanodegree</string>
     <string name="desc_article_header_img">Header image for this article.</string>
+    <string name="desc_nanodegree_ad">Nanodegree ad background image</string>
     Learn
 
 </resources>

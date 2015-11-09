@@ -78,7 +78,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   ImageView iv_nanodegree;
   @Bind(R.id.fl_nanodegree)
   FrameLayout fl_nanodegree;
-
+  @Bind(R.id.fl_nanodegree_border)
+  View fl_nanodegree_border;
 
   public static final String KEY_ARTICLE_OBJECT_ID = "articleObjectId";
   private String articleId, degreeUrl, degreeTitle;
@@ -138,10 +139,12 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     if (visable) {
       spinner.setVisibility(View.INVISIBLE);
       fl_nanodegree.setVisibility(View.VISIBLE);
+      fl_nanodegree_border.setVisibility(View.VISIBLE);
       Log.d(TAG, "WebView loaded, now suggesting " + tv_nanodegree_title.getText());
     } else {
       spinner.setVisibility(View.VISIBLE);
       fl_nanodegree.setVisibility(View.GONE);
+      fl_nanodegree_border.setVisibility(View.GONE);
       Log.d(TAG, "WebView is now loading");
     }
   }
@@ -270,6 +273,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         } else {
           // there is no degree info, hiding footer for now
           fl_nanodegree.setVisibility(View.GONE);
+          fl_nanodegree_border.setVisibility(View.GONE);
         }
       }
     }

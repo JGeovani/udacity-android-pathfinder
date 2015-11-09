@@ -79,9 +79,6 @@
 
   <style name="CustomToolbar">
     <item name="android:textSize">@dimen/expanded_title_size</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:background">@color/grid_item_article_title_background</item>
-    <item name="android:maxLines">2</item>
   </style>
 
   <dimen name="expanded_title_size">24sp</dimen>
