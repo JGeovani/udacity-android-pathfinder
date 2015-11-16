@@ -59,14 +59,14 @@ October 1 - Project Start
 ### Final Checklist
 
 #### Changes
-- Feed/Icon spacing at top of Feed Activity
-- Arrow icon spacing
-- Add Article popup: lookup image, pull title automatically
+- ~~Feed/Icon spacing at top of Feed Activity~~
+- ~~Arrow icon spacing~~
+- ~~Add Article popup: lookup image, pull title automatically~~
 - Show number of times each article is liked
 - Only Liked articles in Liked feed
-- Change heart-pressed color
+- ~~Change heart-pressed color~~
 - Recommendation UI bug
-- Recommendation threshold
+- ~~Recommendation threshold~~
 - Android Notification w/ Link to Recommendation Activity
 
 #### Release Prep
