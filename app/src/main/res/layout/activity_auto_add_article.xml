@@ -49,12 +49,6 @@
                 android:layout_marginBottom="@dimen/add_article_divider_margin"
                 />
 
-            <Button
-                android:id="@+id/btn_check_article"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Check Article"/>
-
             <EditText
                 android:id="@+id/article_title"
                 android:layout_width="match_parent"
@@ -64,8 +58,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/add_article_text_size"
                 android:hint="@string/article_title_hint"
-                android:textColorHint="@color/text_hint"
-                />
+                android:textColorHint="@color/text_hint" />
 
             <View style="@style/add_article_divider"
                 android:layout_marginTop="@dimen/add_article_divider_margin"
@@ -116,7 +109,7 @@
         android:src="@drawable/ic_done_white_24dp"
         app:fabSize="normal"
         app:layout_anchor="@id/scrollview"
-        app:layout_anchorGravity="center_vertical|right"
+        app:layout_anchorGravity="bottom|right|end"
         />
 
 </android.support.design.widget.CoordinatorLayout>
