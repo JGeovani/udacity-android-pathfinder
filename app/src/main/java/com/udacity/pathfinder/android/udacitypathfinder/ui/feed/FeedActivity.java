@@ -1,8 +1,14 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.feed;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -85,6 +91,7 @@ public class FeedActivity extends AuthCompatActivity {
     } else {
       btn_recomendation.setImageResource(R.mipmap.ic_paper_plane_1);
       btn_recomendation.setAlpha((float) 1);
+      notifyUser();
       btn_recomendation.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -209,10 +216,35 @@ public class FeedActivity extends AuthCompatActivity {
       }
     };
 
+  private void notifyUser(){
+    int newScore = sp.getRecommendationTopScore();
+    int oldScore = sp.getNotificationTopScore();
+    Log.d("TEST", "New Score = "+newScore+", Old Score = "+oldScore);
+    if(newScore>oldScore) {
+      Uri notifySound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+      NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
+      Intent notificationIntent = new Intent(this, RecommendNanodegree.class);
+      PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+      NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+      notification.setSmallIcon(R.drawable.ic_app_compass);
+      notification.setColor(getResources().getColor(R.color.primary));
+      notification.setContentTitle("Recommendation");
+      notification.setContentText("Recommendation ready for your review");
+      notification.setContentIntent(pendingIntent);
+      notification.setSound(notifySound);
+      mNotificationManager.notify(101, notification.build());
+      sp.setNotificationTopScore(newScore);
+    } else if((newScore+2)<oldScore) {
+      sp.setNotificationTopScore(newScore-2);
+    }
+
+  }
   @Override
   protected void onResume() {
     super.onResume();
     checkRecommendationStatus();
     if (isLikedView) setupLikedLayout();
   }
+
+
 }
