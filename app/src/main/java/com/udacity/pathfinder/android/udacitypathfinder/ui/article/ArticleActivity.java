@@ -16,11 +16,9 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -101,15 +99,18 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     Intent intent = getIntent();
     articleId = intent.getStringExtra(KEY_ARTICLE_OBJECT_ID);
     collapsing_toolbar.setExpandedTitleTextAppearance(R.style.CustomToolbar);
+    btn_like.setImageResource(R.drawable.ic_action_heart);
     requestArticle();
   }
 
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_article_detail, menu);
     return true;
   }
 
-  @Override public boolean onOptionsItemSelected(MenuItem item) {
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.action_cancel) {
       finish();
       return true;
@@ -156,10 +157,12 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         public void onResponse(Article article, ParseException e) {
           // Check if article is already liked
           arraylist = new ArrayList<>();
-          if (likeDb.alreadyLiked(articleId)) {
+          if (likeDb.alreadyLiked(articleId) && likeDb.isLiked(articleId)) {
             isLiked = true;
             btn_like.setImageResource(R.drawable.ic_action_heart_pressed);
           }
+
+
           List<String> nanodegreeData = article.getNanodegrees();
           for (int i = 0; i < nanodegreeData.size(); i++) {
             arraylist.add(nanodegreeData.get(i));
@@ -187,11 +190,11 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
               }, 750);
             }
           });
-          if(webView!=null) {
+          if (webView != null) {
 
             Glide.with(getApplicationContext())
-                    .load(article.getImageUrl())
-                    .into(iv_toolbar_background);
+              .load(article.getImageUrl())
+              .into(iv_toolbar_background);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle(getSafeTitle(capitalizeString(article.getTitle())));
             getSupportActionBar().setSubtitle(article.getDomain());
@@ -212,18 +215,22 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   }
 
   private void setLike(boolean isLiked) {
+
     String[] nano = sp.getNanodegrees();
     if (!isLiked && !likeDb.alreadyLiked(articleId)) {
       btn_like.setImageResource(R.drawable.ic_action_heart_pressed);
-      likeDb.addLike(articleId, nano);
+      likeDb.addLike(articleId, nano, true);
+      likeDb.updateParseArticleLikes(articleId, true);
       this.isLiked = true;
     } else if (!isLiked && likeDb.alreadyLiked(articleId)) {
       likeDb.updateLike(articleId, true);
       btn_like.setImageResource(R.drawable.ic_action_heart_pressed);
+      likeDb.updateParseArticleLikes(articleId, true);
       this.isLiked = true;
     } else if (isLiked) {
       btn_like.setImageResource(R.drawable.ic_action_heart);
       likeDb.updateLike(articleId, false);
+      likeDb.updateParseArticleLikes(articleId, false);
       this.isLiked = false;
     }
     // Checking if recommendation is ready
@@ -293,11 +300,11 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     return String.valueOf(chars);
   }
 
-  public String getSafeTitle(String data){
+  public String getSafeTitle(String data) {
     int length = 18;
-    if(!TextUtils.isEmpty(data)){
-      if(data.length() >= length){
-        return data.substring(0, length)+"...";
+    if (!TextUtils.isEmpty(data)) {
+      if (data.length() >= length) {
+        return data.substring(0, length) + "...";
       }
     }
     return data;

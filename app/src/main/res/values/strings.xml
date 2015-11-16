@@ -80,8 +80,8 @@
     <string name="profile_logout_button_label" translatable="true">Logout</string>
     <string name="facebook_login_button_label" translatable="true">Facebook</string>
     <!-- Twitter Authentication -->
-    <string name="twitter_consumer_key" translatable="false">o69sqMRGxV4AYFQF5feiDKSkc</string>
-    <string name="twitter_consumer_secret" translatable="false">IGSCcUbzCBzpRDE6sFKPccNKL7Kgk8FA4u2kqnLVURstE7lHj1</string>
+    <string name="twitter_consumer_key" translatable="false">1kFNCee0iCTwZ5Jgp33ICCsoa</string>
+    <string name="twitter_consumer_secret" translatable="false">uIaT90DAd9pdlYumfqaPHvZrbAT4pKZSsSe6r8Lmv0lsLX4ERD</string>
     <string name="twitter_login_button_label" translatable="true">Twitter</string>
 
     <!-- Error Handling -->

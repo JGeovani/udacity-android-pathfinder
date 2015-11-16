@@ -1,266 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  tools:context="com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation.RecommendationActivity"
+  android:orientation="vertical">
+
+  <android.support.v7.widget.Toolbar
+    android:id="@+id/tv_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation.RecommendationActivity"
-    android:orientation="vertical">
+    android:minHeight="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:title="@string/rec_toolbar_title"
+    />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tv_toolbar"
+  <ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="fill"
+    android:id="@+id/scrollView2">
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/nanorecommendation_card"
+        android:layout_weight="1"
+        android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:title="@string/rec_toolbar_title"
-        />
-
-    <ScrollView
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-        android:layout_gravity="fill"
-      android:id="@+id/scrollView2">
+        android:layout_margin="10dp"
+        card_view:cardElevation="4dp">
 
         <LinearLayout
-            android:orientation="vertical"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          >
 
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/nanorecommendation_card"
-                android:layout_weight="1"
-                android:layout_gravity="top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                card_view:cardElevation="4dp">
+          <RelativeLayout
+            android:id="@+id/recommendation_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="230dp">
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                  >
+            <ImageView
+              android:id="@+id/iv_nano_logo"
+              android:scaleType="centerInside"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"/>
 
-                    <RelativeLayout
-                        android:id="@+id/recommendation_wrap"
-                        android:background="@color/nano_data_analyst"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+            <TextView
+              android:id="@+id/tv_nano_title"
+              android:text="@string/nano_title_front_end"
+              android:textColor="@color/white"
+              android:textSize="28sp"
+              android:layout_gravity="bottom"
+              android:padding="20dp"
+              android:layout_height="wrap_content"
+              android:layout_width="225dp" />
 
-                        <ImageView
-                            android:id="@+id/iv_nano_logo"
-                            android:scaleType="centerInside"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"/>
+          </RelativeLayout>
 
-                        <TextView
-                            android:id="@+id/tv_nano_title"
-                            android:text="@string/nano_title_front_end"
-                            android:textColor="@color/white"
-                            android:textSize="28sp"
-                            android:layout_gravity="bottom"
-                            android:padding="20dp"
-                            android:layout_height="wrap_content"
-                            android:layout_width="225dp" />
+          <TextView
+            android:id="@+id/tv_nano_short_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="14dp"
+            android:lineSpacingMultiplier="1.2"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            />
 
-                    </RelativeLayout>
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/light_grey" />
 
-                    <TextView
-                        android:id="@+id/tv_nano_short_description"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="14dp"
-                        android:lineSpacingMultiplier="1.2"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
-                        android:background="@color/white"
-                        />
+          <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme_accent"
+            android:background="@color/white"
+            android:textAllCaps="true"
+            android:text="@string/nano_button_learn_more"
+            android:id="@+id/btn_learn_more"/>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/light_grey" />
-
-                    <Button
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/theme_accent"
-                        android:background="@color/white"
-                        android:textAllCaps="true"
-                        android:text="@string/nano_button_learn_more"
-                        android:id="@+id/btn_learn_more"/>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/like_graph_card"
-                android:layout_gravity="bottom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                card_view:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:text="@string/like_summary_title"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textAllCaps="true"
-                        android:layout_weight="1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="20dp"
-                        android:id="@+id/tv_summary_title"/>
-
-                    <LinearLayout
-                      android:orientation="horizontal"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
-                        <TextView
-                          android:text="@string/like_summary_cat_1"
-                          android:textColor="@color/nano_front_end_web_developer"
-                          android:textAllCaps="true"
-                          android:layout_weight="1"
-                          android:gravity="center_vertical"
-                          android:layout_width="0dp"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/tv_like_1"/>
-
-
-                        <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textAppearance="?android:attr/textAppearanceSmall"
-                          android:text="@string/rec_likes_default_value"
-                          android:id="@+id/tv_total_likes_1"
-                          android:layout_gravity="right"
-                            android:paddingRight="5dp"
-                          android:paddingEnd="5dp"/>
-
-                        <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                          android:textAppearance="?android:attr/textAppearanceSmall"
-                          android:text="@string/rec_likes"/>
-
-                    </LinearLayout>
-
-
-                    <ProgressBar
-                        android:layout_width="300dp"
-                        android:layout_height="4dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginRight="5dp"
-                        android:id="@+id/pb_like_1"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        />
-
-                    <LinearLayout
-                      android:orientation="horizontal"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
-
-                        <TextView
-                          android:text="@string/like_summary_cat_2"
-                          android:textColor="@color/nano_full_stack_developer"
-                          android:textAllCaps="true"
-                          android:layout_weight="1"
-                          android:layout_width="0dp"
-                          android:gravity="center_vertical"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/tv_like_2"/>
-
-                        <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textAppearance="?android:attr/textAppearanceSmall"
-                          android:text="@string/rec_likes_default_value"
-                          android:id="@+id/tv_total_likes_2"
-                          android:layout_gravity="right"
-                          android:paddingEnd="5dp"/>
-
-                        <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                          android:textAppearance="?android:attr/textAppearanceSmall"
-                          android:text="@string/rec_likes"/>
-
-                    </LinearLayout>
-
-                    <ProgressBar
-                        android:layout_width="300dp"
-                        android:layout_height="4dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@color/nano_full_stack_developer"
-                        android:layout_marginRight="5dp"
-                        android:layout_centerHorizontal="true"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:id="@+id/pb_like_2"/>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:text="@string/like_summary_cat_3"
-                            android:textColor="@color/nano_data_analyst"
-                            android:textAllCaps="true"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:gravity="center_vertical"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tv_like_3"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/rec_likes_default_value"
-                            android:id="@+id/tv_total_likes_3"
-                            android:layout_gravity="right"
-                            android:paddingEnd="5dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="@string/rec_likes"/>
-
-                    </LinearLayout>
-
-                    <ProgressBar
-                        android:layout_width="300dp"
-                        android:layout_height="4dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginRight="5dp"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:id="@+id/pb_like_3"/>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
-    </ScrollView>
+
+      </android.support.v7.widget.CardView>
+
+      <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/like_graph_card"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        card_view:cardElevation="4dp">
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="20dp">
+
+          <TextView
+            android:text="@string/like_summary_title"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/tv_summary_title"/>
+
+          <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+              android:text="@string/like_summary_cat_1"
+              android:textColor="@color/nano_front_end_web_developer"
+              android:textAllCaps="true"
+              android:layout_weight="1"
+              android:gravity="center_vertical"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/tv_like_1"/>
+
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:text="@string/rec_likes_default_value"
+              android:id="@+id/tv_total_likes_1"
+              android:layout_gravity="right"
+              android:paddingRight="5dp"
+              android:paddingEnd="5dp"/>
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="right"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:text="@string/rec_likes"/>
+
+          </LinearLayout>
+
+
+          <ProgressBar
+            android:layout_width="300dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/pb_like_1"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            />
+
+          <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+              android:text="@string/like_summary_cat_2"
+              android:textColor="@color/nano_full_stack_developer"
+              android:textAllCaps="true"
+              android:layout_weight="1"
+              android:layout_width="0dp"
+              android:gravity="center_vertical"
+              android:layout_height="wrap_content"
+              android:id="@+id/tv_like_2"/>
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:text="@string/rec_likes_default_value"
+              android:id="@+id/tv_total_likes_2"
+              android:layout_gravity="right"
+              android:paddingEnd="5dp"/>
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="right"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:text="@string/rec_likes"/>
+
+          </LinearLayout>
+
+          <ProgressBar
+            android:layout_width="300dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/nano_full_stack_developer"
+            android:layout_marginRight="5dp"
+            android:layout_centerHorizontal="true"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:id="@+id/pb_like_2"/>
+
+          <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+              android:text="@string/like_summary_cat_3"
+              android:textColor="@color/nano_data_analyst"
+              android:textAllCaps="true"
+              android:layout_weight="1"
+              android:layout_width="0dp"
+              android:gravity="center_vertical"
+              android:layout_height="wrap_content"
+              android:id="@+id/tv_like_3"/>
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:text="@string/rec_likes_default_value"
+              android:id="@+id/tv_total_likes_3"
+              android:layout_gravity="right"
+              android:paddingEnd="5dp"/>
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="right"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:text="@string/rec_likes"/>
+
+          </LinearLayout>
+
+          <ProgressBar
+            android:layout_width="300dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="5dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:id="@+id/pb_like_3"/>
+
+        </LinearLayout>
+
+      </android.support.v7.widget.CardView>
+    </LinearLayout>
+  </ScrollView>
 
 </LinearLayout>

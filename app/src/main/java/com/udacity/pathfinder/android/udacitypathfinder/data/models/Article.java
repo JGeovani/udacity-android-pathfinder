@@ -52,4 +52,8 @@ public class Article extends ParseObject {
   public String getId() {
     return getString("id");
   }
+
+  public int getLikes() {
+    return getInt("likes");
+  }
 }

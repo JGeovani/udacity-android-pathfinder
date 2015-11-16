@@ -8,14 +8,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
+import com.udacity.pathfinder.android.udacitypathfinder.data.ParseClient;
+import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
+import com.udacity.pathfinder.android.udacitypathfinder.data.RequestCallback2;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.LikedArticle;
+import com.udacity.pathfinder.android.udacitypathfinder.data.models.Likes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class DbArticleLikes {
 
@@ -32,7 +45,7 @@ public class DbArticleLikes {
     sp = new SharedPref(context);
   }
 
-  public void addLike(String articleId, String[] nanodegrees) {
+  public void addLike(String articleId, String[] nanodegrees, boolean isLiked) {
     String username = sp.getUserId();
     Gson gson = new Gson();
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -40,7 +53,7 @@ public class DbArticleLikes {
     ContentValues cv = new ContentValues();
     cv.put(DbHelper.COLUMN_ARTICLE_ID, articleId);
     cv.put(DbHelper.COLUMN_USERNAME, username);
-    cv.put(DbHelper.COLUMN_ARTICLE_IS_LIKED, true);
+    cv.put(DbHelper.COLUMN_ARTICLE_IS_LIKED, isLiked);
     cv.put(DbHelper.COLUMN_DATE_ADDED, date);
     cv.put(DbHelper.COLUMN_ARTICLE_NANODEGREES, gson.toJson(nanodegrees));
     db.insert(DbHelper.TABLE_ARTICLE_LIKES, null, cv);
@@ -68,12 +81,28 @@ public class DbArticleLikes {
     return doesExist;
   }
 
-  public void deleteLike(String articleId) {
+  public boolean isLiked(String articleId) {
+    String[] column = {DbHelper.COLUMN_ID, DbHelper.COLUMN_ARTICLE_ID, DbHelper.COLUMN_USERNAME, DbHelper.COLUMN_ARTICLE_IS_LIKED};
+    Cursor cursor = db.query(DbHelper.TABLE_ARTICLE_LIKES, column, null, null, null, null, null);
+    boolean articleisLiked = false;
     String username = sp.getUserId();
-    String whereClause = DbSchema.COLUMN_ARTICLE_ID + " = ? AND " + DbSchema.COLUMN_USERNAME + " = ?";
-    String[] whereArgs = {articleId, username};
-    db.delete(DbHelper.TABLE_ARTICLE_LIKES, whereClause, whereArgs);
-    Log.d(TAG, "User: " + username + ", deleted article " + articleId);
+    if (cursor != null) {
+      int articleIdIndex = cursor.getColumnIndex(DbSchema.COLUMN_ARTICLE_ID);
+      int usernameIndex = cursor.getColumnIndex(DbSchema.COLUMN_USERNAME);
+      int isLikedIndex = cursor.getColumnIndex(DbSchema.COLUMN_ARTICLE_IS_LIKED);
+
+      cursor.moveToFirst();
+      while (!cursor.isAfterLast()) {
+        String article_id = cursor.getString(articleIdIndex);
+        String user_name = cursor.getString(usernameIndex);
+        boolean isLiked = cursor.getInt(isLikedIndex) > 0;
+        if (article_id.equals(articleId) && user_name.equals(username) && isLiked) {
+          articleisLiked = true;
+        }
+        cursor.moveToNext();
+      }
+    }
+    return articleisLiked;
   }
 
   public void updateLike(String articleId, boolean isLiked) {
@@ -98,8 +127,8 @@ public class DbArticleLikes {
       cursor.moveToFirst();
       while (!cursor.isAfterLast()) {
         String user_name = cursor.getString(usernameIndex);
-        boolean isLiked = cursor.getInt(isLikedIndex)>0;
-        if (user_name.equals(username)&&isLiked) {
+        boolean isLiked = cursor.getInt(isLikedIndex) > 0;
+        if (user_name.equals(username) && isLiked) {
           count++;
         }
         cursor.moveToNext();
@@ -107,7 +136,6 @@ public class DbArticleLikes {
     }
     return count;
   }
-
 
 
   public HashMap<String, Integer> getNanoScore() {
@@ -126,12 +154,12 @@ public class DbArticleLikes {
           String nanoJson = cursor.getString(nanoIdIndex);
           JSONArray nanoData = new JSONArray(nanoJson);
           String user_name = cursor.getString(userIdIndex);
-          boolean isLiked = cursor.getInt(isLikedIdIndex)>0;
-          if(user_name.equals(username) && isLiked){
-            for(int i=0;i<nanoData.length();i++){
+          boolean isLiked = cursor.getInt(isLikedIdIndex) > 0;
+          if (user_name.equals(username) && isLiked) {
+            for (int i = 0; i < nanoData.length(); i++) {
               String nanoString = nanoData.get(i).toString();
-              if(scores.containsKey(nanoString)){
-                int score = scores.get(nanoString)+1;
+              if (scores.containsKey(nanoString)) {
+                int score = scores.get(nanoString) + 1;
                 scores.put(nanoString, score);
               } else {
                 scores.put(nanoString, 1);
@@ -145,6 +173,165 @@ public class DbArticleLikes {
       }
     }
     return scores;
+  }
+
+  public void updateParseArticleLikes(final String articeId, final boolean isLiked) {
+    Log.e(TAG, "Artice Id = " + articeId + ", updating like status to " + isLiked);
+    ParseQuery query = new ParseQuery(ParseConstants.ARTICLE_CLASS_NAME);
+    try {
+      int likeCount = 0;
+      ParseObject object = query.get(articeId);
+      if (object.get(ParseConstants.ARTICLES_COL_LIKES) != null)
+        likeCount = (int) object.get(ParseConstants.ARTICLES_COL_LIKES);
+      if (isLiked) {
+        likeCount++;
+      } else {
+        likeCount--;
+      }
+      object.put(ParseConstants.ARTICLES_COL_LIKES, likeCount);
+      object.saveInBackground();
+      Log.d(TAG, "Like count for artice id: " + articeId + " = " + likeCount);
+
+    } catch (ParseException e) {
+      e.printStackTrace();
+      Log.e(TAG, "There was an error with retrieving Parse query");
+    }
+    syncUserArticleLikes();
+  }
+
+
+  public void saveInBackground() {
+    ArrayList<LikedArticle> la = getArticlesLiked();
+    List<ParseObject> objList = new ArrayList<>();
+    for (LikedArticle obj : la) {
+      Likes newObject = new Likes();
+      newObject.put(ParseConstants.LIKES_ARTICLE_ID, obj.getArticleId());
+      newObject.put(ParseConstants.LIKES_ARTICLE_ISLIKED, obj.isLiked());
+      newObject.put("username", sp.getUserId());
+      objList.add(newObject);
+      Log.d(TAG, "Adding id " + obj.getArticleId() + " , isLiked: " + obj.isLiked() + " to parse backend");
+    }
+    ParseObject.saveAllInBackground(objList, new SaveCallback() {
+      @Override
+      public void done(ParseException e) {
+        if (e == null) {
+          Log.d(TAG, "Save in background success");
+        } else {
+          Log.e(TAG, "ERROR - " + e);
+        }
+      }
+    });
+  }
+
+  public void syncUserArticleLikes() {
+    final String userId = sp.getUserId();
+    ParseQuery<Likes> query = ParseQuery.getQuery(ParseConstants.LIKES_CLASS_NAME);
+    query.whereEqualTo("username", userId);
+    query.findInBackground(new FindCallback<Likes>() {
+      ArrayList<LikedArticle> localLikes = getArticlesLiked();
+
+      @Override
+      public void done(List<Likes> remoteLikes, ParseException e) {
+        final List<ParseObject> objList = new ArrayList<>();
+        String remoteArticleId = " ";
+        String localArticleId = " ";
+        boolean localIsLiked = false;
+        boolean remoteIsLiked = false;
+        //local likes loop
+        int i = 0;
+        for (LikedArticle localLike : localLikes) {
+          boolean alreadyExist = false;
+          i++;
+          localArticleId = localLike.getArticleId();
+          localIsLiked = localLike.isLiked();
+          // remote likes loop
+          int j = 0;
+          for (Likes remoteLike : remoteLikes) {
+            j++;
+            remoteArticleId = remoteLike.getArticleId();
+            remoteIsLiked = remoteLike.isLiked();
+            if (localArticleId.equals(remoteArticleId)) {
+              alreadyExist = true;
+              //compare and update if needed
+              if (localIsLiked != remoteIsLiked) {
+                remoteLike.put(ParseConstants.LIKES_ARTICLE_ISLIKED, localIsLiked);
+                objList.add(remoteLike);
+              }
+              break;
+            }
+          }
+          if (!alreadyExist) {
+            Likes newObject = new Likes();
+            newObject.put(ParseConstants.LIKES_ARTICLE_ID, localArticleId);
+            newObject.put(ParseConstants.LIKES_ARTICLE_ISLIKED, localIsLiked);
+            newObject.put("username", userId);
+            objList.add(newObject);
+          }
+        }
+        if (objList.size() > 0) {
+          ParseObject.saveAllInBackground(objList, new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+              if (e == null) {
+              } else {
+                Log.e(TAG, "ERROR - " + e);
+              }
+            }
+          });
+        }
+      }
+    });
+  }
+
+
+  public void restoreUserArticleLikes() {
+
+    final String userId = sp.getUserId();
+    ParseQuery<Likes> query = ParseQuery.getQuery(ParseConstants.LIKES_CLASS_NAME);
+    query.whereEqualTo("username", userId);
+    query.findInBackground(new FindCallback<Likes>() {
+      @Override
+      public void done(List<Likes> remoteLikes, ParseException e) {
+        for (Likes remoteLike : remoteLikes) {
+          final String remoteArticleId = remoteLike.getArticleId();
+          final boolean remoteIsLiked = remoteLike.isLiked();
+          ParseClient.request(
+            ParseConstants.ARTICLE_CLASS_NAME, true, remoteArticleId, new RequestCallback2<Article>() {
+              @Override
+              public void onResponse(Article article, ParseException e) {
+                List<String> remoteNanodegrees = article.getNanodegrees();
+                String[] nanodegreeData = new String[remoteNanodegrees.size()];
+                for (int i = 0; i < remoteNanodegrees.size(); i++) {
+                  nanodegreeData[i] = remoteNanodegrees.get(i);
+                }
+                addLike(remoteArticleId, nanodegreeData, remoteIsLiked);
+              }
+            });
+        }
+      }
+    });
+    sp.setFirstRunComplete(true);
+  }
+
+  public ArrayList<LikedArticle> getArticlesLiked() {
+    ArrayList<LikedArticle> likedArticles = new ArrayList<>();
+    String[] column = {DbHelper.COLUMN_ID, DbHelper.COLUMN_ARTICLE_ID, DbHelper.COLUMN_ARTICLE_IS_LIKED};
+    Cursor cursor = db.query(DbHelper.TABLE_ARTICLE_LIKES, column, null, null, null, null, null);
+    if (cursor != null) {
+      int articleIdIndex = cursor.getColumnIndex(DbSchema.COLUMN_ARTICLE_ID);
+      int isLikedIdIndex = cursor.getColumnIndex(DbSchema.COLUMN_ARTICLE_IS_LIKED);
+      cursor.moveToFirst();
+      while (!cursor.isAfterLast()) {
+        LikedArticle likedArticle = new LikedArticle();
+        String article_id = cursor.getString(articleIdIndex);
+        boolean isLiked = cursor.getInt(isLikedIdIndex) > 0;
+        likedArticle.setArticleId(article_id);
+        likedArticle.setIsLiked(isLiked);
+        likedArticles.add(likedArticle);
+        cursor.moveToNext();
+      }
+    }
+    return likedArticles;
   }
 
 
