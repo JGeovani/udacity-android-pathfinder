@@ -1,12 +1,9 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.addArticle;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  * Retrieve all images from a given URL.
