@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +48,9 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
 
   @Bind(R.id.grid_crawled_images) RecyclerView mRecyclerView;
   RecyclerView.LayoutManager mLayoutManager;
-  RecyclerView.Adapter mAdapter;
+  CrawledGridAdapter mAdapter;
+
+  ArrayList<String> imageItems = new ArrayList<>();
 
   @State Integer[] selectionIndices = new Integer[]{};
   @State String selectionsText;
@@ -121,15 +124,19 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
   public void checkForImages(View view) {
     final String articleUrl = articleUrlEditText.getText().toString();
     try {
-      Toast.makeText(this, articleUrl, Toast.LENGTH_SHORT).show();
       FetchImageTask imageTask = (FetchImageTask) new FetchImageTask(
               new FetchImageTask.ImageResponse() {
         @Override
-        public void finishImageResponse(Elements out) {
-          Elements articleImages = out;
+        public void finishImageResponse(Elements articleImages) {
           for (Element img : articleImages) {
-            Toast.makeText(getApplicationContext(), img.toString(), Toast.LENGTH_LONG).show();
+            CrawledImageItem item = new CrawledImageItem();
+            item.setName(img.attr("alt"));
+            item.setThumbnail(img.absUrl("src"));
+            Log.e("$$$", item.getName());
+            Log.e("$$$", item.getThumbnail());
+            mAdapter.add(item);
           }
+          mAdapter.notifyDataSetChanged();
         }
       }).execute(articleUrl);
 
@@ -188,12 +195,16 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
   }
 
   private void setupGrid() {
-    mRecyclerView.setHasFixedSize(true);
+    mRecyclerView.setHasFixedSize(false);
     mLayoutManager = new GridLayoutManager(this, 2);
     mRecyclerView.setLayoutManager(mLayoutManager);
 
-    mAdapter = new CrawledGridAdapter();
+    mAdapter = new CrawledGridAdapter(getApplicationContext());
     mRecyclerView.setAdapter(mAdapter);
+  }
+
+  private void showForm() {
+
   }
 
   @Override

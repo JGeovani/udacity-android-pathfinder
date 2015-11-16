@@ -24,25 +24,20 @@ class FetchImageTask extends AsyncTask<String, Void, Elements> {
         this.delegate = delegate;
     }
 
-    protected Elements doInBackground(String... in) throws IllegalArgumentException {
+    protected Elements doInBackground(String... in) {
         String url = in[0];
         Document articleRaw;
         try {
             articleRaw = Jsoup.connect(url).get();
-            try {
-                Thread.sleep(1000);                 //1000 milliseconds is one second.
-            } catch(InterruptedException ex) {
-                Thread.currentThread().interrupt();
+            Elements imageSources = articleRaw.select("img[src]");
+            for (Element e : imageSources) {
+                candidates.add(e);
+                Log.e("$$$", e.toString());
             }
-            for (Element imageUrl : articleRaw.select("url")) {
-                Log.e("$$$", imageUrl.data() + imageUrl.toString());
-                candidates.add(imageUrl);
-            }
-            return candidates;
         } catch (Exception ex) {
-            Log.e("$$$", ex.getMessage());
-            throw new IllegalArgumentException("Invalid URL");
+            // Do nothing
         }
+        return candidates;
     }
 
     protected void onPostExecute(Elements result) {

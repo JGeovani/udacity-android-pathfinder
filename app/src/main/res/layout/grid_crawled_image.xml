@@ -16,7 +16,7 @@
         android:layout_marginBottom="0dp">
 
         <RelativeLayout
-            android:id="@+id/top_layout"
+            android:id="@+id/crawled_image_wrapper"
             android:layout_width="165dp"
             android:layout_height="160dp">
 
@@ -37,8 +37,8 @@
                 android:gravity="center_vertical"
                 android:background="#ff444444"
                 android:textColor="#fff"
-                android:textSize="20dp"
-                android:text="Test"
+                android:textSize="12sp"
+                android:maxLines="1"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

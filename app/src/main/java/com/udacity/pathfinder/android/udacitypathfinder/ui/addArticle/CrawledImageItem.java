@@ -6,7 +6,7 @@ package com.udacity.pathfinder.android.udacitypathfinder.ui.addArticle;
 public class CrawledImageItem {
 
     private String mName;
-    private int mThumbnail;
+    private String mThumbnail;
 
     public String getName() {
         return mName;
@@ -16,11 +16,11 @@ public class CrawledImageItem {
         this.mName = name;
     }
 
-    public int getThumbnail() {
+    public String getThumbnail() {
         return mThumbnail;
     }
 
-    public void setThumbnail(int thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.mThumbnail = thumbnail;
     }
 }
