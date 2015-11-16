@@ -10,13 +10,21 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
@@ -27,7 +35,7 @@ import butterknife.OnClick;
 import icepick.Icepick;
 import icepick.State;
 
-public class AddArticleActivity extends AppCompatActivity {
+public class AddArticleActivity extends AppCompatActivity implements FetchImageTask.ImageResponse {
 
   @BindString(R.string.title_activity_add_article) String ADD_ARTICLE_ACTIVITY_TITLE;
   @Bind(R.id.toolbar) Toolbar toolbar;
@@ -35,6 +43,11 @@ public class AddArticleActivity extends AppCompatActivity {
   @Bind(R.id.article_url) EditText articleUrlEditText;
   @Bind(R.id.image_url) EditText imageUrlEditText;
   @Bind(R.id.nanodegrees) TextView nanodegreesTextView;
+  @Bind(R.id.btn_check_article) Button checkArticleButton;
+
+  @Bind(R.id.grid_crawled_images) RecyclerView mRecyclerView;
+  RecyclerView.LayoutManager mLayoutManager;
+  RecyclerView.Adapter mAdapter;
 
   @State Integer[] selectionIndices = new Integer[]{};
   @State String selectionsText;
@@ -48,6 +61,7 @@ public class AddArticleActivity extends AppCompatActivity {
     Icepick.restoreInstanceState(this, savedInstanceState);
     ButterKnife.bind(this);
 
+    setupGrid();
     toolbar.setTitle(ADD_ARTICLE_ACTIVITY_TITLE);
     setSupportActionBar(toolbar);
 
@@ -103,6 +117,29 @@ public class AddArticleActivity extends AppCompatActivity {
         .show();
   }
 
+  @OnClick(R.id.btn_check_article)
+  public void checkForImages(View view) {
+    final String articleUrl = articleUrlEditText.getText().toString();
+    try {
+      Toast.makeText(this, articleUrl, Toast.LENGTH_SHORT).show();
+      FetchImageTask imageTask = (FetchImageTask) new FetchImageTask(
+              new FetchImageTask.ImageResponse() {
+        @Override
+        public void finishImageResponse(Elements out) {
+          Elements articleImages = out;
+          for (Element img : articleImages) {
+            Toast.makeText(getApplicationContext(), img.toString(), Toast.LENGTH_LONG).show();
+          }
+        }
+      }).execute(articleUrl);
+
+    } catch (IllegalArgumentException mu) {
+      Toast.makeText(this, "Invalid URL - " + articleUrl, Toast.LENGTH_SHORT).show();
+    } catch (Exception ex) {
+      Toast.makeText(this, "Invalid EXP - " + articleUrl, Toast.LENGTH_SHORT).show();
+    }
+  }
+
   @OnClick(R.id.fab)
   public void save(View view) {
     final String title = titleEditText.getText().toString();
@@ -148,5 +185,19 @@ public class AddArticleActivity extends AppCompatActivity {
     } else {
       return new Pair<>(true, "");
     }
+  }
+
+  private void setupGrid() {
+    mRecyclerView.setHasFixedSize(true);
+    mLayoutManager = new GridLayoutManager(this, 2);
+    mRecyclerView.setLayoutManager(mLayoutManager);
+
+    mAdapter = new CrawledGridAdapter();
+    mRecyclerView.setAdapter(mAdapter);
+  }
+
+  @Override
+  public void finishImageResponse(Elements out) {
+
   }
 }
