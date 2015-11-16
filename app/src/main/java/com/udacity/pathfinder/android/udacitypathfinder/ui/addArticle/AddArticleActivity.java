@@ -24,6 +24,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.ParseConstants;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -46,9 +47,9 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
   @Bind(R.id.nanodegrees) TextView nanodegreesTextView;
   @Bind(R.id.btn_check_article) Button checkArticleButton;
 
-  @Bind(R.id.grid_crawled_images) RecyclerView mRecyclerView;
   RecyclerView.LayoutManager mLayoutManager;
   CrawledGridAdapter mAdapter;
+  RecyclerView mRecyclerView;
 
   ArrayList<String> imageItems = new ArrayList<>();
 
@@ -57,13 +58,14 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
 
   private static final String DELIMITER = ", ";
   private MaterialDialog nanodegreesDialog;
+  private MaterialDialog imageSelectDialog;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_article);
     Icepick.restoreInstanceState(this, savedInstanceState);
     ButterKnife.bind(this);
-
+    imageSelectDialog = getImageDialog();
     setupGrid();
     toolbar.setTitle(ADD_ARTICLE_ACTIVITY_TITLE);
     setSupportActionBar(toolbar);
@@ -121,20 +123,27 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
   }
 
   @OnClick(R.id.btn_check_article)
-  public void checkForImages(View view) {
+  public void showImageSelectDialog(View view) {
+    imageSelectDialog.show();
     final String articleUrl = articleUrlEditText.getText().toString();
     try {
       FetchImageTask imageTask = (FetchImageTask) new FetchImageTask(
               new FetchImageTask.ImageResponse() {
         @Override
-        public void finishImageResponse(Elements articleImages) {
+        public void finishImageResponse(Document doc) {
+          // Parse and assign article title.
+          String articleTitle = doc.title();
+          titleEditText.setText(articleTitle);
+          Elements articleImages = doc.select("img[src]");
+
+          int counter = 0;
           for (Element img : articleImages) {
             CrawledImageItem item = new CrawledImageItem();
             item.setName(img.attr("alt"));
             item.setThumbnail(img.absUrl("src"));
-            Log.e("$$$", item.getName());
-            Log.e("$$$", item.getThumbnail());
-            mAdapter.add(item);
+            mAdapter.add(counter, item);
+            mAdapter.notifyItemInserted(counter);
+            counter++;
           }
           mAdapter.notifyDataSetChanged();
         }
@@ -195,6 +204,7 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
   }
 
   private void setupGrid() {
+    mRecyclerView = (RecyclerView)imageSelectDialog.getCustomView();
     mRecyclerView.setHasFixedSize(false);
     mLayoutManager = new GridLayoutManager(this, 2);
     mRecyclerView.setLayoutManager(mLayoutManager);
@@ -203,12 +213,18 @@ public class AddArticleActivity extends AppCompatActivity implements FetchImageT
     mRecyclerView.setAdapter(mAdapter);
   }
 
-  private void showForm() {
-
+  private MaterialDialog getImageDialog() {
+    return new MaterialDialog.Builder(this)
+            .title(R.string.select_image_title)
+            .customView(R.layout.grid_crawled_images, false)
+            .buttonRippleColorRes(R.color.primary)
+            .negativeColorRes(R.color.primary)
+            .negativeText(R.string.select_image_decline)
+            .build();
   }
 
   @Override
-  public void finishImageResponse(Elements out) {
+  public void finishImageResponse(Document out) {
 
   }
 }

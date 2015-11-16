@@ -55,11 +55,6 @@
                 android:layout_height="wrap_content"
                 android:text="Check Article"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/grid_crawled_images"
-                android:layout_width="match_parent"
-                android:layout_height="360dp"/>
-
             <EditText
                 android:id="@+id/article_title"
                 android:layout_width="match_parent"
@@ -70,12 +65,11 @@
                 android:textSize="@dimen/add_article_text_size"
                 android:hint="@string/article_title_hint"
                 android:textColorHint="@color/text_hint"
-                android:visibility="gone"/>
+                />
 
             <View style="@style/add_article_divider"
                 android:layout_marginTop="@dimen/add_article_divider_margin"
                 android:layout_marginBottom="@dimen/add_article_divider_margin"
-                android:visibility="gone"
                 />
 
             <EditText
@@ -88,13 +82,11 @@
                 android:textSize="@dimen/add_article_text_size"
                 android:hint="@string/image_url_hint"
                 android:textColorHint="@color/text_hint"
-                android:visibility="gone"
                 />
 
             <View style="@style/add_article_divider"
                 android:layout_marginTop="@dimen/add_article_divider_margin"
                 android:layout_marginBottom="@dimen/add_article_divider_margin"
-                android:visibility="gone"
                 />
 
             <TextView
@@ -105,13 +97,11 @@
                 android:textSize="@dimen/add_article_text_size"
                 android:hint="@string/nanodegrees_hint"
                 android:textColorHint="@color/text_hint"
-                android:visibility="gone"
                 />
 
             <View style="@style/add_article_divider"
                 android:layout_marginTop="@dimen/add_article_divider_margin"
                 android:layout_marginBottom="@dimen/add_article_divider_margin"
-                android:visibility="gone"
                 />
 
         </LinearLayout>
@@ -124,7 +114,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_done_white_24dp"
-        android:visibility="gone"
         app:fabSize="normal"
         app:layout_anchor="@id/scrollview"
         app:layout_anchorGravity="center_vertical|right"

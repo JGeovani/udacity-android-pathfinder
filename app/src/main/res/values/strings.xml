@@ -177,6 +177,9 @@
     <string name="desc_article_header_img">Header image for this article.</string>
     <string name="desc_nanodegree_ad">Nanodegree ad background image</string>
     <string name="desc_btn_recommendation">Button activates when a Recommendation becomes available.</string>
+    <string name="select_image_title">Choose an Image</string>
+    <string name="select_image_accept">Choose</string>
+    <string name="select_image_decline">None</string>
     Learn
 
 </resources>

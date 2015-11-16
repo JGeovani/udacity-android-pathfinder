@@ -6,10 +6,12 @@ package com.udacity.pathfinder.android.udacitypathfinder.ui.addArticle;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,15 +22,10 @@ import com.udacity.pathfinder.android.udacitypathfinder.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrawledGridAdapter extends RecyclerView.Adapter<CrawledGridAdapter.ViewHolder>
-        implements View.OnClickListener {
+public class CrawledGridAdapter extends RecyclerView.Adapter<CrawledGridAdapter.ViewHolder> {
 
     List<CrawledImageItem> mItems;
     Context context;
-
-    public interface mClickListener {
-        public void mClick(View v, int position);
-    }
 
     public CrawledGridAdapter(Context context) {
         super();
@@ -51,6 +48,7 @@ public class CrawledGridAdapter extends RecyclerView.Adapter<CrawledGridAdapter.
         Glide.with(context)
                 .load(item.getThumbnail())
                 .into(viewHolder.imgThumbnail);
+
     }
 
     @Override
@@ -59,22 +57,21 @@ public class CrawledGridAdapter extends RecyclerView.Adapter<CrawledGridAdapter.
     }
 
     public void add(CrawledImageItem item) {
-        mItems.add(item);
+
     }
 
-    @Override
-    public void onClick(View v) {
-
+    public void add(int position, CrawledImageItem item) {
+        mItems.add(position, item);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgThumbnail;
         public TextView tvName;
-        public RelativeLayout ciWrapper;
+        public LinearLayout ciWrapper;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ciWrapper = (RelativeLayout)itemView.findViewById(R.id.crawled_image_wrapper);
+            ciWrapper = (LinearLayout)itemView.findViewById(R.id.crawled_image_wrapper);
             imgThumbnail = (ImageView)itemView.findViewById(R.id.crawled_image_thumbnail);
             tvName = (TextView)itemView.findViewById(R.id.crawled_image_name);
         }

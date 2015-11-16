@@ -11,36 +11,31 @@ import org.jsoup.select.Elements;
 /**
  * Retrieve all images from a given URL.
  */
-class FetchImageTask extends AsyncTask<String, Void, Elements> {
+class FetchImageTask extends AsyncTask<String, Void, Document> {
 
     public interface ImageResponse {
-        void finishImageResponse(Elements out);
+        void finishImageResponse(Document out);
     }
 
     public ImageResponse delegate = null;
-    Elements candidates = new Elements();
 
     public FetchImageTask(ImageResponse delegate) {
         this.delegate = delegate;
     }
 
-    protected Elements doInBackground(String... in) {
+    protected Document doInBackground(String... in) {
         String url = in[0];
         Document articleRaw;
         try {
             articleRaw = Jsoup.connect(url).get();
-            Elements imageSources = articleRaw.select("img[src]");
-            for (Element e : imageSources) {
-                candidates.add(e);
-                Log.e("$$$", e.toString());
-            }
+            return articleRaw;
         } catch (Exception ex) {
             // Do nothing
+            return null;
         }
-        return candidates;
     }
 
-    protected void onPostExecute(Elements result) {
+    protected void onPostExecute(Document result) {
         delegate.finishImageResponse(result);
     }
 }
