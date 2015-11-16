@@ -17,10 +17,10 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias 'release'
-            keyPassword '/FZ3oq7d74QTxJfkPI1dcavNw'
-            storeFile file('/Users/curt/Keys/release.jks')
-            storePassword '/FZ3oq7d74QTxJfkPI1dcavNw'
+            keyAlias 'pathfinder_release'
+            keyPassword System.getenv("PATHFINDERPASSWORD")
+            storeFile file('/Users/curt/Keys/pathfinder-release-key.keystore')
+            storePassword System.getenv("PATHFINDERPASSWORD")
         }
     }
     buildTypes {
