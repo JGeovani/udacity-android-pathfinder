@@ -82,7 +82,6 @@ public class FeedActivity extends AuthCompatActivity {
   private void checkRecommendationStatus() {
     if (!sp.isRecomended()) {
       btn_recomendation.setImageResource(R.mipmap.ic_paper_plane_0);
-      btn_recomendation.setAlpha((float) .2);
     } else {
       btn_recomendation.setImageResource(R.mipmap.ic_paper_plane_1);
       btn_recomendation.setAlpha((float) 1);
