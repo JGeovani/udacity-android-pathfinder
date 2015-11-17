@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            />
+            android:contentDescription="@string/desc_sample_article_image" />
 
         <LinearLayout
             android:id="@+id/article_title_background"
@@ -40,6 +40,7 @@
                 android:layout_weight="0.8"
                 android:textStyle="bold"
                 android:textSize="16sp"
+                android:maxLines="4"
                 android:textColor="@android:color/white"
                 />
 
