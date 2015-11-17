@@ -65,9 +65,9 @@ public class ArticlePullService extends IntentService {
                 int totalArticles = articles.size();
                 String message;
                 if (totalArticles > 1) {
-                  message = totalArticles + "New articles have been added";
+                  message = totalArticles + " New articles have been added";
                 } else {
-                  message = totalArticles + "New article has been added";
+                  message = totalArticles + " New article has been added";
                 }
                 Uri notifySound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 NotificationCompat.Builder notification = new NotificationCompat.Builder(getBaseContext());
