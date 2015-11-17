@@ -43,8 +43,8 @@ October 1 - Project Start
 3. Populate Article Store with Static Content (min 10 for each category = 80 articles) - (October 29 - All)
 4. ~~Complete Recommendation Datastore (October 29 - BM)~~
 5. ~~Implement ‘Add Article’ ui popup (DialogFrag?) - (October 29 - MH)~~
-6. ~~Complete Like Datastore (October 29 - BM)~~
-7. Complete Like Functionality (October 29 - MH) - Partial
+6. ~~Complete Like Datastore (October 29 - BC)~~
+7. ~~Complete Like Functionality (October 29 - BC) ~~
 8. ~~Polish Sprint 1/2 Features (Prod assets, standardized fonts/colors/text sizes, HD images, etc.)~~
 
 ### Finishing Up (November 6 - Project Due)
@@ -63,7 +63,8 @@ October 1 - Project Start
 - ~~Arrow icon spacing~~
 - ~~Add Article popup: lookup image, pull title automatically~~
 - Show number of times each article is liked
-- Only Liked articles in Liked feed
+- ~~Only Liked articles in Liked feed~~
+- ~~2-way data Sync to Parse backend~~
 - ~~Change heart-pressed color~~
 - Recommendation UI bug
 - ~~Recommendation threshold~~

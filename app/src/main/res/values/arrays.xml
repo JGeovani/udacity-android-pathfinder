@@ -10,6 +10,7 @@
         <item>Intro to Programming</item>
         <item>iOS Developer</item>
         <item>Tech Entrepreneur</item>
+        <item>Machine Learning</item>
     </string-array>
 
     <string-array name="nanodegree_ids">
@@ -21,6 +22,7 @@
         <item>nd000</item>
         <item>nd003</item>
         <item>nd007</item>
+        <item>nd009</item>
     </string-array>
 
 </resources>

@@ -11,11 +11,11 @@ public class Likes extends ParseObject {
   }
 
   public String getArticleId() {
-    return getString("article_id");
+    return getString("articleId");
   }
 
-  public Boolean getIsLiked() {
-    return getBoolean("is_liked");
+  public Boolean isLiked() {
+    return getBoolean("isLiked");
   }
 
 }

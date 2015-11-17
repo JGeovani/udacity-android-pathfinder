@@ -17,4 +17,10 @@ public class ParseConstants {
   public static final String ARTICLES_COL_LINK = "link";
   public static final String ARTICLES_COL_IMAGE_URL = "imageUrl";
   public static final String ARTICLES_COL_NANODEGREES = "nanodegrees";
+  public static final String ARTICLES_COL_LIKES = "likes";
+  public static final String ARTICLES_COL_SUBMITTED_BY = "submittedBy";
+  public static final String ARTICLES_COL_ARTICLE_ID = "articleId";
+
+  public static final String LIKES_ARTICLE_ID = "articleId";
+  public static final String LIKES_ARTICLE_ISLIKED = "isLiked";
 }

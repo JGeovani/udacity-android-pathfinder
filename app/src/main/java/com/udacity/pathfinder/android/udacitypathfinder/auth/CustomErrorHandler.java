@@ -37,7 +37,7 @@ public class CustomErrorHandler implements ErrorHandler {
         } catch (Exception ex) {
           try {
             errorDescription = context.getString(R.string.error_network_http_error,
-                cause.getResponse().getStatus());
+              cause.getResponse().getStatus());
           } catch (Exception ex2) {
             Log.e(TAG, "handleError: " + ex2.getLocalizedMessage());
             errorDescription = context.getString(R.string.error_unknown);

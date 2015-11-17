@@ -33,9 +33,9 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
 import org.json.JSONObject;
 
 public class GoogleLoginActivity extends Activity implements
-    ActivityCompat.OnRequestPermissionsResultCallback,
-    GoogleApiClient.ConnectionCallbacks,
-    GoogleApiClient.OnConnectionFailedListener {
+  ActivityCompat.OnRequestPermissionsResultCallback,
+  GoogleApiClient.ConnectionCallbacks,
+  GoogleApiClient.OnConnectionFailedListener {
 
   private final String TAG = getClass().getSimpleName();
   ProgressDialog progressDialog;
@@ -47,6 +47,7 @@ public class GoogleLoginActivity extends Activity implements
   private ConnectionResult mConnectionResult;
   /* RequestCode for resolutions to get GET_ACCOUNTS permission on M */
   private static final int RC_PERM_GET_ACCOUNTS = 2;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     // Inflate the layout for this fragment
@@ -57,21 +58,21 @@ public class GoogleLoginActivity extends Activity implements
 
     // start google plus api
     mGoogleApiClient = new GoogleApiClient.Builder(this)
-        .addConnectionCallbacks(this)
-        .addOnConnectionFailedListener(this)
-        .addApi(Plus.API)
-        .addScope(Plus.SCOPE_PLUS_LOGIN)
-        .build();
+      .addConnectionCallbacks(this)
+      .addOnConnectionFailedListener(this)
+      .addApi(Plus.API)
+      .addScope(Plus.SCOPE_PLUS_LOGIN)
+      .build();
     startLoginProcess();
   }
 
   protected void onStart() {
     Log.d(TAG, "Start");
     super.onStart();
-    if (!isNetworkConnected()){
+    if (!isNetworkConnected()) {
       Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_LONG).show();
       finish();
-    }else {
+    } else {
       // Google Plus API
       progressDialog.setMessage("Communicating with Google");
       progressDialog.show();
@@ -131,8 +132,10 @@ public class GoogleLoginActivity extends Activity implements
       }
     }
   }
+
   /**
    * Check if we have the GET_ACCOUNTS permission and request it if we do not.
+   *
    * @return true if we have the permission, false if we do not.
    */
   private boolean checkAccountsPermission() {
@@ -148,26 +151,27 @@ public class GoogleLoginActivity extends Activity implements
       AlertDialog alertDialog = new AlertDialog.Builder(this).create();
       alertDialog.setMessage(getString(R.string.contacts_permission_rationale));
       alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.global_ok_button_label),
-          new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-              // Request the permission again.
-              ActivityCompat.requestPermissions(GoogleLoginActivity.this,
-                  new String[]{perm},
-                  RC_PERM_GET_ACCOUNTS);
-              dialog.dismiss();
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            // Request the permission again.
+            ActivityCompat.requestPermissions(GoogleLoginActivity.this,
+              new String[]{perm},
+              RC_PERM_GET_ACCOUNTS);
+            dialog.dismiss();
 
-            }
-          });
+          }
+        });
       alertDialog.show();
       return false;
     } else {
       // No explanation needed, we can request the permission.
       ActivityCompat.requestPermissions(this,
-          new String[]{perm},
-          RC_PERM_GET_ACCOUNTS);
+        new String[]{perm},
+        RC_PERM_GET_ACCOUNTS);
       return false;
     }
   }
+
   @Override
   public void onRequestPermissionsResult(int requestCode,
                                          @NonNull String permissions[],
@@ -185,9 +189,10 @@ public class GoogleLoginActivity extends Activity implements
       }
     }
   }
+
   @Override
   public void onActivityResult(int requestCode, int responseCode, Intent intent) {
-    Log.d(TAG, "ActivityResult: " + requestCode + ", Response Code = "+responseCode);
+    Log.d(TAG, "ActivityResult: " + requestCode + ", Response Code = " + responseCode);
     if (requestCode == RC_SIGN_IN) {
       if (responseCode != RESULT_OK) {
         mSignInClicked = false;
@@ -230,12 +235,14 @@ public class GoogleLoginActivity extends Activity implements
   private void getProfileInformation() {
     Log.d(TAG, "Get profile information: started ");
     // Android M Permission Check
-    if(checkAccountsPermission()){
+    if (checkAccountsPermission()) {
       Log.d(TAG, "Permission verified granted for Google+ access ");
-    }else{Log.d(TAG, "Permission was denied for Google+ access ");}
+    } else {
+      Log.d(TAG, "Permission was denied for Google+ access ");
+    }
     // Check Android API Version
     int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-    if (currentapiVersion < android.os.Build.VERSION_CODES.M){
+    if (currentapiVersion < android.os.Build.VERSION_CODES.M) {
       progressDialog.setMessage("Obtaining data...");
       progressDialog.show();
     }
@@ -296,7 +303,7 @@ public class GoogleLoginActivity extends Activity implements
         });
       } else {
         Toast.makeText(this, "Please check your data connection",
-            Toast.LENGTH_LONG).show();
+          Toast.LENGTH_LONG).show();
         finish();
       }
     } catch (Exception e) {

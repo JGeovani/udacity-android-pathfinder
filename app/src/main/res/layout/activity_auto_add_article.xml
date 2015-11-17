@@ -25,55 +25,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/add_article_layout_margin"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingTop="48dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              >
+            <EditText
+                android:id="@+id/article_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="textUri"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/add_article_text_size"
+                android:hint="@string/article_url_hint"
+                android:textColorHint="@color/text_hint"
+                />
 
-                <LinearLayout
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_weight=".8"
-                  android:layout_gravity="right"
-                  android:paddingRight="16dp">
-
-                    <EditText
-                        android:id="@+id/article_url"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:background="@android:color/transparent"
-                        android:inputType="textUri"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/add_article_text_size"
-                        android:hint="@string/article_url_hint"
-                        android:textColorHint="@color/text_hint"
-                      />
-
-                    <View style="@style/add_article_divider"
-                        android:layout_marginTop="@dimen/add_article_divider_margin"
-                        android:layout_marginBottom="@dimen/add_article_divider_margin"
-                        />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btn_check_article"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Load"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight=".2"/>
-
-            </LinearLayout>
+            <View style="@style/add_article_divider"
+                android:layout_marginTop="@dimen/add_article_divider_margin"
+                android:layout_marginBottom="@dimen/add_article_divider_margin"
+                />
 
             <EditText
                 android:id="@+id/article_title"
@@ -84,8 +58,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/add_article_text_size"
                 android:hint="@string/article_title_hint"
-                android:textColorHint="@color/text_hint"
-                />
+                android:textColorHint="@color/text_hint" />
 
             <View style="@style/add_article_divider"
                 android:layout_marginTop="@dimen/add_article_divider_margin"
@@ -122,7 +95,7 @@
             <View style="@style/add_article_divider"
                 android:layout_marginTop="@dimen/add_article_divider_margin"
                 android:layout_marginBottom="@dimen/add_article_divider_margin"
-                  android:layout_width="159dp"/>
+                />
 
         </LinearLayout>
 
@@ -136,7 +109,7 @@
         android:src="@drawable/ic_done_white_24dp"
         app:fabSize="normal"
         app:layout_anchor="@id/scrollview"
-        app:layout_anchorGravity="bottom|right"
-      />
+        app:layout_anchorGravity="bottom|right|end"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

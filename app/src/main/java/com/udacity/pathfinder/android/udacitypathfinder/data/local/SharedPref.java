@@ -13,6 +13,7 @@ public class SharedPref {
   private static final String USER_ID = "user_id";
   private static final String NANODEGREES = "nanodegrees";
   private static final String RECOMEND = "recomend";
+  private static final String FIRST_RUN_COMPLETE = "first_run_complete";
 
 
   private Context context;
@@ -34,6 +35,7 @@ public class SharedPref {
   public void saveLogin(boolean isLoginComplete, String userId) {
     editor.putBoolean(LOGIN_COMPLETE, isLoginComplete);
     editor.putString(USER_ID, userId);
+    editor.putBoolean(FIRST_RUN_COMPLETE, false);
     editor.apply();
   }
 
@@ -42,7 +44,7 @@ public class SharedPref {
     editor.apply();
   }
 
-  public boolean isRecomended(){
+  public boolean isRecomended() {
     return sharedPreferences.getBoolean(RECOMEND, false);
   }
 
@@ -66,6 +68,14 @@ public class SharedPref {
     return nano;
   }
 
+  public boolean isFirstFunComplete() {
+    return sharedPreferences.getBoolean(FIRST_RUN_COMPLETE, false);
+  }
+
+  public void setFirstRunComplete(boolean isComplete) {
+    editor.putBoolean(FIRST_RUN_COMPLETE, true);
+    editor.apply();
+  }
 
   public boolean readLoginStatus() {
     return sharedPreferences.getBoolean(LOGIN_COMPLETE, false);

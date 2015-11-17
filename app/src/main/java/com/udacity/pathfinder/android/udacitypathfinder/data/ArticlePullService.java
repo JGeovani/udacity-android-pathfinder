@@ -9,6 +9,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.CacheNanodegreeImageAssets;
+import com.udacity.pathfinder.android.udacitypathfinder.data.local.DbArticleLikes;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Nanodegree;
 
@@ -26,6 +27,7 @@ public class ArticlePullService extends IntentService {
   @Override protected void onHandleIntent(Intent intent) {
     requestNewArticles();
     requestNewNanodegrees();
+    new DbArticleLikes(getBaseContext()).syncUserArticleLikes();
   }
 
   /**
