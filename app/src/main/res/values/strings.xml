@@ -180,6 +180,7 @@
     <string name="select_image_title">Choose an Image</string>
     <string name="select_image_accept">Choose</string>
     <string name="select_image_decline">None</string>
+    <string name="desc_sample_article_image">Article featured image.</string>
     Learn
 
 </resources>

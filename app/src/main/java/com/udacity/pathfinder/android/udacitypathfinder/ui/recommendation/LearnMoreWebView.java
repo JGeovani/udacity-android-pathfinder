@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,8 +23,7 @@ public class LearnMoreWebView extends AppCompatActivity {
   Toolbar toolbar;
   @Bind(R.id.spinner)
   ProgressBar spinner;
-  @Bind(R.id.btn_exit)
-  ImageButton btn_exit;
+
   private WebView webView;
 
   public void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,6 @@ public class LearnMoreWebView extends AppCompatActivity {
     ButterKnife.bind(this);
     toolbar.setTitle(title);
     setSupportActionBar(toolbar);
-    btn_exit.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        finish();
-      }
-    });
 
 
     webView = (WebView) findViewById(R.id.webview);
@@ -54,6 +49,21 @@ public class LearnMoreWebView extends AppCompatActivity {
     });
 
     webView.loadUrl(url);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_add_article, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.action_cancel) {
+      finish();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override

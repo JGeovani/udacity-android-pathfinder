@@ -60,6 +60,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   CollapsingToolbarLayout collapsing_toolbar;
   @Bind(R.id.article_toolbar_background)
   ImageView iv_toolbar_background;
+  @Bind(R.id.article_image_overlay)
+  View imageOverlay;
   @Bind(R.id.webview)
   WebView webView;
   @Bind(R.id.spinner)
@@ -195,6 +197,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
             Glide.with(getApplicationContext())
               .load(article.getImageUrl())
               .into(iv_toolbar_background);
+            imageOverlay.setBackgroundResource(R.drawable.actionbar_gradient_dark);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle(getSafeTitle(capitalizeString(article.getTitle())));
             getSupportActionBar().setSubtitle(article.getDomain());
