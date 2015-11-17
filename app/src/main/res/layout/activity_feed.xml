@@ -63,7 +63,7 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
                 app:tabMode="fixed"
                 app:tabGravity="fill"
-                app:tabIndicatorColor="@color/primary_dark"
+                app:tabIndicatorColor="@color/theme_accent"
                 app:tabIndicatorHeight="@dimen/tab_indicator_height"
                 app:layout_scrollFlags="scroll|enterAlways"
                 android:layout_alignParentBottom="true"
