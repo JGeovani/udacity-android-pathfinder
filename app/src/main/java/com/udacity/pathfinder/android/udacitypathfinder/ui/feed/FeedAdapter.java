@@ -99,6 +99,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
           .into(listViewHolder.image);
       listViewHolder.title.setText(article.getTitle().trim());
       listViewHolder.source.setText(article.getDomain());
+      listViewHolder.likesCount.setText(Integer.toString(article.getLikes()));
     }
   }
 
@@ -117,6 +118,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
               .into(likedViewHolder.image);
       likedViewHolder.title.setText(article.getTitle().trim());
       likedViewHolder.source.setText(article.getDomain());
+      likedViewHolder.likesCount.setText(Integer.toString(article.getLikes()));
     }
   }
 
@@ -138,6 +140,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     @Bind(R.id.article_image) ImageView image;
     @Bind(R.id.article_title) TextView title;
     @Bind(R.id.article_source) TextView source;
+    @Bind(R.id.article_likes_count) TextView likesCount;
     public final View view;
 
     public ViewHolder(View view) {
