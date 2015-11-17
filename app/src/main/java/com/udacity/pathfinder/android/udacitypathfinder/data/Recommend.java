@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.DbArticleLikes;
+import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -41,6 +42,9 @@ public class Recommend {
       if (count <3){
         recommendedDegrees[count][0] = degree;
         recommendedDegrees[count][1] = score;
+        if(count == 0){
+          new SharedPref(context).setRecommendationTopScore(((Map.Entry<String, Integer>) data).getValue());
+        }
         Log.d("Recommendation # "+(count+1)+" = ", (degree + " : Total Likes = "+ score));
         count++;
       }
@@ -54,7 +58,7 @@ public class Recommend {
     String[][] nanodegreeTopThree = nanodegree();
     if (nanodegreeTopThree[0][1]!=null) {
       int topScore = Integer.parseInt(nanodegreeTopThree[0][1]);
-      if (topScore >= 4) isRecommendationReady = true;
+      if (topScore > 4) isRecommendationReady = true;
     }
     return isRecommendationReady;
   }

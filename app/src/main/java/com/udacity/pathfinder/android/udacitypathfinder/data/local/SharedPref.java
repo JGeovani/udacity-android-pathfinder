@@ -2,6 +2,7 @@ package com.udacity.pathfinder.android.udacitypathfinder.data.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,6 +15,9 @@ public class SharedPref {
   private static final String NANODEGREES = "nanodegrees";
   private static final String RECOMEND = "recomend";
   private static final String FIRST_RUN_COMPLETE = "first_run_complete";
+  private static final String NOTIFICATION_LAST_COUNT = "notification_last_count";
+  private static final String RECOMMENDATION_LAST_COUNT = "recommendation_last_count";
+
 
 
   private Context context;
@@ -48,6 +52,7 @@ public class SharedPref {
     return sharedPreferences.getBoolean(RECOMEND, false);
   }
 
+
   public void saveNanodegree(ArrayList<String> nanodegree) {
     ndSet.isEmpty();
     for (int i = 0; i < nanodegree.size(); i++) {
@@ -67,6 +72,28 @@ public class SharedPref {
     }
     return nano;
   }
+
+  public void setRecommendationTopScore(int score){
+    editor.putInt(RECOMMENDATION_LAST_COUNT, score);
+    editor.apply();
+    Log.d("TEST", "Recommendation Score = " + score);
+
+  }
+
+  public int getRecommendationTopScore(){
+    return sharedPreferences.getInt(RECOMMENDATION_LAST_COUNT, 0);
+  }
+
+  public void setNotificationTopScore(int score){
+    editor.putInt(NOTIFICATION_LAST_COUNT, score);
+    editor.apply();
+    Log.d("TEST", "Notification Score = "+score);
+  }
+
+  public int getNotificationTopScore(){
+    return sharedPreferences.getInt(NOTIFICATION_LAST_COUNT, 0);
+  }
+
 
   public boolean isFirstFunComplete() {
     return sharedPreferences.getBoolean(FIRST_RUN_COMPLETE, false);
