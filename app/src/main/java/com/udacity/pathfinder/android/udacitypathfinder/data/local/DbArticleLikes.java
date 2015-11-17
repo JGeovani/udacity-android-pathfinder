@@ -284,8 +284,8 @@ public class DbArticleLikes {
   }
 
 
-  public void restoreUserArticleLikes() {
 
+  public void restoreUserArticleLikes() {
     final String userId = sp.getUserId();
     ParseQuery<Likes> query = ParseQuery.getQuery(ParseConstants.LIKES_CLASS_NAME);
     query.whereEqualTo("username", userId);

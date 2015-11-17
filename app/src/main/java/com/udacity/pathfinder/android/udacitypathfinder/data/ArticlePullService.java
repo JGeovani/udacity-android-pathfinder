@@ -1,17 +1,25 @@
 package com.udacity.pathfinder.android.udacitypathfinder.data;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.udacity.pathfinder.android.udacitypathfinder.R;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.CacheNanodegreeImageAssets;
 import com.udacity.pathfinder.android.udacitypathfinder.data.local.DbArticleLikes;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Nanodegree;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.feed.FeedActivity;
 
 import java.util.List;
 
@@ -24,7 +32,8 @@ public class ArticlePullService extends IntentService {
     super("ArticlePullService");
   }
 
-  @Override protected void onHandleIntent(Intent intent) {
+  @Override
+  protected void onHandleIntent(Intent intent) {
     requestNewArticles();
     requestNewNanodegrees();
     new DbArticleLikes(getBaseContext()).syncUserArticleLikes();
@@ -46,12 +55,32 @@ public class ArticlePullService extends IntentService {
           ParseQuery<Article> remoteQuery = ParseQuery.getQuery(ParseConstants.ARTICLE_CLASS_NAME);
           remoteQuery.orderByDescending(ParseConstants.PARSE_COL_CREATED_AT);
           remoteQuery.whereGreaterThan(ParseConstants.PARSE_COL_CREATED_AT, article.getCreatedAt());
-          //remoteQuery.whereEqualTo(ParseConstants.ARTICLES_COL_APPROVED, true);
+          // Only show approved articles use: remoteQuery.whereEqualTo(ParseConstants.ARTICLES_COL_APPROVED, true);
           remoteQuery.findInBackground(new FindCallback<Article>() {
             @Override
             public void done(List<Article> articles, ParseException e) {
               if (e == null && articles != null) {
                 ParseObject.pinAllInBackground(ParseConstants.ARTICLE_CLASS_NAME, articles);
+                // notification goes here
+                int totalArticles = articles.size();
+                String message;
+                if (totalArticles > 1) {
+                  message = totalArticles + " New articles have been added";
+                } else {
+                  message = totalArticles + " New article has been added";
+                }
+                Uri notifySound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                NotificationCompat.Builder notification = new NotificationCompat.Builder(getBaseContext());
+                Intent notificationIntent = new Intent(getBaseContext(), FeedActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, notificationIntent, 0);
+                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notification.setSmallIcon(R.drawable.ic_app_compass);
+                notification.setColor(getResources().getColor(R.color.primary));
+                notification.setContentTitle("Pathfinder Alert");
+                notification.setContentText(message);
+                notification.setContentIntent(pendingIntent);
+                notification.setSound(notifySound);
+                mNotificationManager.notify(102, notification.build());
               }
             }
           });
@@ -71,14 +100,16 @@ public class ArticlePullService extends IntentService {
     localQuery.fromLocalDatastore();
     localQuery.orderByDescending(ParseConstants.PARSE_COL_CREATED_AT);
     localQuery.getFirstInBackground(new GetCallback<Nanodegree>() {
-      @Override public void done(Nanodegree nanodegree, ParseException e) {
+      @Override
+      public void done(Nanodegree nanodegree, ParseException e) {
         // now we have date of entry we will need to compare
         if (e == null && nanodegree != null) {
           ParseQuery<Nanodegree> remoteQuery = ParseQuery.getQuery(ParseConstants.NANODEGREE_CLASS_NAME);
           remoteQuery.orderByDescending(ParseConstants.PARSE_COL_CREATED_AT);
           remoteQuery.whereGreaterThan(ParseConstants.PARSE_COL_CREATED_AT, nanodegree.getCreatedAt());
           remoteQuery.findInBackground(new FindCallback<Nanodegree>() {
-            @Override public void done(List<Nanodegree> nanodegrees, ParseException e) {
+            @Override
+            public void done(List<Nanodegree> nanodegrees, ParseException e) {
               // after comparing to see if we have new nanodegrees we then add new to localdataset
               if (e == null && nanodegrees != null) {
                 ParseObject.pinAllInBackground(ParseConstants.NANODEGREE_CLASS_NAME, nanodegrees);
