@@ -1,6 +1,8 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.article;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -218,8 +220,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
   }
 
   private void setLike(boolean isLiked) {
-
     String[] nano = sp.getNanodegrees();
+    buttonSound();
     if (!isLiked && !likeDb.alreadyLiked(articleId)) {
       btn_like.setImageResource(R.drawable.ic_action_heart_pressed);
       likeDb.addLike(articleId, nano, true);
@@ -318,5 +320,11 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     super.onDestroy();
     webView.removeAllViews();
     webView.destroy();
+  }
+
+  private void buttonSound() {
+    Uri blop = Uri.parse("android.resource://" + getPackageName() + "/raw/liked");
+    MediaPlayer mp = MediaPlayer.create(this, blop);
+    mp.start();
   }
 }

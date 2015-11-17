@@ -4,7 +4,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -68,6 +67,8 @@ public class FeedActivity extends AuthCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_feed);
     ButterKnife.bind(this);
+    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    notificationManager.cancel(102);
     sp = new SharedPref(this);
     checkRecommendationStatus();
 
@@ -216,12 +217,11 @@ public class FeedActivity extends AuthCompatActivity {
       }
     };
 
-  private void notifyUser(){
+  private void notifyUser() {
     int newScore = sp.getRecommendationTopScore();
     int oldScore = sp.getNotificationTopScore();
-    Log.d("TEST", "New Score = "+newScore+", Old Score = "+oldScore);
-    if(newScore>oldScore) {
-      Uri notifySound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    if (newScore > oldScore) {
+      Uri notifySound = Uri.parse("android.resource://" + getPackageName() + "/raw/recommendation");
       NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
       Intent notificationIntent = new Intent(this, RecommendNanodegree.class);
       PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
@@ -234,11 +234,12 @@ public class FeedActivity extends AuthCompatActivity {
       notification.setSound(notifySound);
       mNotificationManager.notify(101, notification.build());
       sp.setNotificationTopScore(newScore);
-    } else if((newScore+2)<oldScore) {
-      sp.setNotificationTopScore(newScore-2);
+    } else if ((newScore + 2) < oldScore) {
+      sp.setNotificationTopScore(newScore - 2);
     }
 
   }
+
   @Override
   protected void onResume() {
     super.onResume();
