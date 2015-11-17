@@ -1,5 +1,6 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -69,7 +69,9 @@ public class RecommendNanodegree extends AppCompatActivity {
     setContentView(R.layout.activity_recommendation);
     ButterKnife.bind(this);
     tv_toolbar.setTitle(R.string.rec_toolbar_title);
-
+    // remove notification
+    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    notificationManager.cancel(101);
     // Obtain recommended nanodegrees
     recommendedNanodegrees = recommend.nanodegree();
     requestNanodegrees();
