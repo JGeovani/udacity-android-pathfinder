@@ -1,5 +1,8 @@
 package com.udacity.pathfinder.android.udacitypathfinder.ui.article;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -7,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -36,6 +40,7 @@ import com.udacity.pathfinder.android.udacitypathfinder.data.local.SharedPref;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Article;
 import com.udacity.pathfinder.android.udacitypathfinder.data.models.Nanodegree;
 import com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation.LearnMoreWebView;
+import com.udacity.pathfinder.android.udacitypathfinder.ui.recommendation.RecommendNanodegree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -240,6 +245,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     }
     // Checking if recommendation is ready
     if (recommend.isReady()) {
+      notifyUser();
       sp.saveRecomendation(true);
     } else {
       sp.saveRecomendation(false);
@@ -326,5 +332,28 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     Uri blop = Uri.parse("android.resource://" + getPackageName() + "/raw/liked");
     MediaPlayer mp = MediaPlayer.create(this, blop);
     mp.start();
+  }
+
+  private void notifyUser() {
+    int newScore = sp.getRecommendationTopScore();
+    int oldScore = sp.getNotificationTopScore();
+    if (newScore > oldScore) {
+      Uri notifySound = Uri.parse("android.resource://" + getPackageName() + "/raw/recommendation");
+      NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
+      Intent notificationIntent = new Intent(this, RecommendNanodegree.class);
+      PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+      NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+      notification.setSmallIcon(R.drawable.ic_app_compass);
+      notification.setColor(getResources().getColor(R.color.primary));
+      notification.setContentTitle("Recommendation");
+      notification.setContentText("Recommendation ready for your review");
+      notification.setContentIntent(pendingIntent);
+      notification.setSound(notifySound);
+      mNotificationManager.notify(101, notification.build());
+      sp.setNotificationTopScore(newScore);
+    } else if ((newScore + 2) < oldScore) {
+      sp.setNotificationTopScore(newScore - 2);
+    }
+
   }
 }
