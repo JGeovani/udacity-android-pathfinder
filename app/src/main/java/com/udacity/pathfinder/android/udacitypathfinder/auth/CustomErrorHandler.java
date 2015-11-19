@@ -30,7 +30,7 @@ public class CustomErrorHandler implements ErrorHandler {
         errorDescription = context.getString(R.string.error_no_response);
       } else {
 
-        // Error message handling - return a simple error to Retrofit handlers..
+        // Error message handling - return a simple error to Retrofit handlers.
         try {
           ErrorResponse errorResponse = (ErrorResponse) cause.getBodyAs(ErrorResponse.class);
           errorDescription = errorResponse.error;

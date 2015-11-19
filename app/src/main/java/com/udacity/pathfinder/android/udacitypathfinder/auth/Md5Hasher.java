@@ -20,7 +20,6 @@ public class Md5Hasher {
     String md5 = salt+data+password;
 
     try {
-
       //Create MessageDigest object for MD5
       MessageDigest digest = MessageDigest.getInstance("MD5");
 

@@ -16,9 +16,8 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="@color/primary"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp">
 

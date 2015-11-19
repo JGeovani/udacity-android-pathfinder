@@ -10,7 +10,7 @@
 
     <string name="app_title">Pathfinder</string>
     <string name="walkthrough_text_1" translatable="true">Pathfinder suggests tech-related articles and stories from around the internet.</string>
-    <string name="walkthrough_text_2" translatable="true">Read an article &amp; rate it by clicking heart icon. While you’re reading, we’ll be doing some thinking in the background.</string>
+    <string name="walkthrough_text_2" translatable="true">Read an article &amp; like it by clicking the heart. While you’re reading, we’ll be doing some thinking in the background.</string>
     <string name="walkthrough_text_3" translatable="true">Over time, we’ll begin recommending top courses &amp; educational tools for you based on your reading habits. So let’s dig in!</string>
 
     <string name="button_learn_more" translatable="true">Learn More</string>
@@ -173,7 +173,7 @@
     <string name="learn_more_ca001"><a href="https://www.udacity.com/course/ca001">Learn More</a></string>
     <string name="rec_likes">likes</string>
     <string name="rec_likes_default_value">0</string>
-    <string name="rec_toolbar_title">Your Recommended Nanodegree</string>
+    <string name="rec_toolbar_title">Recommended Nanodegree</string>
     <string name="desc_article_header_img">Header image for this article.</string>
     <string name="desc_nanodegree_ad">Nanodegree ad background image</string>
     <string name="desc_btn_recommendation">Button activates when a Recommendation becomes available.</string>
@@ -181,6 +181,11 @@
     <string name="select_image_accept">Choose</string>
     <string name="select_image_decline">None</string>
     <string name="desc_sample_article_image">Article featured image.</string>
+    <string name="btn_add_article_load">Load</string>
+    <string name="desc_nanodegree_logo">Recommended Nanodegree logo.</string>
+    <string name="desc_udacity_logo">Udacity\'s logo.</string>
+    <string name="desc_article_featured">Featured image for the article.</string>
+    <string name="default_likes_zero">0</string>
     Learn
 
 </resources>

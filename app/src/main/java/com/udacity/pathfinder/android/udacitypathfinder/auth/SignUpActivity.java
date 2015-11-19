@@ -32,8 +32,8 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     setContentView(R.layout.activity_signup);
     this.setFinishOnTouchOutside(true);
     mEmailEditText = (EditText) findViewById(R.id.etEmail);
-    mFirstNameEditText = (EditText) findViewById(R.id.etPassword);
-    mLastNameEditText = (EditText) findViewById(R.id.etPassword);
+    mFirstNameEditText = (EditText) findViewById(R.id.etFirstName);
+    mLastNameEditText = (EditText) findViewById(R.id.etLastName);
     mPasswordEditText = (EditText) findViewById(R.id.etPassword);
     mConfirmPasswordEditText = (EditText) findViewById(R.id.etPasswordConfirm);
     mCreateAccountButton = (Button) findViewById(R.id.btnCreateAccount);
