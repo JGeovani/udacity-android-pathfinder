@@ -41,11 +41,11 @@ public class DbArticleLikes {
   public DbArticleLikes(Context ctx) {
     this.context = ctx;
     dbHelper = new DbHelper(context);
-    db = dbHelper.getWritableDatabase();
     sp = new SharedPref(context);
   }
 
   public void addLike(String articleId, String[] nanodegrees, boolean isLiked) {
+    db = dbHelper.getWritableDatabase();
     String username = sp.getUserId();
     Gson gson = new Gson();
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -57,10 +57,12 @@ public class DbArticleLikes {
     cv.put(DbHelper.COLUMN_DATE_ADDED, date);
     cv.put(DbHelper.COLUMN_ARTICLE_NANODEGREES, gson.toJson(nanodegrees));
     db.insert(DbHelper.TABLE_ARTICLE_LIKES, null, cv);
+    db.close();
     Log.d(TAG, "User: " + username + ", inserted article ID:" + articleId + " with tags: " + gson.toJson(nanodegrees) + " dateSubmitted: " + date);
   }
 
   public boolean alreadyLiked(String articleId) {
+    db = dbHelper.getReadableDatabase();
     String[] column = {DbHelper.COLUMN_ID, DbHelper.COLUMN_ARTICLE_ID, DbHelper.COLUMN_USERNAME};
     Cursor cursor = db.query(DbHelper.TABLE_ARTICLE_LIKES, column, null, null, null, null, null);
     boolean doesExist = false;
@@ -77,11 +79,14 @@ public class DbArticleLikes {
         }
         cursor.moveToNext();
       }
+      cursor.close();
     }
+    db.close();
     return doesExist;
   }
 
   public boolean isLiked(String articleId) {
+    db = dbHelper.getReadableDatabase();
     String[] column = {DbHelper.COLUMN_ID, DbHelper.COLUMN_ARTICLE_ID, DbHelper.COLUMN_USERNAME, DbHelper.COLUMN_ARTICLE_IS_LIKED};
     Cursor cursor = db.query(DbHelper.TABLE_ARTICLE_LIKES, column, null, null, null, null, null);
     boolean articleisLiked = false;
@@ -101,22 +106,27 @@ public class DbArticleLikes {
         }
         cursor.moveToNext();
       }
+      cursor.close();
     }
+    db.close();
     return articleisLiked;
   }
 
   public void updateLike(String articleId, boolean isLiked) {
+    db = dbHelper.getWritableDatabase();
     ContentValues cv = new ContentValues();
     cv.put(DbSchema.COLUMN_ARTICLE_IS_LIKED, isLiked);
     String username = sp.getUserId();
     String whereClause = DbSchema.COLUMN_ARTICLE_ID + " = ? AND " + DbSchema.COLUMN_USERNAME + " = ?";
     String[] whereArgs = {articleId, username};
     db.update(DbHelper.TABLE_ARTICLE_LIKES, cv, whereClause, whereArgs);
+    db.close();
     Log.d(TAG, "User: " + username + ", updated article " + articleId + " liked: " + isLiked);
   }
 
 
   public int totalCount() {
+    db = dbHelper.getReadableDatabase();
     String[] column = {DbHelper.COLUMN_USERNAME, DbHelper.COLUMN_ARTICLE_IS_LIKED};
     Cursor cursor = db.query(DbHelper.TABLE_ARTICLE_LIKES, column, null, null, null, null, null);
     int count = 0;
@@ -133,12 +143,15 @@ public class DbArticleLikes {
         }
         cursor.moveToNext();
       }
+      cursor.close();
     }
+    db.close();
     return count;
   }
 
 
   public HashMap<String, Integer> getNanoScore() {
+    db = dbHelper.getReadableDatabase();
     HashMap<String, Integer> scores = new HashMap<>();
     String[] column = {DbHelper.COLUMN_ID, DbHelper.COLUMN_ARTICLE_IS_LIKED, DbHelper.COLUMN_USERNAME, DbHelper.COLUMN_ARTICLE_NANODEGREES};
     Cursor cursor = db.query(DbHelper.TABLE_ARTICLE_LIKES, column, null, null, null, null, null);
@@ -171,7 +184,9 @@ public class DbArticleLikes {
         }
         cursor.moveToNext();
       }
+      cursor.close();
     }
+    db.close();
     return scores;
   }
 
@@ -233,10 +248,10 @@ public class DbArticleLikes {
       @Override
       public void done(List<Likes> remoteLikes, ParseException e) {
         final List<ParseObject> objList = new ArrayList<>();
-        String remoteArticleId = " ";
-        String localArticleId = " ";
-        boolean localIsLiked = false;
-        boolean remoteIsLiked = false;
+        String remoteArticleId;
+        String localArticleId;
+        boolean localIsLiked;
+        boolean remoteIsLiked;
         //local likes loop
         int i = 0;
         for (LikedArticle localLike : localLikes) {
@@ -280,6 +295,7 @@ public class DbArticleLikes {
           });
         }
       }
+
     });
   }
 
@@ -299,12 +315,14 @@ public class DbArticleLikes {
             ParseConstants.ARTICLE_CLASS_NAME, true, remoteArticleId, new RequestCallback2<Article>() {
               @Override
               public void onResponse(Article article, ParseException e) {
-                List<String> remoteNanodegrees = article.getNanodegrees();
-                String[] nanodegreeData = new String[remoteNanodegrees.size()];
-                for (int i = 0; i < remoteNanodegrees.size(); i++) {
-                  nanodegreeData[i] = remoteNanodegrees.get(i);
+                if (article != null) {
+                  List<String> remoteNanodegrees = article.getNanodegrees();
+                  String[] nanodegreeData = new String[remoteNanodegrees.size()];
+                  for (int i = 0; i < remoteNanodegrees.size(); i++) {
+                    nanodegreeData[i] = remoteNanodegrees.get(i);
+                  }
+                  addLike(remoteArticleId, nanodegreeData, remoteIsLiked);
                 }
-                addLike(remoteArticleId, nanodegreeData, remoteIsLiked);
               }
             });
         }
@@ -314,6 +332,7 @@ public class DbArticleLikes {
   }
 
   public ArrayList<LikedArticle> getArticlesLiked() {
+    db = dbHelper.getReadableDatabase();
     ArrayList<LikedArticle> likedArticles = new ArrayList<>();
     String[] column = {DbHelper.COLUMN_ID, DbHelper.COLUMN_ARTICLE_ID, DbHelper.COLUMN_ARTICLE_IS_LIKED};
     Cursor cursor = db.query(DbHelper.TABLE_ARTICLE_LIKES, column, null, null, null, null, null);
@@ -331,6 +350,7 @@ public class DbArticleLikes {
         cursor.moveToNext();
       }
     }
+    db.close();
     return likedArticles;
   }
 
